@@ -1,3 +1,5 @@
-export const schemaTypes = [
 
-]
+
+export const schemaTypes = []
+
+

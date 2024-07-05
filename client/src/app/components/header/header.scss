@@ -6,7 +6,6 @@
     -webkit-border-radius: 6px;
     height: 70px;
     width: 100%;
-    margin-bottom: 30px;
     line-height: 70px;
     box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.07) !important;
     -webkit-box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.07) !important;
@@ -26,7 +25,8 @@
             -moz-border-radius: 0;
             -webkit-border-radius: 0;
             box-shadow: none;
-            transition: all .2s linear;
+            transition: all 0.2s linear;
+            position: relative;
             .iconHome{
                 font-size: 21px;
             }
@@ -34,13 +34,29 @@
                 background-color: #0c51a0;
             }
         }
+        .btnHome {
+            &::before {
+                content: '';
+                position: absolute;
+                width: 5px;
+                height: 5px;
+                background-color: #eee;
+                border-radius: 50%;
+                transform: translateY(50px);
+                transition: all 0.3s linear;
+            }
+            &.active::before {
+                transform: translateY(20px);
+            }
+        }
         .navMenu {
             display: flex;
             align-items: center;
             justify-content: space-between;
             height: 100%;
-            padding: 0 10px;
-            button {
+            padding: 0 9px;
+            margin: 0 15px;
+            a {
                 font-size: 14px;
                 font-weight: bold;
                 color: #000;
@@ -51,6 +67,9 @@
                     color: #0c51a0;
                 }
             }
+            .active {
+                color: #0c51a0;
+            }
             @media (max-width: 768px) {
                 &{
                     display: none;
@@ -58,15 +77,24 @@
             }
         }
         .btn-nav {
-            margin-right: 15px;
-            margin-left: auto;
+            margin: 0 15px;
+            @media (max-width: 768px) {
+                &{
+                    display: none;
+                }
+            }
         }
         .btnMenu {
             background-color: #fff;
             border-left: 1px solid #b9b8b8;
             color: #000;
+            margin-left: 10px;
             &:hover {
                 background-color: #dbdbdb;
+            }
+            .hamburger-react {
+                width: 100% !important;
+                height: 100% !important;
             }
             @media (min-width: 768px) {
                 & {
@@ -74,6 +102,63 @@
                 }
             }
         }
+        .socile-icon {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 5px;
+            margin: 0 5px 0 auto;
+            a {
+                font-size: 14px;
+                font-weight: bold;
+                color: #000;
+                padding: 0 9px;
+                text-transform: uppercase;
+                transition: all 0.2s linear;
+                &:hover {
+                    color: #0c51a0;
+                    transform: scale(1.15);
+                }
+            }
+            .active {
+                color: #0c51a0;
+            }
+
+        }
     }
-    
+}
+.menu {
+    width: 100%;
+    .menuList {
+        width: 100%;
+        background: #fff;
+        z-index: 4;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.05);
+        -webkit-box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.05);
+        padding: 0;
+        overflow: hidden;
+        .menuItem {
+            border-bottom: solid 1px #efefef;
+            .menuLink {
+                border-radius: 0;
+                font-size: 14px;
+                font-weight: bold;
+                color: #000;
+                padding: 0 15px 0 22px;
+                line-height: 60px;
+                display: block;
+            }
+            .active {
+                background-color: #1565c050;
+            }
+        }
+    }
+
 }

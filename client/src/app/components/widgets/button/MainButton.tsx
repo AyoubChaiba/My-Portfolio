@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { ButtonProps } from "../../types/button";
+import { ButtonProps } from "../../../types";
 
 const MainButton: React.FC<ButtonProps> = ({ text, className, icon }) => {
     return (

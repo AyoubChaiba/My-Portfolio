@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
-import BasicTimeline from '../Timeline/basicTimeline';
+import BasicTimeline from '../widgets/Timeline/basicTimeline';
 import './profile.scss';
-import MainButton from '../button/MainButton';
+import MainButton from '../widgets/button/MainButton';
 import { FaDownload } from "react-icons/fa6";
 
 

@@ -3,4 +3,12 @@ body {
     // overflow-x: hidden;
     position: relative;
     background: url(../../public/assets/bg.png) #fafafa;
+    .main {
+        padding: 15px;
+        .mainGrid {
+                gap: 15px;
+        
+            }
+    }
+
 }

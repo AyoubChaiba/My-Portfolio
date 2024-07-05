@@ -10,21 +10,22 @@ const App = () => {
 
   return (
     <>
-      <Container>
-          <Grid container >
+      <Container className='main'>
+          <Grid container className='mainGrid' >
             <Grid item xs={12} sm={12} md={4} lg={3}>
               <Profile />
             </Grid>
             <Grid item xs >
-              <Header />
               <BrowserRouter>
-                <Routes>
-                  <Route path="/" index element={<Home />} />
-                  <Route path="/resume" index element={<Resume />} />
-                  <Route path="/portfolio" element={<Portfolio />} />
-                </Routes>
-              </BrowserRouter>
+                <Header />
+                  <Routes>
+                    <Route path="/" index element={<Home />} />
+                    <Route path="/resume" index element={<Resume />} />
+                    <Route path="/portfolio" element={<Portfolio />} />
+                    <Route path="/contact" element={<Portfolio />} />
+                  </Routes>
               <Footer />
+              </BrowserRouter>
             </Grid>
           </Grid>
       </Container>
