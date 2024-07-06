@@ -1,0 +1,92 @@
+.content {
+    margin:  0 !important;
+    width: 100% !important;
+    padding: 25px !important;
+    .head-content {
+        position: relative;
+        margin-bottom: 25px;
+        z-index: 1;
+        &::before {
+            content: "";
+            position: absolute;
+            background-color: #1976d2;
+            width: 95%;
+            height: 10px;
+            bottom: 0;
+            z-index: -1;
+            transform: translate(-6px, 0px);
+            opacity: .5;
+        }
+    }
+    .body-content {
+        .text-container {
+            white-space: pre-line;
+            color: #4c4c4c;
+            line-height: 24px;
+            &:after  {
+                content: '\00A0\00A0';
+            }
+            & span::after {
+                content: '\00A0\00A0';
+            }
+        }
+    }
+}
+
+.services {
+    background-color: #fafafa;
+    width: 100%;
+    .service-card {
+        cursor: default ;
+        background: #fff;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0px 0px 48px 0px rgba(4, 6, 4, 0.08);
+        min-height: 186px;
+        svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        h6 {
+            margin-bottom: 10px;
+            color: #000;
+        }
+    }
+}
+
+.skills {
+    .skills-card {
+        cursor: default ;
+        background: #fff;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0px 0px 48px 0px rgba(4, 6, 4, 0.08);
+        min-height: 40px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        border-radius: 5px;
+        border: 1px solid #bbb;
+        svg {
+            width: 30px;
+            height: 30px;
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            &{
+                justify-content: center;
+            }
+        }
+    }
+    .btn-load {
+        display: block;
+        margin: 25px auto 15px auto;
+        padding: 9px 25px;
+    }
+}

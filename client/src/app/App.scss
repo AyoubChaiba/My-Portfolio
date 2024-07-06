@@ -3,12 +3,22 @@ body {
     // overflow-x: hidden;
     position: relative;
     background: url(../../public/assets/bg.png) #fafafa;
-    .main {
+    .app {
         padding: 15px;
-        .mainGrid {
-                gap: 15px;
-        
-            }
+        .appGrid {
+            margin: 35px auto 0 auto;
+            gap: 25px;
+        }
+        main {
+            min-height: 500px;
+            border-radius: 6px;
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            background: #fff;
+            box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.07);
+            -webkit-box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.07);
+            -moz-box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.07);
+        }
     }
 
 }

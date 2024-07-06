@@ -1,7 +1,11 @@
 import Button from '@mui/material/Button';
 import { ButtonProps } from "../../../types";
+import React, { MouseEvent } from 'react';
 
-const MainButton: React.FC<ButtonProps> = ({ text, className, icon }) => {
+const MainButton: React.FC<ButtonProps> = ({ text, className, icon, handleClick }) => {
+
+    const onClickHandler = (event: MouseEvent<HTMLButtonElement>) => handleClick && handleClick(event);
+
     return (
         <Button
             variant="contained"
@@ -26,6 +30,7 @@ const MainButton: React.FC<ButtonProps> = ({ text, className, icon }) => {
                     }
                 },
             }}
+            onClick={onClickHandler}
         >
             {text}
         </Button>

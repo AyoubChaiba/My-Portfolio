@@ -1,9 +1,15 @@
+import { ContentGrid } from "../../components/widgets/content/ContentGrid";
+import "./resume.scss";
+
+
 
 const Resume = () => {
     return (
-        <div>
-            <p>Resume</p>
-        </div>
+        <main>
+            <ContentGrid title={'Resume'} classContent={'resume'}>
+                
+            </ContentGrid>
+        </main>
     );
 }
 

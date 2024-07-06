@@ -11,6 +11,7 @@
     -webkit-box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.07) !important;
     -moz-box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.07) !important;
     overflow: hidden;
+    margin-bottom: 25px;
     .navBar {
         height: 100%;
         .btnHead {
@@ -55,7 +56,6 @@
             justify-content: space-between;
             height: 100%;
             padding: 0 9px;
-            margin: 0 15px;
             a {
                 font-size: 14px;
                 font-weight: bold;
@@ -77,10 +77,15 @@
             }
         }
         .btn-nav {
-            margin: 0 15px;
+            margin: 0 10px;
             @media (max-width: 768px) {
                 &{
                     display: none;
+                }
+            }
+            @media (max-width: 992px) {
+                &{
+                    margin-left: auto;
                 }
             }
         }
@@ -107,8 +112,8 @@
             align-items: center;
             justify-content: space-between;
             height: 100%;
-            padding: 0 5px;
-            margin: 0 5px 0 auto;
+            padding: 0 3px;
+            margin-left:  auto;
             a {
                 font-size: 14px;
                 font-weight: bold;
@@ -124,7 +129,16 @@
             .active {
                 color: #0c51a0;
             }
-
+            @media (max-width: 992px) {
+                &{
+                    display: none;
+                }
+            }
+            @media (max-width: 768px) {
+                &{
+                    display: flex;
+                }
+            }
         }
     }
 }
