@@ -38,53 +38,6 @@
     }
     .profile_info {
         padding: 0 5px;
-        .timeline {
-            padding: 0;
-            margin: 0 auto;
-            .timeline-item-header {
-                min-height:0;
-                    &::before {
-                        flex: 0;
-                    }
-                    .timeline-dot {
-                        margin-left: -17px;
-                        margin-bottom: 0;
-                        margin-top: -15px;
-                        width: 40px;
-                        height: 40px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        svg {
-                            width: 30px;
-                            height: 30px;
-                        }
-                    }
-                    .timeline-connector {
-                        margin-left: -16px;
-                        min-height: 27px;
-                    }
-                }
-                .timeline-item {
-                    min-height: 35px;
-                    &::before {
-                        flex: 0;
-                    }
-                    .timeline-dot {
-                        margin: 0;
-                        padding: 2px;
-                    }
-                    .timeline-text {
-                        margin-top: -3px;
-                        font-size: 13.5px;
-                        color: #000;
-                        line-height: 0px;
-                        span {
-                            color: #7F7F7F;
-                        }
-                    }
-                }
-        }
         .btn_resume {
             display: flex;
             justify-content: center;

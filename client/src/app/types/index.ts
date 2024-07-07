@@ -8,6 +8,34 @@ export interface ButtonProps {
   handleClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
+export interface TimelineProps {
+  title?: string;
+  icon?: ReactNode;
+  children: ReactNode;
+  style: {
+    sizeIcon: number;
+    marginLeft: string;
+    headHeight?: string;
+    headIconTop?: string;
+  };
+}
+
+export interface WorkingProps {
+  company: string;
+  position: string;
+  dates: string;
+  description: string;
+}
+
+export interface TimelineInfoProps {
+  title: string;
+  text?: string;
+  link?: {
+    userName: string;
+    profileLink: string;
+  };
+}
+
 export interface LinkProps {
   to: string;
   text?: string;

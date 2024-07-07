@@ -1,0 +1,42 @@
+.timeline {
+    padding: 0 !important;
+    margin: 0 auto !important;
+    .timeline-item-header {
+            &::before {
+                flex: 0;
+            }
+            .timeline-dot {
+                margin-bottom: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .timeline-connector {
+                min-height: 30px;
+            }
+        }
+        .timeline-item {
+            min-height: 35px;
+            &::before {
+                flex: 0;
+            }
+            .timeline-dot {
+                margin: 0;
+                padding: 2px;
+            }
+            .timeline-text {
+                margin-top: -3px;
+                font-size: 13.5px;
+                color: #000;
+                line-height: 0px;
+                span {
+                    color: #7F7F7F;
+                }
+            }
+            &:nth-last-child(1) {
+                .timeline-connector {
+                    display: none;
+                }
+            }
+        }
+}
