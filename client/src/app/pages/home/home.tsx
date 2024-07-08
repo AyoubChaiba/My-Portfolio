@@ -110,9 +110,6 @@ const Home = () => {
                                     className="skills-card"
                                     variants={itemVariants}
                                     whileHover={{ scale: 1.05 }}
-                                    style={{
-                                        border: "1px solid"
-                                    }}
                                 >
                                     {skill.icon}
                                     <Typography

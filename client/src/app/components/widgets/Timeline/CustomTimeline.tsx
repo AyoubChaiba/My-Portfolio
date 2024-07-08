@@ -11,7 +11,7 @@ import "./timeline.scss"
 
 const CustomTimeline: React.FC<TimelineProps> = ({ title, icon, children, style  }) => {
     return (
-        <Timeline className='timeline'>
+        <Timeline className='timeline' >
             <TimelineItem
                 className='timeline-item-header'
                 sx={{
@@ -45,7 +45,9 @@ const CustomTimeline: React.FC<TimelineProps> = ({ title, icon, children, style 
                     <Typography
                         variant='h6'
                         lineHeight={3.3}
-                    >{title}</Typography>
+                        >
+                        {title}
+                    </Typography>
                 </TimelineContent>
             </TimelineItem>
                 {children}

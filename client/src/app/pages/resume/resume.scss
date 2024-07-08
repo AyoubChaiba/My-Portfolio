@@ -3,3 +3,43 @@
         padding: 0 !important;
     }
 }
+.clients {
+    background-color: #fafafa;
+    .scroller {
+        min-height: 200px;
+        overflow: hidden;
+        position: relative;
+        overflow: hidden;
+        -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+        mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+        .clients-items {
+            width: max-content;
+            flex-wrap: nowrap;
+            animation: scroll 10s linear infinite;
+            padding-block: 1rem;
+            display: flex;
+            gap: 1rem;
+            position: absolute;
+            .client-card {
+                padding: 5px;
+                border-radius: 8px;
+                width: 100%;
+                img {
+                    width: 100%;
+                }
+            }
+        }
+        &:hover .clients-items {
+            animation-play-state: paused;
+        }
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}

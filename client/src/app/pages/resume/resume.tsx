@@ -1,17 +1,9 @@
-import React from 'react';
 import { ContentGrid } from "../../components/widgets/content/ContentGrid";
 import CustomTimeline from "../../components/widgets/Timeline/CustomTimeline";
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa6";
 import "./resume.scss";
-import Typography from '@mui/material/Typography';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
-import Grid from '@mui/material/Grid';
-import { WorkingProps } from '../../types';
-
+import { ListItem, Grid, List } from '@mui/material';
+import { TimelineInfo } from '../../components/widgets/Timeline/TimelineInfo';
 
 const working = {
     title: "Working History",
@@ -57,48 +49,29 @@ const education = {
     ]
 };
 
-const TimelineInfo: React.FC<WorkingProps> = ({ company, position, dates, description }) => {
-    return (
-        <TimelineItem className='timeline-item'>
-            <TimelineSeparator className='timeline-separator'>
-                <TimelineDot variant="outlined" className='timeline-dot' color="primary" />
-                <TimelineConnector className='timeline-connector' />
-            </TimelineSeparator>
-            <TimelineContent
-                sx={{
-                    minHeight: "150px",
-                }}
-            >
-                <Typography
-                    variant="h6"
-                    color="initial"
-                    sx={{
-                        fontSize: { xs: '13px', sm: '13px', md: '14px' },
-                        fontWeight: 'bold',
-                        lineHeight: '1.5',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.025em',
-                        marginTop: "-12px",
-                        "& span": {
-                            color: "#232323"
-                        }
-                    }}
-                    className='timeline-titel'
-                >
-                    {position} - <span>{company}</span>
-                </Typography>
-                <Typography variant="caption" color="black" className='timeline-description'>{dates}</Typography>
-                <Typography variant="body2" color="textSecondary" paddingY={2} className='timeline-description'>{description}</Typography>
-            </TimelineContent>
-        </TimelineItem>
-    );
-};
+const clients = [
+    {
+        name: 'Client A',
+        logo: 'https://placehold.co/200x100',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, ipsum sed dignissim fermentum, velit arcu scelerisque metus, non faucibus lectus ante sed velit. Donec id libero non urna aliquet dignissim.',
+    },
+    {
+        name: 'Client B',
+        logo: 'https://placehold.co/200x100',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, ipsum sed dignissim fermentum, velit arcu scelerisque metus, non faucibus lectus ante sed velit. Donec id libero non urna aliquet dignissim.',
+    },
+    {
+        name: 'Client C',
+        logo: 'https://placehold.co/200x100',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, ipsum sed dignissim fermentum, velit arcu scelerisque metus, non faucibus lectus ante sed velit. Donec id libero non urna aliquet dignissim.',
+    }
+]
 
 const Resume: React.FC = () => {
     return (
         <main>
             <ContentGrid title={'Resume'} classContent={'resume'}>
-                <Grid container spacing={1}>
+                <Grid container >
                     <Grid item md={12} lg={6} className='resume-content'>
                         <CustomTimeline
                             title={working.title}
@@ -142,6 +115,19 @@ const Resume: React.FC = () => {
                         </CustomTimeline>
                     </Grid>
                 </Grid>
+            </ContentGrid>
+            <ContentGrid title={'Clients'} classContent={'clients'} >
+                <div className="clients">
+                    <div className="scroller" data-animated="true">
+                        <List className="clients-items" data-animated="true">
+                        {clients.concat(clients).map((client, index) => (
+                            <ListItem key={index} className="client-card">
+                            <img src={client.logo} alt={client.name} loading="lazy" />
+                            </ListItem>
+                        ))}
+                        </List>
+                    </div>
+                </div>
             </ContentGrid>
         </main>
     );

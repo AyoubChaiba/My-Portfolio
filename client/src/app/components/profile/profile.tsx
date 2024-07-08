@@ -3,7 +3,6 @@ import CustomTimeline from '../widgets/Timeline/CustomTimeline';
 import './profile.scss';
 import MainButton from '../widgets/button/MainButton';
 import { FaDownload } from "react-icons/fa6";
-import StickyBox from "react-sticky-box";
 import { FaCircleUser } from "react-icons/fa6";
 
 import TimelineItem from '@mui/lab/TimelineItem';
@@ -53,41 +52,35 @@ const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, text, link }) => {
 
 const Profile = () => {
     return (
-        <StickyBox
-            bottom={false}
-            offsetTop={50}
-            offsetBottom={15}
-            >
-            <div className="profile container_shadow">
-                <div className="profile_name">
-                    <Typography className='name' >{profile.name}</Typography>
-                    <Typography className='job' >{profile.job}</Typography>
+        <div className="profile container_shadow">
+            <div className="profile_name">
+                <Typography className='name' >{profile.name}</Typography>
+                <Typography className='job' >{profile.job}</Typography>
+            </div>
+            <figure>
+                <img src={profile.avatar} alt="Avatar" />
+            </figure>
+            <div className='profile_info'>
+                <div className='timeline_info'>
+                    <CustomTimeline icon={<FaCircleUser />}
+                        style={{
+                            sizeIcon: 45 ,
+                            marginLeft: "-19px",
+                            headIconTop: "-24px",
+                        }}
+                        >
+                        <TimelineInfo title={'birthday'} text={profile.birthday} />
+                        <TimelineInfo title={'email'} text={profile.email} />
+                        <TimelineInfo title={'phone'} text={profile.phone} />
+                        <TimelineInfo title={'linkedin'} link={profile.linkedin} />
+                        <TimelineInfo title={'github'} link={profile.github} />
+                    </CustomTimeline>
                 </div>
-                <figure>
-                    <img src={profile.avatar} alt="Avatar" />
-                </figure>
-                <div className='profile_info'>
-                    <div className='timeline_info'>
-                        <CustomTimeline icon={<FaCircleUser />}
-                            style={{
-                                sizeIcon: 45 ,
-                                marginLeft: "-19px",
-                                headIconTop: "-25px",
-                            }}
-                            >
-                            <TimelineInfo title={'birthday'} text={profile.birthday} />
-                            <TimelineInfo title={'email'} text={profile.email} />
-                            <TimelineInfo title={'phone'} text={profile.phone} />
-                            <TimelineInfo title={'linkedin'} link={profile.linkedin} />
-                            <TimelineInfo title={'github'} link={profile.github} />
-                        </CustomTimeline>
-                    </div>
-                    <div className='btn_resume'>
-                        <MainButton text={"Download CV"} icon={<FaDownload />} />
-                    </div>
+                <div className='btn_resume'>
+                    <MainButton text={"Download CV"} icon={<FaDownload />} />
                 </div>
             </div>
-        </StickyBox>
+        </div>
     );
 }
 
