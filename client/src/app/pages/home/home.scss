@@ -1,24 +1,26 @@
 .content {
     margin:  0 !important;
     width: 100% !important;
-    padding: 25px !important;
+    padding: 30px !important;
     .head-content {
         position: relative;
         margin-bottom: 25px;
+        padding: 0 !important;
         z-index: 1;
         &::before {
             content: "";
             position: absolute;
             background-color: #1976d2;
-            width: 95%;
-            height: 10px;
-            bottom: 0;
+            width: 110%;
+            height: 8px;
+            bottom: 1px;
             z-index: -1;
-            transform: translate(-6px, 0px);
-            opacity: .5;
+            transform: translate(-4px, 0px);
+            opacity: 0.5;
         }
     }
     .body-content {
+        padding: 0 !important;
         .text-container {
             white-space: pre-line;
             color: #4c4c4c;

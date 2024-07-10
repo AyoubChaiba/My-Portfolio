@@ -2,8 +2,9 @@ import { ContentGrid } from "../../components/widgets/content/ContentGrid";
 import CustomTimeline from "../../components/widgets/Timeline/CustomTimeline";
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa6";
 import "./resume.scss";
-import { ListItem, Grid, List } from '@mui/material';
 import { TimelineInfo } from '../../components/widgets/Timeline/TimelineInfo';
+import { Grid, List, ListItem } from "@mui/material";
+
 
 const working = {
     title: "Working History",
@@ -68,10 +69,11 @@ const clients = [
 ]
 
 const Resume: React.FC = () => {
+
     return (
         <main>
             <ContentGrid title={'Resume'} classContent={'resume'}>
-                <Grid container >
+                <Grid container>
                     <Grid item md={12} lg={6} className='resume-content'>
                         <CustomTimeline
                             title={working.title}
@@ -118,11 +120,11 @@ const Resume: React.FC = () => {
             </ContentGrid>
             <ContentGrid title={'Clients'} classContent={'clients'} >
                 <div className="clients">
-                    <div className="scroller" data-animated="true">
-                        <List className="clients-items" data-animated="true">
+                    <div className="scroller" >
+                        <List className="clients-items" >
                         {clients.concat(clients).map((client, index) => (
                             <ListItem key={index} className="client-card">
-                            <img src={client.logo} alt={client.name} loading="lazy" />
+                                <img src={client.logo} alt={client.name} loading="lazy" />
                             </ListItem>
                         ))}
                         </List>
