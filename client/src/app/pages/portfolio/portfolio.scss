@@ -1,14 +1,14 @@
+.portfolio-tabpanel {
+    padding: 25px 0  !important;
+}
+
 .portfolio-card {
     position: relative;
     overflow: hidden;
     border-radius: 15px !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
-    height: 400px;
-
     .portfolio-card-media-wrapper {
         position: relative;
-        // -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
-        // mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
         height: 180px;
         img {
             width: 100%;
@@ -17,15 +17,22 @@
             object-position: center;
         }
     }
-    .portfolio-card-button {
+    .portfolio-card-buttons {
         position: absolute;
         top: 50%;
         left: 50%;
-        color: white;
-        background: rgba(0, 0, 0, 0.5);
-        opacity: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+            color: white;
+        }
+        .btn-card {
+            margin-left: 10px;
+            background-color: rgba(61, 57, 57, 0.589);
+        }
         transition: opacity 0.3s ease;
-        transform: translate(-50% , -50% );
+        transform: translate(-52% , -50% );
         &:hover {
             opacity: 1;
         }
@@ -34,12 +41,13 @@
         position: absolute;
         top:  7px;
         left: 8px;
+        color: #eee;
+        background-color: #747272b6;
     }
-
 }
-
 .portfolio-card-stack {
     .card-stack-chip {
+        margin: 3px 0;
         font-size: 11px;
         font-weight: 500;
         background-color: #ccc;
@@ -48,6 +56,12 @@
         padding: 12px 0 !important;
     }
 
+}
+
+.portfolio-card-description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .portfolio-card-title,
