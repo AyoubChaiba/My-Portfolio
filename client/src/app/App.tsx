@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container'
 import { Profile } from "./components"
 import { Route, BrowserRouter, Routes } from "react-router-dom"
-import { Portfolio, Resume, Home } from './pages';
+import { Portfolio, Resume, Home, Contact } from './pages';
 import Layout from './layout';
 
 
@@ -23,7 +23,7 @@ const App = () => {
                   <Route index element={<Home />} />
                   <Route path="resume" element={<Resume />} />
                   <Route path="portfolio" element={<Portfolio />} />
-                  <Route path="contact" element={"<Portfolio />"} />
+                  <Route path="contact" element={<Contact />} />
                 </Route>
               </Routes>
             </BrowserRouter>

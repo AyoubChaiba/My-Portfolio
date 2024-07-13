@@ -1,12 +1,24 @@
 .portfolio-tabpanel {
-    padding: 25px 0  !important;
+    padding: 25px 0 !important;
+}
+
+.portfolio {
+    .btn-load {
+        display: block;
+        margin: 25px auto 15px auto;
+        padding: 9px 25px;
+    }
 }
 
 .portfolio-card {
     position: relative;
     overflow: hidden;
-    border-radius: 15px !important;
+    border-radius: 10px !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    &:hover .portfolio-card-buttons {
+        opacity: 1;
+    }
+
     .portfolio-card-media-wrapper {
         position: relative;
         height: 180px;
@@ -17,6 +29,7 @@
             object-position: center;
         }
     }
+
     .portfolio-card-buttons {
         position: absolute;
         top: 50%;
@@ -24,48 +37,39 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        transform: translate(-50%, -50%);
         svg {
             color: white;
         }
         .btn-card {
             margin-left: 10px;
-            background-color: rgba(61, 57, 57, 0.589);
-        }
-        transition: opacity 0.3s ease;
-        transform: translate(-52% , -50% );
-        &:hover {
-            opacity: 1;
+            background-color: #1976d2;
+            transition: background-color .3 ease-out ;
+            &:hover {
+                background-color: #0c51a0;
+            }
         }
     }
     .portfolio-chip {
         position: absolute;
-        top:  7px;
-        left: 8px;
-        color: #eee;
-        background-color: #747272b6;
+        top: 7px;
+        left: 7px;
+        color: #fff;
+        background-color: #1976d2;
     }
 }
-.portfolio-card-stack {
-    .card-stack-chip {
-        margin: 3px 0;
-        font-size: 11px;
-        font-weight: 500;
-        background-color: #ccc;
-        margin-left: 5px;
-        height: 0;
-        padding: 12px 0 !important;
-    }
 
+
+.portfolio-card-title {
+    &:hover ~ .portfolio-card-buttons {
+        opacity: 1;
+    }
 }
 
 .portfolio-card-description {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.portfolio-card-title,
-.portfolio-card-stack,
-.portfolio-card-client {
-    transition: color 0.3s ease;
 }
