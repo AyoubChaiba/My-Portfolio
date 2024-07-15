@@ -1,13 +1,10 @@
 body {
-    background: #fafafa;
+    // background: #fafafa;
     overflow-x: hidden;
     position: relative;
     background: url(../../public/assets/bg.png) #fafafa;
     .app {
-        padding: 15px;
         .appGrid {
-            margin: 35px auto 0 auto;
-            gap: 25px;
             main {
                 min-height: 500px;
                 border-radius: 6px;

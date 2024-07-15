@@ -10,7 +10,7 @@ import { CustomLink } from "../widgets/button/customLink";
 import { FaFacebook, FaInstagram, FaGithub , FaDev  } from "react-icons/fa6";
 
 
-const pages = ['RESUME', 'PORTFOLIO', 'CONTACT'];
+const pages = ['RESUME', 'PORTFOLIO', 'Stats', 'CONTACT', ];
 const socile = ['facebook', 'instagram', 'github', "dev" ];
 
 const Header: React.FC = () => {

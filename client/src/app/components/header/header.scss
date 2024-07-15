@@ -70,7 +70,7 @@
             .active {
                 color: #0c51a0;
             }
-            @media (max-width: 768px) {
+            @media (max-width: 1115px) {
                 &{
                     display: none;
                 }
@@ -83,11 +83,11 @@
                     display: none;
                 }
             }
-            @media (max-width: 1025px) {
-                &{
-                    margin-left: auto;
-                }
-            }
+            // @media (max-width: 1025px) {
+            //     &{
+            //         margin-left: auto;
+            //     }
+            // }
         }
         .btnMenu {
             background-color: #fff;
@@ -101,7 +101,7 @@
                 width: 100% !important;
                 height: 100% !important;
             }
-            @media (min-width: 768px) {
+            @media (min-width: 1115px) {
                 & {
                     display: none;
                 }
@@ -129,16 +129,16 @@
             .active {
                 color: #0c51a0;
             }
-            @media (max-width: 1025px) {
-                &{
-                    display: none;
-                }
-            }
-            @media (max-width: 768px) {
-                &{
-                    display: flex;
-                }
-            }
+            // @media (max-width: 1025px) {
+            //     &{
+            //         display: none;
+            //     }
+            // }
+            // @media (max-width: 768px) {
+            //     &{
+            //         display: flex;
+            //     }
+            // }
         }
     }
 }

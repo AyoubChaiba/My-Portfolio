@@ -14,10 +14,11 @@ export interface TimelineProps {
   children: ReactNode;
   style: {
     sizeIcon: number;
-    marginLeft: string;
+    marginLeft: number;
     headHeight?: string;
     headIconTop?: string;
   };
+  className?: string;
 }
 
 export interface WorkingProps {
@@ -52,4 +53,23 @@ export interface ContentProps {
 
 export interface TextWithProps {
   text: string;
+}
+
+
+export interface Contribution {
+  color: string;
+  contributionCount: number;
+  contributionLevel: string;
+  date: string;
+}
+
+export interface ApiResponse {
+  contributions: Contribution[][];
+  totalContributions: number;
+}
+
+export interface CalendarProps {
+  values: { [key: string]: number };
+  until: string;
+  totalContributions: number;
 }

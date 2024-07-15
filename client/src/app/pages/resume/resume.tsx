@@ -80,7 +80,7 @@ const Resume: React.FC = () => {
                             icon={working.icon}
                             style={{
                                 sizeIcon: 60,
-                                marginLeft: "-26px",
+                                marginLeft: -26,
                                 headHeight: "125px",
                             }}
                         >
@@ -101,7 +101,7 @@ const Resume: React.FC = () => {
                             icon={education.icon}
                             style={{
                                 sizeIcon: 60,
-                                marginLeft: "-26px",
+                                marginLeft: -26,
                                 headHeight: "125px",
                             }}
                         >

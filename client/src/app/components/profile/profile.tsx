@@ -65,9 +65,10 @@ const Profile = () => {
                     <CustomTimeline icon={<FaCircleUser />}
                         style={{
                             sizeIcon: 45 ,
-                            marginLeft: "-19px",
+                            marginLeft: -19,
                             headIconTop: "-24px",
                         }}
+                        className='timeline_profile'
                         >
                         <TimelineInfo title={'birthday'} text={profile.birthday} />
                         <TimelineInfo title={'email'} text={profile.email} />

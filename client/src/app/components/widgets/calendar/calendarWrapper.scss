@@ -1,0 +1,11 @@
+.github-calendar {
+    max-width: 705px;
+    margin: 0 auto;
+}
+
+.github-contribution {
+    background-color: #fafafa;
+    .github-calendar {
+        min-height: 160px;
+    }
+}

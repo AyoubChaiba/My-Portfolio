@@ -1,18 +1,19 @@
+import MainButton from "../../components/widgets/button/MainButton";
 import { ContentGrid } from "../../components/widgets/content/ContentGrid";
 import { TextWithSpaces } from "../../components/widgets/content/TextWithSpaces";
 import "./contact.scss";
-import { Container, TextField, Button, Typography, Grid } from '@mui/material';
+import { Container, TextField, Grid } from '@mui/material';
+import { FaPaperPlane } from "react-icons/fa6";
 
 
 const Contact = () => {
 
-
     return (
         <main>
-            <ContentGrid title={'Get in touch'} classContent={'contact'}>
+            <ContentGrid title={'Get in touch'} classContent={'contact-text'}>
                 <TextWithSpaces text={"Is there something on your mind you'd like to talk about? Whether it's related to work or just a casual conversation, I am here and ready to listen. Please don't hesitate to reach out to me at any time. 📞."} />
             </ContentGrid>
-            <ContentGrid title={'Connect with me'} classContent={'contact'}>
+            <ContentGrid title={'Connect with me'} classContent={'contact-form'}>
                 <Container maxWidth="md" className="contact-container">
                     <form className="contact-form">
                     <Grid container spacing={2}>
@@ -55,17 +56,12 @@ const Contact = () => {
                         />
                         </Grid>
                         <Grid item xs={12}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            size="large"
-                            sx={{
-                                display : "block",
-                                marginX: 'auto',
-                            }}
-                        >
-                            Send 
-                        </Button>
+                        <MainButton
+                            text="Send"
+                            className="btn-send"
+                            handleClick={() => window.open('#')}
+                            icon={<FaPaperPlane />}
+                        />
                         </Grid>
                     </Grid>
                     </form>

@@ -1,15 +1,43 @@
 .timeline {
     padding: 0 !important;
     margin: 0 auto !important;
+    @media (max-width: 900px) {
+        &.timeline_profile{
+            margin: 0 15px !important;
+        }
+    }
     .timeline-item-header {
             &::before {
                 flex: 0;
+                @media (max-width: 768px) {
+                    &{
+                        padding: 6px 8px;
+                    }
+                }
             }
             .timeline-dot {
                 margin-bottom: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
+            }
+            .timeline-dot.timeline_profile {
+                @media (max-width: 900px) {
+                    margin-left: -15px;
+                    width: 40px;
+                    height: 40px;
+                    svg{
+                        width: 50px;
+                        height: 50px;
+                    }
+                }
+
+            }
+            .timeline-connector.timeline_profile {
+                @media (max-width: 900px) {
+                    margin-left: -15px;
+                }
             }
             .timeline-connector {
                 min-height: 30px;
@@ -19,6 +47,11 @@
             min-height: 34px;
             &::before {
                 flex: 0;
+                @media (max-width: 768px) {
+                    &{
+                        padding: 6px 8px;
+                    }
+                }
             }
             .timeline-dot {
                 margin: 0;

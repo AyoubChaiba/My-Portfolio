@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container'
 import { Profile } from "./components"
 import { Route, BrowserRouter, Routes } from "react-router-dom"
-import { Portfolio, Resume, Home, Contact } from './pages';
+import { Portfolio, Resume, Home, Contact, Stats } from './pages';
 import Layout from './layout';
 
 
@@ -11,8 +11,14 @@ const App = () => {
 
   return (
     <>
-      <Container className='app'>
-          <Grid container className='appGrid' >
+      <Container
+          className='app'
+          sx={{
+            marginTop: 8,
+            marginX: "auto",
+          }}
+        >
+          <Grid container className='appGrid' columnSpacing={3} rowSpacing={3} >
             <Grid item xs={12} sm={12} md={4} lg={3} className='widgets-profile'>
               <Profile />
             </Grid>
@@ -24,6 +30,7 @@ const App = () => {
                   <Route path="resume" element={<Resume />} />
                   <Route path="portfolio" element={<Portfolio />} />
                   <Route path="contact" element={<Contact />} />
+                  <Route path="stats" element={<Stats />} />
                 </Route>
               </Routes>
             </BrowserRouter>
