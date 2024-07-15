@@ -1,36 +1,26 @@
+import { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import CustomTimeline from '../widgets/Timeline/CustomTimeline';
 import './profile.scss';
 import MainButton from '../widgets/button/MainButton';
-import { FaDownload } from "react-icons/fa6";
-import { FaCircleUser } from "react-icons/fa6";
-
+import { FaDownload, FaCircleUser } from "react-icons/fa6";
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
-import { TimelineInfoProps } from '../../types';
-import { Link } from '@mui/material';
+import { Link as MUILink } from '@mui/material';
+import { fetchProfile } from '../../profileService';
+import { Profile as ProfileType, Link } from '../../types';
+import { urlFor } from '../../sanityClient';
 
-const profile = {
-    name: "Ayoub Chaiba",
-    job: "Full stack developer",
-    avatar: '../../../../public/assets/avatar.JPG',
-    birthday: '06 December 1987',
-    email: "henry@domain.com",
-    phone: "+212 555 012345",
-    linkedin: {
-        userName : "@AyoubCh",
-        profileLink : "https://www.linkedin.com/in/ayoubchaiba"
-    },
-    github: {
-        userName : "@AyoubChaiba",
-        profileLink : "https://www.github.com/ayoubchaiba"
-    },
-};
+interface TimelineInfoProps {
+    title: string;
+    value: string | Link;
+    isLink?: boolean;
+}
 
-const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, text, link }) => {
+const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, value, isLink }) => {
     return (
         <TimelineItem className='timeline-item'>
             <TimelineSeparator className='timeline-separator'>
@@ -39,10 +29,10 @@ const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, text, link }) => {
             </TimelineSeparator>
             <TimelineContent>
                 <Typography color="initial" className='timeline-text'>
-                    {text ? (
-                        <>{title}: <span>{text}</span></>
+                    {isLink && typeof value !== 'string' ? (
+                        <>{title}: <MUILink href={value.url} underline="hover" target="_blank" rel="noopener noreferrer">{value.name}</MUILink></>
                     ) : (
-                        <>{title}: <Link href={link?.profileLink} underline="hover" target="_blank" rel="noopener noreferrer">{link?.userName}</Link></>
+                        <>{title}: <span>{value}</span></>
                     )}
                 </Typography>
             </TimelineContent>
@@ -50,15 +40,37 @@ const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, text, link }) => {
     );
 };
 
-const Profile = () => {
+
+const Profile: React.FC = () => {
+    const [profile, setProfile] = useState<ProfileType | null>(null);
+
+    useEffect(() => {
+        const getProfile = async () => {
+            const data = await fetchProfile();
+            setProfile(data);
+        };
+        getProfile();
+    }, []);
+
+    if (!profile) {
+        return <div>Loading...</div>;
+    }
+
+    const profileLinks = profile.links.reduce((acc: { [key: string]: Link }, link) => {
+        acc[link.name.toLowerCase()] = link;
+        return acc;
+    }, {});
+
+    console.log(profile.links)
+
     return (
         <div className="profile container_shadow">
             <div className="profile_name">
-                <Typography className='name' >{profile.name}</Typography>
-                <Typography className='job' >{profile.job}</Typography>
+                <Typography className='name'>{profile.fullName}</Typography>
+                <Typography className='job'>{profile.job}</Typography>
             </div>
             <figure>
-                <img src={profile.avatar} alt="Avatar" />
+                <img src={urlFor(profile.photo.asset).url()} alt="Avatar" />
             </figure>
             <div className='profile_info'>
                 <div className='timeline_info'>
@@ -70,20 +82,19 @@ const Profile = () => {
                         }}
                         className='timeline_profile'
                         >
-                        <TimelineInfo title={'birthday'} text={profile.birthday} />
-                        <TimelineInfo title={'email'} text={profile.email} />
-                        <TimelineInfo title={'phone'} text={profile.phone} />
-                        <TimelineInfo title={'linkedin'} link={profile.linkedin} />
-                        <TimelineInfo title={'github'} link={profile.github} />
+                        <TimelineInfo title='Birthday' text={profile._createdAt.split('T')[0]} />
+                        <TimelineInfo title='Email' text={profile.email} />
+                        <TimelineInfo title='Phone' text={profile.phone} />
+                        {profileLinks.linkedin && <TimelineInfo title='LinkedIn' link={profileLinks.linkedin} />}
+                        {profileLinks.github && <TimelineInfo title='GitHub' link={profileLinks.github} />}
                     </CustomTimeline>
                 </div>
                 <div className='btn_resume'>
-                    <MainButton text={"Download CV"} icon={<FaDownload />} />
+                    <MainButton text="Download CV" icon={<FaDownload />} />
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default Profile;
-

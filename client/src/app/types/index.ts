@@ -73,3 +73,30 @@ export interface CalendarProps {
   until: string;
   totalContributions: number;
 }
+
+export interface Asset {
+  _ref: string;
+  _type: string;
+}
+
+export interface Image {
+  _type: string;
+  asset: Asset;
+}
+
+export interface Link {
+  name: string;
+  url: string;
+}
+
+export interface Profile {
+  _id: string;
+  fullName: string;
+  email: string;
+  job: string;
+  phone: string;
+  photo: Image;
+  links: Link[];
+  _createdAt: string;
+  _updatedAt: string;
+}
