@@ -1,20 +1,14 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ContentGrid } from "../../components/widgets/content/ContentGrid";
 import { TextWithSpaces } from "../../components/widgets/content/TextWithSpaces";
 import { FaDev, FaDatabase, FaChartSimple, FaMobileScreenButton } from "react-icons/fa6";
 import "./home.scss";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, CircularProgress } from "@mui/material";
 import { motion, useInView } from "framer-motion";
 import MainButton from "../../components/widgets/button/MainButton";
-
-const text = "Lorem ipsum dolor sit amet <strong>consectetur</strong> adipisicing elit. Non aperiam animi laudantium nemo dolorem, quis odit minima incidunt sequi quae provident ratione facilis neque fuga repellendus laborum quasi eum error? Lorem ipsum dolor sit, amet consectetur adipisicing elit. <br><br> Magni unde ad quas culpa architecto cum iste laborum modi repudiandae nesciunt itaque tenetur eos voluptas, pariatur ab, recusandae sapiente quam quasi.";
-
-const services = [
-    { icon: <FaDev className='service-icon' />, title: 'Web Development', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-    { icon: <FaMobileScreenButton className='service-icon' />, title: 'Mobile Development', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-    { icon: <FaChartSimple className='service-icon' />, title: 'Digital Marketing', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-    { icon: <FaDatabase className='service-icon' />, title: 'Data Analysis', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-];
+import { fetchProfile, fetchService } from "../../service";
+import { Services } from '../../types';
+import { urlFor } from "../../sanityClient";
 
 const skills = [
     { icon: <FaDev className='skill-icon' />, title: 'React' },
@@ -55,47 +49,74 @@ const Home = () => {
     const ref1 = useRef(null);
     const ref2 = useRef(null);
 
-    const isInView1 = useInView(ref1, { once: true });
-    const isInView2 = useInView(ref2, { once: true });
+    const isInView1 = useInView(ref1);
+    const isInView2 = useInView(ref2);
 
     const [visibleSkills, setVisibleSkills] = useState(9);
+    const [about, setAbout] = useState<string | null>(null);
+    const [services, setServices] = useState<Services>([]);
+    const [loading, setLoading] = useState(true);
 
-    const handleLoadMore = () => setVisibleSkills((prevVisibleSkills) => prevVisibleSkills + 6);
+    const handleLoadMore = () => setVisibleSkills(prevVisibleSkills => prevVisibleSkills + 6);
+
+    useEffect(() => {
+        const fetchDataAsync = async () => {
+            setLoading(true);
+            try {
+                const dataAbout = await fetchProfile("profile");
+                const dataServices = await fetchService("services");
+                setAbout(dataAbout?.about || "");
+                setServices(dataServices || []);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setLoading(false);
+            }
+        };
+        fetchDataAsync();
+    }, []);
 
     return (
         <main>
             <ContentGrid title={'About Me'} classContent={'about'}>
-                <TextWithSpaces text={text} />
+                {loading || !about ? (
+                    <CircularProgress />
+                ) : (
+                    <TextWithSpaces text={about} />
+                )}
             </ContentGrid>
+
             <ContentGrid title={'My Services'} classContent={'services'}>
-                <Grid container rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3 }} className="services-items">
-                    {services.map(service => (
-                        <Grid item xs={12} sm={6} md={6} lg={3} key={service.title}>
-                            <motion.div
-                                className="service-card"
-                                ref={ref1}
-                                initial="hidden"
-                                animate={isInView1 ? "visible" : "hidden"}
-                                whileHover={{ scale: 1.05 }}
-                                variants={{
-                                    hidden: { opacity: 0, y: 20 },
-                                    visible: {
-                                        opacity: 1,
-                                        y: 0,
-                                        transition: {
-                                            duration: 0.5,
-                                        },
-                                    },
-                                }}
-                            >
-                                {service.icon}
-                                <Typography variant="h6" fontSize={14} fontWeight={600}>{service.title}</Typography>
-                                <Typography fontSize={12}>{service.description}</Typography>
-                            </motion.div>
-                        </Grid>
-                    ))}
-                </Grid>
+                <motion.div
+                    ref={ref1}
+                    initial="hidden"
+                    animate={isInView1 ? "visible" : "hidden"}
+                    variants={containerVariants}
+                >
+                    <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }} className="services-items">
+                        {loading || !services.length ? (
+                            <CircularProgress />
+                        ) : (
+                            services.map((service, index) => (
+                                <Grid item xs={12} sm={6} md={6} lg={3} key={index}>
+                                    <motion.div
+                                        className="service-card"
+                                        whileHover={{ scale: 1.03 }}
+                                        variants={itemVariants}
+                                    >
+                                        {service.photo && (
+                                            <img src={urlFor(service.photo.asset).url()} alt={service.title} />
+                                        )}
+                                        <Typography variant="h6" fontSize={14} fontWeight={600}>{service.title}</Typography>
+                                        <Typography fontSize={12}>{service.description}</Typography>
+                                    </motion.div>
+                                </Grid>
+                            ))
+                        )}
+                    </Grid>
+                </motion.div>
             </ContentGrid>
+
             <ContentGrid title={'My Top Skills'} classContent={'skills'}>
                 <motion.div
                     ref={ref2}
@@ -125,7 +146,11 @@ const Home = () => {
                         ))}
                     </Grid>
                 </motion.div>
-                <MainButton text={`${visibleSkills < skills.length ? `Load More  (${skills.length - visibleSkills})` : 'No More Skills' }`} className="btn-load" handleClick={handleLoadMore} />
+                <MainButton
+                    text={`${visibleSkills < skills.length ? `Load More  (${skills.length - visibleSkills})` : 'No More Skills' }`}
+                    className="btn-load"
+                    handleClick={handleLoadMore}
+                />
             </ContentGrid>
         </main>
     );

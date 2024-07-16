@@ -28,15 +28,6 @@ export interface WorkingProps {
   description: string;
 }
 
-export interface TimelineInfoProps {
-  title: string;
-  text?: string;
-  link?: {
-    userName: string;
-    profileLink: string;
-  };
-}
-
 export interface LinkProps {
   to: string;
   text?: string;
@@ -84,6 +75,12 @@ export interface Image {
   asset: Asset;
 }
 
+export interface TimelineInfoProps {
+  title: string;
+  text?: string;
+  link?: Link;
+}
+
 export interface Link {
   name: string;
   url: string;
@@ -97,6 +94,23 @@ export interface Profile {
   phone: string;
   photo: Image;
   links: Link[];
+  about: string;
+  birthday: string;
   _createdAt: string;
   _updatedAt: string;
 }
+
+export interface ProfileField {
+  title: string;
+  value: string;
+  isLink?: boolean;
+}
+
+export interface Service {
+  title: string;
+  description: string;
+  photo: Image;
+}
+
+export type Services = Service[];
+

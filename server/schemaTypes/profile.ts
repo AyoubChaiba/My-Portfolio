@@ -39,6 +39,11 @@ export const profile = defineType({
             },
         }),
         defineField({
+            name: 'about',
+            title: 'About',
+            type: 'text',
+        }),
+        defineField({
             name: 'links',
             title: 'Links',
             type: 'array',

@@ -10,17 +10,12 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import { Link as MUILink } from '@mui/material';
-import { fetchProfile } from '../../profileService';
-import { Profile as ProfileType, Link } from '../../types';
+import { fetchProfile } from '../../service';
+import { Profile as ProfileType, TimelineInfoProps } from '../../types';
 import { urlFor } from '../../sanityClient';
 
-interface TimelineInfoProps {
-    title: string;
-    value: string | Link;
-    isLink?: boolean;
-}
 
-const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, value, isLink }) => {
+const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, text, link }) => {
     return (
         <TimelineItem className='timeline-item'>
             <TimelineSeparator className='timeline-separator'>
@@ -29,10 +24,10 @@ const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, value, isLink }) => 
             </TimelineSeparator>
             <TimelineContent>
                 <Typography color="initial" className='timeline-text'>
-                    {isLink && typeof value !== 'string' ? (
-                        <>{title}: <MUILink href={value.url} underline="hover" target="_blank" rel="noopener noreferrer">{value.name}</MUILink></>
+                    {text ? (
+                        <>{title}: <span>{text}</span></>
                     ) : (
-                        <>{title}: <span>{value}</span></>
+                        <>{title}: <MUILink href={link?.url} underline="hover" target="_blank" rel="noopener noreferrer">@{link?.name}</MUILink></>
                     )}
                 </Typography>
             </TimelineContent>
@@ -40,13 +35,12 @@ const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, value, isLink }) => 
     );
 };
 
-
 const Profile: React.FC = () => {
     const [profile, setProfile] = useState<ProfileType | null>(null);
 
     useEffect(() => {
         const getProfile = async () => {
-            const data = await fetchProfile();
+            const data = await fetchProfile("profile");
             setProfile(data);
         };
         getProfile();
@@ -56,12 +50,13 @@ const Profile: React.FC = () => {
         return <div>Loading...</div>;
     }
 
-    const profileLinks = profile.links.reduce((acc: { [key: string]: Link }, link) => {
-        acc[link.name.toLowerCase()] = link;
-        return acc;
-    }, {});
+    const profileLinks = profile.links.map(link => {
+        return {
+            name: link.name.toLowerCase(),
+            link: link
+        };
+    });
 
-    console.log(profile.links)
 
     return (
         <div className="profile container_shadow">
@@ -82,11 +77,15 @@ const Profile: React.FC = () => {
                         }}
                         className='timeline_profile'
                         >
-                        <TimelineInfo title='Birthday' text={profile._createdAt.split('T')[0]} />
+                        {/* <TimelineInfo title='Birthday' text={profile.birthday.split('T')[0]} /> */}
                         <TimelineInfo title='Email' text={profile.email} />
                         <TimelineInfo title='Phone' text={profile.phone} />
-                        {profileLinks.linkedin && <TimelineInfo title='LinkedIn' link={profileLinks.linkedin} />}
-                        {profileLinks.github && <TimelineInfo title='GitHub' link={profileLinks.github} />}
+                        {
+                            profileLinks.map((link) => {
+                                return <TimelineInfo key={link.name} title={link.name} link={link.link} />;
+                            })
+                        }
+
                     </CustomTimeline>
                 </div>
                 <div className='btn_resume'>
