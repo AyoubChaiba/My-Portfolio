@@ -40,6 +40,7 @@ export interface ContentProps {
   title?: string;
   classContent: string;
   children?: ReactNode;
+  dataUpdate?: string;
 }
 
 export interface TextWithProps {
@@ -110,7 +111,19 @@ export interface Service {
   title: string;
   description: string;
   photo: Image;
+  _createdAt: string;
+  _updatedAt: string;
 }
 
 export type Services = Service[];
+
+export interface Skill {
+  name: string;
+  color: string;
+  photo: Image;
+  _createdAt: string;
+  _updatedAt: string;
+}
+
+export type Skills = Skill[];
 
