@@ -1,19 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Typography from '@mui/material/Typography';
 import CustomTimeline from '../widgets/Timeline/CustomTimeline';
 import './profile.scss';
 import MainButton from '../widgets/button/MainButton';
-import { FaDownload, FaCircleUser } from "react-icons/fa6";
+import { FaDownload, FaCircleUser, FaQrcode } from "react-icons/fa6";
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
-import { Link as MUILink } from '@mui/material';
+import { Link as MUILink, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 import { fetchProfile } from '../../service';
 import { Profile as ProfileType, TimelineInfoProps } from '../../types';
 import { urlFor } from '../../sanityClient';
-
+import QRCode from 'react-qr-code';
+import * as htmlToImage from 'html-to-image';
 
 const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, text, link }) => {
     return (
@@ -37,6 +38,8 @@ const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, text, link }) => {
 
 const Profile: React.FC = () => {
     const [profile, setProfile] = useState<ProfileType | null>(null);
+    const [open, setOpen] = useState(false);
+    const qrRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const getProfile = async () => {
@@ -45,6 +48,21 @@ const Profile: React.FC = () => {
         };
         getProfile();
     }, []);
+
+    const handleDownloadQRCode = () => {
+        if (qrRef.current) {
+            htmlToImage.toPng(qrRef.current)
+                .then((dataUrl) => {
+                    const link = document.createElement('a');
+                    link.download = 'qr-code.png';
+                    link.href = dataUrl;
+                    link.click();
+                })
+                .catch((error) => {
+                    console.error('Failed to generate QR code image', error);
+                });
+        }
+    };
 
     if (!profile) {
         return <div>Loading...</div>;
@@ -57,12 +75,12 @@ const Profile: React.FC = () => {
         };
     });
 
-
     return (
         <div className="profile container_shadow">
             <div className="profile_name">
                 <Typography className='name'>{profile.fullName}</Typography>
                 <Typography className='job'>{profile.job}</Typography>
+                <MainButton icon={<FaQrcode />} className={'btn-qr'} handleClick={() => setOpen(true)} />
             </div>
             <figure>
                 <img src={urlFor(profile.photo.asset).url()} alt="Avatar" />
@@ -71,13 +89,12 @@ const Profile: React.FC = () => {
                 <div className='timeline_info'>
                     <CustomTimeline icon={<FaCircleUser />}
                         style={{
-                            sizeIcon: 45 ,
+                            sizeIcon: 45,
                             marginLeft: -19,
                             headIconTop: "-24px",
                         }}
                         className='timeline_profile'
-                        >
-                        {/* <TimelineInfo title='Birthday' text={profile.birthday.split('T')[0]} /> */}
+                    >
                         <TimelineInfo title='Email' text={profile.email} />
                         <TimelineInfo title='Phone' text={profile.phone} />
                         {
@@ -92,6 +109,22 @@ const Profile: React.FC = () => {
                     <MainButton text="Download CV" icon={<FaDownload />} />
                 </div>
             </div>
+            <Dialog open={open} onClose={() => setOpen(false)}>
+                <DialogTitle align='center'>Share this page</DialogTitle>
+                <DialogContent>
+                    <div ref={qrRef}>
+                        <QRCode value="https://example.com" />
+                    </div>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDownloadQRCode} color="primary">
+                        Download QR Code
+                    </Button>
+                    <Button onClick={() => setOpen(false)} color="primary">
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 };

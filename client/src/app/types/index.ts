@@ -2,7 +2,7 @@ import { ReactNode, MouseEvent } from "react";
 
 
 export interface ButtonProps {
-  text: string;
+  text?: string;
   className?: string;
   icon?: ReactNode;
   handleClick?: (event: MouseEvent<HTMLButtonElement>) => void;
