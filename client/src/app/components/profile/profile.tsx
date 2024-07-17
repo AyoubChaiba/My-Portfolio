@@ -116,9 +116,12 @@ const Profile: React.FC = () => {
                         <QRCode value="https://example.com" />
                     </div>
                 </DialogContent>
-                <DialogActions>
+                <DialogActions sx={{
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                }}>
                     <Button onClick={handleDownloadQRCode} color="primary">
-                        Download QR Code
+                        Download
                     </Button>
                     <Button onClick={() => setOpen(false)} color="primary">
                         Close
