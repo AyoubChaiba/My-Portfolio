@@ -1,6 +1,6 @@
-import MainButton from "../../components/widgets/button/MainButton";
-import { ContentGrid } from "../../components/widgets/content/ContentGrid";
-import { TextWithSpaces } from "../../components/widgets/content/TextWithSpaces";
+import MainButton from "../../components/widgets/Button/MainButton";
+import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
+import { TextWithSpaces } from "../../components/widgets/Content/TextWithSpaces";
 import "./contact.scss";
 import { Container, TextField, Grid } from '@mui/material';
 import { FaPaperPlane } from "react-icons/fa6";

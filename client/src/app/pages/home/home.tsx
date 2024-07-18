@@ -1,20 +1,21 @@
 import { useState, useRef, useEffect } from "react";
-import { ContentGrid } from "../../components/widgets/content/ContentGrid";
-import { TextWithSpaces } from "../../components/widgets/content/TextWithSpaces";
+import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
+import { TextWithSpaces } from "../../components/widgets/Content/TextWithSpaces";
 import "./home.scss";
 import { Grid, Typography } from "@mui/material";
 import { motion, useInView } from "framer-motion";
-import MainButton from "../../components/widgets/button/MainButton";
+import MainButton from "../../components/widgets/Button/MainButton";
 import { fetchProfile, fetchService, fetchSkills } from "../../service";
 import { Services, Skills } from '../../types';
 import { urlFor } from "../../sanityClient";
 import ContentLoader from 'react-content-loader';
 
 const containerVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 0, scale: 0.8, y: 80 },
     visible: {
         opacity: 1,
         scale: 1,
+        y: 0,
         transition: {
             when: "beforeChildren",
             staggerChildren: 0.2,
@@ -23,15 +24,16 @@ const containerVariants = {
 };
 
 const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: (index: number) => ({
+    hidden: { opacity: 0, y: 50, scale: 0.5 },
+        visible: (index: number) => ({
         opacity: 1,
         y: 0,
+        scale: 1,
         transition: {
             delay: index * 0.1,
-            duration: 0.5,
+            duration: 0.3,
         },
-    }),
+        }),
 };
 
 const Home = () => {
@@ -193,7 +195,7 @@ const Home = () => {
                                         className="skills-card"
                                         custom={index}
                                         variants={itemVariants}
-                                        whileHover={{ scale: 1.05 }}
+                                        whileHover={{ scale: 1.03 }}
                                         style={{
                                             cursor: 'default',
                                             background: '#fff',

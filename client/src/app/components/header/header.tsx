@@ -1,12 +1,12 @@
 import { AppBar, Box, Toolbar, IconButton, List } from '@mui/material';
 import "./header.scss";
-import MainButton from '../widgets/button/MainButton';
+import MainButton from '../widgets/Button/MainButton';
 import { FaPaperPlane, FaHouse } from "react-icons/fa6";
 import { useState, useRef } from "react";
 import { Squash as Hamburger } from "hamburger-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickAway } from "react-use";
-import { CustomLink } from "../widgets/button/customLink";
+import { CustomLink } from "../widgets/Button/customLink";
 import { FaFacebook, FaInstagram, FaGithub , FaDev  } from "react-icons/fa6";
 
 

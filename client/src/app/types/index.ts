@@ -8,7 +8,7 @@ export interface ButtonProps {
   handleClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-export interface TimelineProps {
+export interface CustomTimelineProps {
   title?: string;
   icon?: ReactNode;
   children: ReactNode;
@@ -21,11 +21,25 @@ export interface TimelineProps {
   className?: string;
 }
 
-export interface WorkingProps {
-  company: string;
-  position: string;
+export interface TimelineProfileProps {
+  title: string;
+  text?: string;
+  link?: Link;
+}
+
+export interface TimelineResumeProps {
+  name: string;
+  subName: string;
   dates: string;
   description: string;
+  location: string;
+}
+
+export interface TimelineInfoProps {
+  title: string;
+  icon: ReactNode;
+  children: ReactNode;
+  className: string;
 }
 
 export interface LinkProps {
@@ -36,7 +50,7 @@ export interface LinkProps {
   className?: string;
 }
 
-export interface ContentProps {
+export interface ContentGridProps {
   title?: string;
   classContent: string;
   children?: ReactNode;
@@ -76,11 +90,6 @@ export interface Image {
   asset: Asset;
 }
 
-export interface TimelineInfoProps {
-  title: string;
-  text?: string;
-  link?: Link;
-}
 
 export interface Link {
   name: string;
@@ -88,7 +97,6 @@ export interface Link {
 }
 
 export interface Profile {
-  _id: string;
   fullName: string;
   email: string;
   job: string;
@@ -99,12 +107,6 @@ export interface Profile {
   birthday: string;
   _createdAt: string;
   _updatedAt: string;
-}
-
-export interface ProfileField {
-  title: string;
-  value: string;
-  isLink?: boolean;
 }
 
 export interface Service {
@@ -126,4 +128,63 @@ export interface Skill {
 }
 
 export type Skills = Skill[];
+
+
+export interface Work {
+  company: string;
+  position: string;
+  dates: string;
+  description: string;
+  location: string;
+}
+
+export interface Working {
+  title: string;
+  work: Work[];
+  _createdAt: string;
+  _updatedAt: string;
+}
+
+export interface Education {
+  institution: string;
+  degree: string;
+  dates: string;
+  description: string;
+  location: string;
+}
+
+export interface Educations {
+  title: string;
+  education: Education[];
+  _createdAt: string;
+  _updatedAt: string;
+}
+
+export interface Client {
+  name: string;
+  logo: Image;
+  description: string;
+  _createdAt: string;
+  _updatedAt: string;
+}
+
+export type Clients = Client[];
+
+
+export interface Project {
+  _id: string;
+  title: string;
+  category: string;
+  type: string;
+  photo: Image[];
+  description: string;
+  client: string;
+  stack: string;
+  github: string;
+  link: string;
+  _createdAt: string;
+  _updatedAt: string;
+}
+
+export type Projects = Project[];
 

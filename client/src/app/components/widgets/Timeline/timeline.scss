@@ -44,7 +44,9 @@
             }
         }
         .timeline-item {
-            min-height: 34px;
+            &.timeline_info_profile {
+                min-height: 34px;
+            }
             &::before {
                 flex: 0;
                 @media (max-width: 768px) {

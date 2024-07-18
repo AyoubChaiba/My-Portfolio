@@ -1,133 +1,124 @@
-import { ContentGrid } from "../../components/widgets/content/ContentGrid";
-import CustomTimeline from "../../components/widgets/Timeline/CustomTimeline";
+import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa6";
 import "./resume.scss";
-import { TimelineInfo } from '../../components/widgets/Timeline/TimelineInfo';
 import { Grid, List, ListItem } from "@mui/material";
+import { useState, useEffect } from "react";
+import { fetchEducations, fetchWorking, fetchClients } from "../../service";
+import { Educations, Working, Clients } from "../../types";
+import TimelineInfo from "../../components/widgets/Timeline/TimelineInfo";
+import { TimelineInfoResume } from "../../components/widgets/Timeline/TimelineInfoResume";
+import ResumeContentLoader from "../../components/widgets/ContentLoader/ResumeContentLoader";
+import { urlFor } from "../../sanityClient";
+import ClientsContentLoader from "../../components/widgets/ContentLoader/ClientsContentLoader";
 
-
-const working = {
-    title: "Working History",
-    icon: <FaBriefcase />,
-    work: [
-        {
-            company: 'Company A',
-            position: 'Software Engineer',
-            dates: '2020 - Present',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, ipsum sed dignissim fermentum, velit arcu scelerisque metus, non faucibus lectus ante sed velit. Donec id libero non urna aliquet dignissim.'
-        },
-        {
-            company: 'Company B',
-            position: 'Frontend Developer',
-            dates: '2018 - 2020',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, ipsum sed dignissim fermentum, velit arcu scelerisque metus, non faucibus lectus ante sed velit. Donec id libero non urna aliquet dignissim.'
-        },
-        {
-            company: 'Company C',
-            position: 'Project Manager',
-            dates: '2015 - 2019',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, ipsum sed dignissim fermentum, velit arcu scelerisque metus, non faucibus lectus ante sed velit. Donec id libero non urna aliquet dignissim.'
-        },
-    ]
-};
-
-const education = {
-    title: "Education History",
-    icon: <FaGraduationCap />,
-    education: [
-        {
-            institution: 'University of Liverpool',
-            degree: 'Bachelor of Computer Science',
-            dates: '2014 - 2018',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, ipsum sed dignissim fermentum, velit arcu scelerisque metus, non faucibus lectus ante sed velit. Donec id libero non urna aliquet dignissim.'
-        },
-        {
-            institution: 'National University of Singapore',
-            degree: 'Master of Science in Computer Science',
-            dates: '2018 - 2022',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, ipsum sed dignissim fermentum, velit arcu scelerisque metus, non faucibus lectus ante sed velit. Donec id libero non urna aliquet dignissim.'
-        },
-    ]
-};
-
-const clients = [
-    {
-        name: 'Client A',
-        logo: 'https://placehold.co/200x100',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, ipsum sed dignissim fermentum, velit arcu scelerisque metus, non faucibus lectus ante sed velit. Donec id libero non urna aliquet dignissim.',
-    },
-    {
-        name: 'Client B',
-        logo: 'https://placehold.co/200x100',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, ipsum sed dignissim fermentum, velit arcu scelerisque metus, non faucibus lectus ante sed velit. Donec id libero non urna aliquet dignissim.',
-    },
-    {
-        name: 'Client C',
-        logo: 'https://placehold.co/200x100',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, ipsum sed dignissim fermentum, velit arcu scelerisque metus, non faucibus lectus ante sed velit. Donec id libero non urna aliquet dignissim.',
-    }
-]
 
 const Resume: React.FC = () => {
+    const [working, setWorking] = useState<Working | null>(null);
+    const [educations, setEducations] = useState<Educations | null>(null);
+    const [clients, setClients] = useState<Clients | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchDataAsync = async (): Promise<void> => {
+            setLoading(true);
+            try {
+                const [dataWorking, dataEducations, dataClients] = await Promise.all([
+                    fetchWorking("working"),
+                    fetchEducations("educations"),
+                    fetchClients("clients"),
+                ]);
+                setWorking(dataWorking);
+                setEducations(dataEducations);
+                setClients(dataClients);
+            } catch (error) {
+                console.error("Error fetching data");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchDataAsync();
+    }, []);
+
+
+    const repeatedClients = clients ? Array.from({ length: 20 }, (_, i) => clients[i % clients.length]) : [];
+
 
     return (
         <main>
-            <ContentGrid title={'Resume'} classContent={'resume'}>
+            <ContentGrid
+                title={"Resume"}
+                classContent={"resume"}
+                dataUpdate={working?._updatedAt?.split('T')[0] ?? " ... "}
+            >
                 <Grid container>
-                    <Grid item md={12} lg={6} className='resume-content'>
-                        <CustomTimeline
-                            title={working.title}
-                            icon={working.icon}
-                            style={{
-                                sizeIcon: 60,
-                                marginLeft: -26,
-                                headHeight: "125px",
-                            }}
-                        >
-                            {working.work.map((item, index) => (
+                    <Grid item md={12} lg={6}>
+                        {loading ? (
+                            <ResumeContentLoader />
+                        ) : (
+                            working && (
                                 <TimelineInfo
-                                    key={index}
-                                    company={item.company}
-                                    position={item.position}
-                                    dates={item.dates}
-                                    description={item.description}
-                                />
-                            ))}
-                        </CustomTimeline>
+                                    title={working.title}
+                                    icon={<FaBriefcase />}
+                                    className="timeline_resume working"
+                                >
+                                    {working.work.map((item, index) => (
+                                        <TimelineInfoResume
+                                            key={index}
+                                            name={item.position}
+                                            subName={item.company}
+                                            dates={item.dates}
+                                            description={item.description}
+                                            location={item.location}
+                                        />
+                                    ))}
+                                </TimelineInfo>
+                            )
+                        )}
                     </Grid>
-                    <Grid item md={12} lg={6} className=''>
-                        <CustomTimeline
-                            title={education.title}
-                            icon={education.icon}
-                            style={{
-                                sizeIcon: 60,
-                                marginLeft: -26,
-                                headHeight: "125px",
-                            }}
-                        >
-                            {education.education.map((item, index) => (
+                    <Grid item md={12} lg={6}>
+                        {loading ? (
+                            <ResumeContentLoader />
+                        ) : (
+                            educations && (
                                 <TimelineInfo
-                                    key={index}
-                                    company={item.institution}
-                                    position={item.degree}
-                                    dates={item.dates}
-                                    description={item.description}
-                                />
-                            ))}
-                        </CustomTimeline>
+                                    title={educations.title}
+                                    icon={<FaGraduationCap />}
+                                    className="timeline_resume educations"
+                                >
+                                    {educations.education.map((item, index) => (
+                                        <TimelineInfoResume
+                                            key={index}
+                                            name={item.degree}
+                                            subName={item.institution}
+                                            dates={item.dates}
+                                            description={item.description}
+                                            location={item.location}
+                                        />
+                                    ))}
+                                </TimelineInfo>
+                            )
+                        )}
                     </Grid>
                 </Grid>
             </ContentGrid>
-            <ContentGrid title={'Clients'} classContent={'clients'} >
+            <ContentGrid
+                title={"Clients"}
+                classContent={"clients"}
+                dataUpdate={clients ? clients[0]?._updatedAt?.split('T')[0] : " ... "}
+            >
                 <div className="clients">
-                    <div className="scroller" >
-                        <List className="clients-items" >
-                        {clients.concat(clients).map((client, index) => (
-                            <ListItem key={index} className="client-card">
-                                <img src={client.logo} alt={client.name} loading="lazy" />
-                            </ListItem>
-                        ))}
-                        </List>
+                    <div className="scroller">
+                        {loading ? (
+                            <ClientsContentLoader />
+                        ) : (
+                            <List className="clients-items">
+                                {repeatedClients.map((client, index) => (
+                                    <ListItem key={index} className="client-card">
+                                        <img src={urlFor(client.logo.asset).url()} alt={client.name} loading="lazy" />
+                                    </ListItem>
+                                ))}
+                            </List>
+                        )}
                     </div>
                 </div>
             </ContentGrid>

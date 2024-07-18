@@ -5,11 +5,11 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import Typography from '@mui/material/Typography'
-import { TimelineProps } from '../../../types';
+import { CustomTimelineProps } from '../../../types';
 import "./timeline.scss"
 
 
-const CustomTimeline: React.FC<TimelineProps> = ({ title, icon, children, style, className  }) => {
+const CustomTimeline: React.FC<CustomTimelineProps> = ({ title, icon, children, style, className }) => {
     return (
         <Timeline className={`timeline ${className}`} >
             <TimelineItem

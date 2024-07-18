@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { ContentGrid } from "../../components/widgets/content/ContentGrid";
-import CalendarWrapper from "../../components/widgets/calendar/calendarWrapper";
+import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
+import CalendarWrapper from "../../components/widgets/GitHubCalendar/calendarWrapper";
 import { ApiResponse, Contribution } from '../../types';
 import useGithubStats from "react-github-user-stats";
 import { Grid, Typography } from '@mui/material';

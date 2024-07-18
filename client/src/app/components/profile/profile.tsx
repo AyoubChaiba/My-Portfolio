@@ -2,39 +2,16 @@ import { useEffect, useState, useRef } from 'react';
 import Typography from '@mui/material/Typography';
 import CustomTimeline from '../widgets/Timeline/CustomTimeline';
 import './profile.scss';
-import MainButton from '../widgets/button/MainButton';
+import MainButton from '../widgets/Button/MainButton';
 import { FaDownload, FaCircleUser, FaQrcode } from "react-icons/fa6";
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
-import { Link as MUILink, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 import { fetchProfile } from '../../service';
-import { Profile as ProfileType, TimelineInfoProps } from '../../types';
+import { Profile as ProfileType } from '../../types';
 import { urlFor } from '../../sanityClient';
 import QRCode from 'react-qr-code';
 import * as htmlToImage from 'html-to-image';
-
-const TimelineInfo: React.FC<TimelineInfoProps> = ({ title, text, link }) => {
-    return (
-        <TimelineItem className='timeline-item'>
-            <TimelineSeparator className='timeline-separator'>
-                <TimelineDot variant="outlined" className='timeline-dot' color="primary" />
-                <TimelineConnector className='timeline-connector' />
-            </TimelineSeparator>
-            <TimelineContent>
-                <Typography color="initial" className='timeline-text'>
-                    {text ? (
-                        <>{title}: <span>{text}</span></>
-                    ) : (
-                        <>{title}: <MUILink href={link?.url} underline="hover" target="_blank" rel="noopener noreferrer">@{link?.name}</MUILink></>
-                    )}
-                </Typography>
-            </TimelineContent>
-        </TimelineItem>
-    );
-};
+import TimelineInfoProfile from '../widgets/Timeline/TimelineInfoProfile';
+import CustomProfileLoader from '../widgets/ContentLoader/ProfileContentLoader';
 
 const Profile: React.FC = () => {
     const [profile, setProfile] = useState<ProfileType | null>(null);
@@ -58,14 +35,14 @@ const Profile: React.FC = () => {
                     link.href = dataUrl;
                     link.click();
                 })
-                .catch((error) => {
-                    console.error('Failed to generate QR code image', error);
+                .catch(() => {
+                    console.error('Failed to generate QR code image');
                 });
         }
     };
 
     if (!profile) {
-        return <div>Loading...</div>;
+        return <div className="profile container_shadow"><CustomProfileLoader /></div>
     }
 
     const profileLinks = profile.links.map(link => {
@@ -95,14 +72,11 @@ const Profile: React.FC = () => {
                         }}
                         className='timeline_profile'
                     >
-                        <TimelineInfo title='Email' text={profile.email} />
-                        <TimelineInfo title='Phone' text={profile.phone} />
+                        <TimelineInfoProfile title='Email' text={profile.email} />
+                        <TimelineInfoProfile title='Phone' text={profile.phone} />
                         {
-                            profileLinks.map((link) => {
-                                return <TimelineInfo key={link.name} title={link.name} link={link.link} />;
-                            })
+                            profileLinks.map(link => <TimelineInfoProfile key={link.name} title={link.name} link={link.link} />)
                         }
-
                     </CustomTimeline>
                 </div>
                 <div className='btn_resume'>
@@ -133,3 +107,4 @@ const Profile: React.FC = () => {
 };
 
 export default Profile;
+

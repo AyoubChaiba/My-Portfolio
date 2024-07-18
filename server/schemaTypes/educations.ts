@@ -1,8 +1,8 @@
 import { defineField, defineType } from 'sanity';
 
-export const working = defineType({
-    name: 'working',
-    title: 'Working',
+export const educations = defineType({
+    name: 'educations',
+    title: 'Educations',
     type: 'document',
     fields: [
         defineField({
@@ -11,21 +11,21 @@ export const working = defineType({
             type: 'string',
         }),
         defineField({
-            name: 'work',
-            title: 'Work',
+            name: 'education',
+            title: 'Education',
             type: 'array',
             of: [
                 {
                     type: 'object',
                     fields: [
                         defineField({
-                            name: 'position',
-                            title: 'Position',
+                            name: 'degree',
+                            title: 'Degree',
                             type: 'string',
                         }),
                         defineField({
-                            name: 'company',
-                            title: 'Company',
+                            name: 'institution',
+                            title: 'Institution',
                             type: 'string',
                         }),
                         defineField({

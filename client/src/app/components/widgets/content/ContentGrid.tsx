@@ -1,7 +1,7 @@
 import { Typography, Grid } from "@mui/material";
-import { ContentProps } from "../../../types";
+import { ContentGridProps } from "../../../types";
 
-export const ContentGrid: React.FC<ContentProps> = ({children, title, classContent, dataUpdate }) => {
+export const ContentGrid: React.FC<ContentGridProps> = ({children, title, classContent, dataUpdate }) => {
 
     return (
         <Grid container spacing={2} className={`content ${classContent}`}>
