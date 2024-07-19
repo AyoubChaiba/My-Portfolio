@@ -188,3 +188,15 @@ export interface Project {
 
 export type Projects = Project[];
 
+export interface RenderGridCardsProps {
+  category: string;
+  projects: Projects | null;
+  visibleProjects: number;
+  handleOpenDialog: (project: Project) => void;
+}
+
+export interface ModalDialogProps {
+  openDialog: boolean;
+  handleCloseDialog: () => void;
+  currentProject: Project | null;
+}

@@ -2,68 +2,6 @@
     padding: 25px 0 !important;
 }
 
-
-// .portfolio-card {
-//     position: relative;
-//     overflow: hidden;
-//     border-radius: 10px !important;
-//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
-//     &:hover .portfolio-card-buttons {
-//         opacity: 1;
-//     }
-
-//     .portfolio-card-media-wrapper {
-//         position: relative;
-//         height: 180px;
-//         img {
-//             width: 100%;
-//             height: 100%;
-//             object-fit: cover;
-//             object-position: center;
-//         }
-//     }
-
-//     .portfolio-card-buttons {
-//         position: absolute;
-//         top: 50%;
-//         left: 50%;
-//         display: flex;
-//         justify-content: center;
-//         align-items: center;
-//         opacity: 0;
-//         transition: opacity 0.3s ease;
-//         transform: translate(-70%, -50%);
-//         svg {
-//             color: white;
-//         }
-//         .btn-card {
-//             margin-left: 10px;
-//             background-color: #1976d2;
-//             transition: background-color .3 ease-out ;
-//             &:hover {
-//                 background-color: #0c51a0;
-//             }
-//         }
-//     }
-//     .portfolio-chip {
-//         position: absolute;
-//         top: 7px;
-//         left: 7px;
-//         color: #fff;
-//         background-color: #1976d2;
-//     }
-// }
-
-
-
-
-// .portfolio-card-description {
-//     white-space: nowrap;
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-// }
-
-
 .portfolio-main {
     .portfolio-card {
         position: relative;
@@ -76,7 +14,7 @@
             transform: translateY(-5px);
             .portfolio-card-buttons {
                 opacity: 1 !important;
-              }
+            }
         }
 
         &-media-wrapper {
@@ -120,10 +58,7 @@
             background-color: #fff;
         }
 
-        &-title {
-            font-size: 1.25rem;
-            font-weight: 500;
-        }
+
 
         &-stack, &-client {
             display: flex;
@@ -136,30 +71,9 @@
         }
     }
 
-    // .btn-load {
-    //     margin-top: 2rem;
-    //     padding: 0.75rem 2rem;
-    //     font-size: 1rem;
-    // }
     .btn-load {
         display: block;
         margin: 25px auto 15px auto;
         padding: 9px 25px;
     }
-}
-
-.portfolio-tabs-box {
-    margin-bottom: 2rem;
-
-    .portfolios {
-        .portfolio-item {
-        text-transform: none;
-        font-weight: 500;
-        font-size: 1rem;
-        }
-    }
-}
-
-.portfolio-tabpanel {
-    width: 100%;
 }
