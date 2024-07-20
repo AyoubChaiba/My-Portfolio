@@ -188,7 +188,6 @@ export interface Client {
 
 export type Clients = Client[];
 
-
 export interface Project {
   _id: string;
   title: string;

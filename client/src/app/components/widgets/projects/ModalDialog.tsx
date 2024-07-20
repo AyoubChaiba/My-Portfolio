@@ -23,7 +23,6 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const handleImageClick = (index: number) => {
-        console.log("Image clicked:", index); // Debugging log
         setCurrentImageIndex(index);
         setIsLightboxOpen(true);
     };
@@ -109,15 +108,11 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                                         images={
                                             currentProject.photo.slice(1).map((photo) => ({
                                                 src: urlFor(photo.asset).url(),
-                                                width: 800,
-                                                height: 600,
-                                                thumbnail: urlFor(photo.asset).url(),
-                                                thumbnailWidth: 800,
-                                                thumbnailHeight: 600,
                                             }))
                                         }
                                         enableImageSelection={false}
                                         onClick={(index) => handleImageClick(index + 1)}
+                                        rowHeight={250}
 
                                     />
                                 </ContentGrid>
