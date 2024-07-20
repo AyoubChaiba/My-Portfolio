@@ -1,10 +1,10 @@
 import { Grid, TextField } from "@mui/material";
 import { FaPaperPlane } from "react-icons/fa6";
-import MainButton from "../Button/MainButton";
+import MainButton from "../Button/MainButton.tsx";
 import { useRef, useEffect, useState } from "react";
 import emailjs from '@emailjs/browser';
-import { fetchContact } from "../../../service";
-import { Contact } from "../../../types";
+import { fetchContact } from "../../../service.ts";
+import { Contact } from "../../../types/index.ts";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 

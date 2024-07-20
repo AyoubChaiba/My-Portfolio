@@ -1,5 +1,5 @@
 import { Typography, Grid } from "@mui/material";
-import { ContentGridProps } from "../../../types";
+import { ContentGridProps } from "../../../types/index.ts";
 
 export const ContentGrid: React.FC<ContentGridProps> = ({children, title, classContent, dataUpdate }) => {
 

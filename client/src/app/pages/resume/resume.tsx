@@ -1,15 +1,15 @@
-import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
+import { ContentGrid } from "../../components/widgets/Content/ContentGrid.tsx";
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa6";
 import "./resume.scss";
 import { Grid, List, ListItem } from "@mui/material";
 import { useState, useEffect } from "react";
-import { fetchEducations, fetchWorking, fetchClients } from "../../service";
-import { Educations, Working, Clients } from "../../types";
-import TimelineInfo from "../../components/widgets/Timeline/TimelineInfo";
-import { TimelineInfoResume } from "../../components/widgets/Timeline/TimelineInfoResume";
-import ResumeContentLoader from "../../components/widgets/ContentLoader/ResumeContentLoader";
-import { urlFor } from "../../sanityClient";
-import ClientsContentLoader from "../../components/widgets/ContentLoader/ClientsContentLoader";
+import { fetchEducations, fetchWorking, fetchClients } from "../../service.ts";
+import { Educations, Working, Clients } from "../../types/index.ts";
+import TimelineInfo from "../../components/widgets/Timeline/TimelineInfo.tsx";
+import { TimelineInfoResume } from "../../components/widgets/Timeline/TimelineInfoResume.tsx";
+import ResumeContentLoader from "../../components/widgets/ContentLoader/ResumeContentLoader.tsx";
+import { urlFor } from "../../sanityClient.ts";
+import ClientsContentLoader from "../../components/widgets/ContentLoader/ClientsContentLoader.tsx";
 
 
 const Resume: React.FC = () => {

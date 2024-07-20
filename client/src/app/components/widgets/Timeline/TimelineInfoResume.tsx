@@ -1,12 +1,7 @@
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import { TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@mui/lab";
 import { Typography, IconButton } from '@mui/material';
-import { TimelineResumeProps } from "../../../types";
+import { TimelineResumeProps } from "../../../types/index.ts";
 import { FaCalendarDays, FaLocationDot } from "react-icons/fa6";
-
 
 export const TimelineInfoResume: React.FC<TimelineResumeProps> = ({ name, subName, dates, description, location }) => {
     return (

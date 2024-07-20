@@ -1,15 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
-import { TextWithSpaces } from "../../components/widgets/Content/TextWithSpaces";
+import { ContentGrid } from "../../components/widgets/Content/ContentGrid.tsx";
+import { TextWithSpaces } from "../../components/widgets/Content/TextWithSpaces.tsx";
 import "./home.scss";
 import { Grid, Typography } from "@mui/material";
 import { motion, useInView } from "framer-motion";
-import MainButton from "../../components/widgets/Button/MainButton";
-import { fetchAbout, fetchService, fetchSkills } from "../../service";
-import { About, Services, Skills } from '../../types';
-import { urlFor } from "../../sanityClient";
+import MainButton from "../../components/widgets/Button/MainButton.tsx";
+import { fetchAbout, fetchService, fetchSkills } from "../../service.ts";
+import { About, Services, Skills } from '../../types/index.ts';
+import { urlFor } from "../../sanityClient.ts";
 import ContentLoader from 'react-content-loader';
-import AboutContentLoader from "../../components/widgets/ContentLoader/AboutContentLoader";
+import AboutContentLoader from "../../components/widgets/ContentLoader/AboutContentLoader.tsx";
 
 const containerVariants = {
     hidden: { opacity: 0, scale: 0.8, y: 50 },

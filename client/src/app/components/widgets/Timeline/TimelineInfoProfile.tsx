@@ -1,6 +1,6 @@
 import { TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from "@mui/lab";
 import { Typography, Link as MUILink } from "@mui/material";
-import { TimelineProfileProps } from "../../../types";
+import { TimelineProfileProps } from "../../../types/index.ts";
 
 
 

@@ -1,10 +1,10 @@
 import './App.scss';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container'
-import { Profile } from "./components"
+import { Profile } from "./components/index.ts"
 import { Route, BrowserRouter, Routes } from "react-router-dom"
-import { Portfolio, Resume, Home, Contact, Stats } from './pages';
-import Layout from './layout';
+import { Portfolio, Resume, Home, Contact, Stats } from './pages/index.ts';
+import Layout from './layout/index.tsx';
 
 const App = () => {
   return (

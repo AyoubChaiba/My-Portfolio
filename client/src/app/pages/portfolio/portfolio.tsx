@@ -8,13 +8,13 @@ import {
 import { TabContext, TabPanel } from "@mui/lab";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import MainButton from "../../components/widgets/Button/MainButton";
-import { Projects, Project } from "../../types";
-import { fetchProjects } from "../../service";
-import { ContentGrid } from '../../components/widgets/Content/ContentGrid';
-import RenderGridCards from "../../components/widgets/projects/renderGridCards";
-import ModalDialog from '../../components/widgets/projects/ModalDialog';
-import ProjectContentLoader from "../../components/widgets/ContentLoader/ProjectContentLoader";
+import MainButton from "../../components/widgets/Button/MainButton.tsx";
+import { Projects, Project } from "../../types/index.ts";
+import { fetchProjects } from "../../service.ts";
+import { ContentGrid } from '../../components/widgets/Content/ContentGrid.tsx';
+import RenderGridCards from "../../components/widgets/projects/renderGridCards.tsx";
+import ModalDialog from '../../components/widgets/projects/ModalDialog.tsx';
+import ProjectContentLoader from "../../components/widgets/ContentLoader/ProjectContentLoader.tsx";
 
 
 const Portfolio = () => {

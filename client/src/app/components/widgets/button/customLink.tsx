@@ -1,6 +1,6 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import React, { MouseEvent } from 'react';
-import { LinkProps } from "../../../types";
+import { LinkProps } from "../../../types/index.ts";
 import { Button } from '@mui/material';
 
 export const CustomLink: React.FC<LinkProps> = ({ to, text, handleClick, className, icon }) => {

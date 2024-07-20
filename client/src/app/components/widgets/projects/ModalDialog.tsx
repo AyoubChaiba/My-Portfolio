@@ -9,13 +9,13 @@ import {
     Stack,
 } from "@mui/material";
 import { FaLink, FaGithub, FaXmark } from "react-icons/fa6";
-import { urlFor } from "../../../sanityClient";
-import { ContentGrid } from '../Content/ContentGrid';
+import { urlFor } from "../../../sanityClient.ts";
+import { ContentGrid } from '../Content/ContentGrid.tsx';
 import { Gallery } from 'react-grid-gallery';
 import Lightbox from "yet-another-react-lightbox";
-import { ModalDialogProps } from "../../../types";
+import { ModalDialogProps } from "../../../types/index.ts";
 import "./ModalDialog.scss";
-import MainButton from '../Button/MainButton';
+import MainButton from '../Button/MainButton.tsx';
 import 'yet-another-react-lightbox/styles.css';
 
 const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDialogProps) => {

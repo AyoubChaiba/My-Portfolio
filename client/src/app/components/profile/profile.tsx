@@ -1,17 +1,16 @@
 import { useEffect, useState, useRef } from 'react';
-import Typography from '@mui/material/Typography';
-import CustomTimeline from '../widgets/Timeline/CustomTimeline';
+import CustomTimeline from '../widgets/Timeline/CustomTimeline.tsx';
 import './profile.scss';
-import MainButton from '../widgets/Button/MainButton';
+import MainButton from '../widgets/Button/MainButton.tsx';
 import { FaDownload, FaCircleUser, FaQrcode } from "react-icons/fa6";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Box } from '@mui/material';
-import { fetchProfile } from '../../service';
-import { Profile as ProfileType } from '../../types';
-import { urlFor } from '../../sanityClient';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Box, Typography } from '@mui/material';
+import { fetchProfile } from '../../service.ts';
+import { Profile as ProfileType } from '../../types/index.ts';
+import { urlFor } from '../../sanityClient.ts';
 import QRCode from 'react-qr-code';
 import * as htmlToImage from 'html-to-image';
-import TimelineInfoProfile from '../widgets/Timeline/TimelineInfoProfile';
-import CustomProfileLoader from '../widgets/ContentLoader/ProfileContentLoader';
+import TimelineInfoProfile from '../widgets/Timeline/TimelineInfoProfile.tsx';
+import CustomProfileLoader from '../widgets/ContentLoader/ProfileContentLoader.tsx';
 
 const Profile: React.FC = () => {
     const [profile, setProfile] = useState<ProfileType | null>(null);

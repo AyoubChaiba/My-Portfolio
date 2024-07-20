@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
-import CalendarWrapper from "../../components/widgets/GitHubCalendar/calendarWrapper";
-import { ApiResponse, Contribution } from '../../types';
+import { ContentGrid } from "../../components/widgets/Content/ContentGrid.tsx";
+import CalendarWrapper from "../../components/widgets/GitHubCalendar/calendarWrapper.tsx";
+import { ApiResponse, Contribution } from '../../types/index.ts';
 import useGithubStats from "react-github-user-stats";
 import { Grid, Typography } from '@mui/material';
 import { motion, useInView } from 'framer-motion';

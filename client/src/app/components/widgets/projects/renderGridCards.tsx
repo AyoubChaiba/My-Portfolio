@@ -1,8 +1,8 @@
 import { Grid, Card, CardMedia, Chip, IconButton, CardContent, Typography, Stack } from "@mui/material";
 import { motion } from "framer-motion";
 import { FaEye } from "react-icons/fa6";
-import { urlFor } from "../../../sanityClient";
-import { RenderGridCardsProps } from "../../../types";
+import { urlFor } from "../../../sanityClient.ts";
+import { RenderGridCardsProps } from "../../../types/index.ts";
 
 
 const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog }: RenderGridCardsProps) => {

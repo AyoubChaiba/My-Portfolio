@@ -1,6 +1,6 @@
 import React from 'react';
 import Calendar from 'react-github-contribution-calendar';
-import { CalendarProps } from '../../../types';
+import { CalendarProps } from '../../../types/index.ts';
 import './calendarWrapper.scss';
 import Typography from '@mui/material/Typography';
 
