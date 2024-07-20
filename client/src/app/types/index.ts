@@ -1,6 +1,5 @@
 import { ReactNode, MouseEvent } from "react";
 
-
 export interface ButtonProps {
   text?: string;
   className?: string;

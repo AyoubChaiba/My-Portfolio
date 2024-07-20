@@ -1,4 +1,4 @@
-import { TimelineInfoProps } from "../../../types/index.ts";
+import { TimelineInfoProps } from "../../../types";
 import CustomTimeline from "./CustomTimeline";
 
 

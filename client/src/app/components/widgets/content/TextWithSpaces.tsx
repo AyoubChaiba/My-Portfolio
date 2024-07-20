@@ -1,4 +1,4 @@
-import { TextWithProps } from "../../../types/index.ts";
+import { TextWithProps } from "../../../types";
 import { Typography } from "@mui/material";
 
 export const TextWithSpaces: React.FC<TextWithProps>  = ({text}) => {

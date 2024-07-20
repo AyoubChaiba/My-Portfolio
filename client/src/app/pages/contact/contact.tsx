@@ -1,8 +1,8 @@
-import { ContentGrid } from "../../components/widgets/Content/ContentGrid.tsx";
-import { TextWithSpaces } from "../../components/widgets/Content/TextWithSpaces.tsx";
+import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
+import { TextWithSpaces } from "../../components/widgets/Content/TextWithSpaces";
 import "./contact.scss";
 import { Container } from '@mui/material';
-import FormContact from "../../components/widgets/form/FormContact.tsx";
+import FormContact from "../../components/widgets/form/FormContact";
 
 const Contact = () => {
     return (

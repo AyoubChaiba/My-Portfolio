@@ -1,3 +1,3 @@
-export { default as Footer} from "./footer/footer.tsx"
-export { default as Header} from "./header/header.tsx"
-export { default as Profile} from "./profile/profile.tsx"
+export { default as Footer} from "./footer/footer"
+export { default as Header} from "./header/header"
+export { default as Profile} from "./profile/profile"
