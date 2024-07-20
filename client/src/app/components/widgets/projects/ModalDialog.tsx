@@ -108,6 +108,8 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                                         images={
                                             currentProject.photo.slice(1).map((photo) => ({
                                                 src: urlFor(photo.asset).url(),
+                                                width: 800,
+                                                height: 600,
                                             }))
                                         }
                                         enableImageSelection={false}
