@@ -14,6 +14,8 @@ import { fetchProjects } from "../../service";
 import { ContentGrid } from '../../components/widgets/Content/ContentGrid';
 import RenderGridCards from "../../components/widgets/projects/renderGridCards";
 import ModalDialog from '../../components/widgets/projects/ModalDialog';
+import ProjectContentLoader from "../../components/widgets/ContentLoader/ProjectContentLoader";
+
 
 const Portfolio = () => {
     const [value, setValue] = useState("All");
@@ -52,7 +54,11 @@ const Portfolio = () => {
 
     return (
         <main className="portfolio-main">
-            <ContentGrid title="Portfolio" classContent="portfolio">
+            <ContentGrid
+                title="Portfolio"
+                classContent="portfolio"
+                dataUpdate={projects ? projects[0]._updatedAt.split('T')[0] : "..."}
+                >
                 <TabContext value={value}>
                     <Box className="portfolio-tabs-box">
                         <Tabs
@@ -84,19 +90,23 @@ const Portfolio = () => {
                                     transition={{ duration: 0.3 }}
                                 >
                                     <TabPanel value={tabValue} className="portfolio-tabpanel">
-                                        <RenderGridCards
-                                            category={tabValue}
-                                            projects={projects}
-                                            visibleProjects={visibleProjects}
-                                            handleOpenDialog={handleOpenDialog}
-                                        />
+                                        {loading ? (
+                                            <ProjectContentLoader />
+                                        ) : (
+                                            <RenderGridCards
+                                                category={tabValue}
+                                                projects={projects}
+                                                visibleProjects={visibleProjects}
+                                                handleOpenDialog={handleOpenDialog}
+                                            />
+                                        )}
                                     </TabPanel>
                                 </motion.div>
                             )
                         )}
                     </AnimatePresence>
                 </TabContext>
-                {projects && (
+                {projects && !loading && (
                     <MainButton
                         text={
                             visibleProjects < projects.length

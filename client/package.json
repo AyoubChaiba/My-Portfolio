@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@fontsource/roboto": "^5.0.13",
@@ -38,9 +39,11 @@
     "react-modal": "^3.16.1",
     "react-qr-code": "^2.0.15",
     "react-router-dom": "^6.24.0",
+    "react-toastify": "^10.0.5",
     "react-use": "^17.5.0",
     "sass": "^1.77.6",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "yet-another-react-lightbox": "^1.14.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",

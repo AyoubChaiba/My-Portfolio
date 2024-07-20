@@ -5,6 +5,8 @@ export interface ButtonProps {
   text?: string;
   className?: string;
   icon?: ReactNode;
+  link?: string;
+  type?: 'button' | 'submit' | 'reset';
   handleClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -15,7 +17,12 @@ export interface CustomTimelineProps {
   style: {
     sizeIcon: number;
     marginLeft: number;
-    headHeight?: string;
+    headHeight?: {
+      xs: string;
+      sm: string;
+      md: string;
+      lg: string;
+    };
     headIconTop?: string;
   };
   className?: string;
@@ -96,15 +103,26 @@ export interface Link {
   url: string;
 }
 
+export interface Info {
+  name: string;
+  value: string;
+}
+
 export interface Profile {
   fullName: string;
   email: string;
   job: string;
-  phone: string;
   photo: Image;
   links: Link[];
+  infos: Info[];
+  url_cv: string;
+  link_qr: string;
+  _createdAt: string;
+  _updatedAt: string;
+}
+
+export interface About {
   about: string;
-  birthday: string;
   _createdAt: string;
   _updatedAt: string;
 }
@@ -199,4 +217,16 @@ export interface ModalDialogProps {
   openDialog: boolean;
   handleCloseDialog: () => void;
   currentProject: Project | null;
+}
+
+export interface Contact {
+  YOUR_SERVICE_ID: string;
+  YOUR_PUBLIC_KEY: string;
+  YOUR_TEMPLATE_ID: string;
+}
+export interface SocialProps {
+  facebook?: string;
+  instagram?: string;
+  dev?: string;
+  twitter?: string;
 }

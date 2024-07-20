@@ -36,5 +36,20 @@ export const fetchProjects = async (type: string): Promise<Projects> => {
     return client.fetch(query);
 };
 
+export const fetchAbout = async (type: string) => {
+    const query = `*[_type == "${type}"][0]`;
+    return client.fetch(query);
+};
+
+export const fetchContact = async (type: string) => {
+    const query = `*[_type == "${type}"][0]`;
+    return client.fetch(query);
+};
+
+export const fetchSocial = async (type: string) => {
+    const query = `*[_type == "${type}"][0]`;
+    return client.fetch(query);
+};
+
 
 

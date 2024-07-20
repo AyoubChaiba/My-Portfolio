@@ -12,7 +12,10 @@
     .profile_name {
         line-height: 18px;
         padding: 20px;
-        position: relative;
+        // position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         .name {
             font-size: 20px;
             font-weight: bold;
@@ -23,10 +26,10 @@
             font-weight: normal;
         }
         .btn-qr {
-            position: absolute;
-            top: 20px;
-            right: 15px;
-            margin-right: 0 !important;
+            // position: absolute;
+            // top: 20px;
+            // right: 15px;
+            // margin-right: 0 !important;
             padding: 5px;
             color: #fff;
             border: none;

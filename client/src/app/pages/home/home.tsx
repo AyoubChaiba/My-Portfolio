@@ -5,36 +5,72 @@ import "./home.scss";
 import { Grid, Typography } from "@mui/material";
 import { motion, useInView } from "framer-motion";
 import MainButton from "../../components/widgets/Button/MainButton";
-import { fetchProfile, fetchService, fetchSkills } from "../../service";
-import { Services, Skills } from '../../types';
+import { fetchAbout, fetchService, fetchSkills } from "../../service";
+import { About, Services, Skills } from '../../types';
 import { urlFor } from "../../sanityClient";
 import ContentLoader from 'react-content-loader';
+import AboutContentLoader from "../../components/widgets/ContentLoader/AboutContentLoader";
 
 const containerVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: 80 },
+    hidden: { opacity: 0, scale: 0.8, y: 50 },
     visible: {
         opacity: 1,
         scale: 1,
         y: 0,
         transition: {
             when: "beforeChildren",
-            staggerChildren: 0.2,
+            staggerChildren: 0.3,
+            delay: 0.2,
+            duration: 0.5,
         },
     },
 };
 
 const itemVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.5 },
-        visible: (index: number) => ({
+    hidden: { opacity: 0, y: 30, scale: 0.8, rotate: 10 },
+    visible: (index: number) => ({
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        transition: {
+            delay: index * 0.1,
+            duration: 0.4,
+            type: "spring",
+            stiffness: 100,
+        },
+    }),
+};
+
+const cardContainerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            when: "beforeChildren",
+            staggerChildren: 0.3,
+            delay: 0.2,
+            duration: 0.6,
+            ease: "easeOut",
+        },
+    },
+};
+
+const cardItemVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.9 },
+    visible: (index: number) => ({
         opacity: 1,
         y: 0,
         scale: 1,
         transition: {
             delay: index * 0.1,
-            duration: 0.3,
+            duration: 0.4,
+            ease: "easeOut",
         },
-        }),
+    }),
 };
+
 
 const Home = () => {
     const ref1 = useRef(null);
@@ -44,7 +80,7 @@ const Home = () => {
     const isInView2 = useInView(ref2);
 
     const [visibleSkills, setVisibleSkills] = useState(8);
-    const [about, setAbout] = useState<string | null>(null);
+    const [about, setAbout] = useState<About>();
     const [services, setServices] = useState<Services>([]);
     const [skills, setSkills] = useState<Skills>([]);
     const [loading, setLoading] = useState(true);
@@ -59,10 +95,10 @@ const Home = () => {
         const fetchDataAsync = async () => {
             setLoading(true);
             try {
-                const dataAbout = await fetchProfile("profile");
+                const dataAbout = await fetchAbout("about");
                 const dataServices = await fetchService("services");
                 const dataSkills = await fetchSkills("skills");
-                setAbout(dataAbout?.about || "");
+                setAbout(dataAbout || {});
                 setServices(dataServices || []);
                 setSkills(dataSkills || []);
                 setLoading(false);
@@ -74,26 +110,18 @@ const Home = () => {
         fetchDataAsync();
     }, []);
 
+
     return (
         <main>
-            <ContentGrid title={'About Me'} classContent={'about'}>
+            <ContentGrid
+                title={'About Me'}
+                classContent={'about'}
+                dataUpdate={about ? about?._updatedAt.split('T')[0] : "..."}
+            >
                 {loading || !about ? (
-                        <ContentLoader
-                            viewBox="0 0 500 140"
-                            speed={2}
-                            backgroundColor="#cccccc"
-                            foregroundColor="#ecebeb"
-                        >
-                            <rect x="0" y="13" rx="4" ry="4" width="100%" height="9" />
-                            <rect x="0" y="29" rx="4" ry="4" width="50%" height="9" />
-                            <rect x="0" y="50" rx="4" ry="4" width="100%" height="9" />
-                            <rect x="0" y="65" rx="4" ry="4" width="60%" height="9" />
-                            <rect x="0" y="79" rx="4" ry="4" width="40%" height="9" />
-                            <rect x="0" y="100" rx="4" ry="4" width="100%" height="9" />
-                            <rect x="0" y="115" rx="4" ry="4" width="50%" height="9" />
-                        </ContentLoader>
+                        <AboutContentLoader />
                 ) : (
-                    <TextWithSpaces text={about} />
+                    <TextWithSpaces text={about?.about} />
                 )}
             </ContentGrid>
 
@@ -163,7 +191,7 @@ const Home = () => {
                     ref={ref2}
                     initial={isAnimation ? "visible" : "hidden"}
                     animate={isInView2 ? "visible" : "hidden"}
-                    variants={containerVariants}
+                    variants={cardContainerVariants}
                     >
                     <Grid
                         container
@@ -194,7 +222,7 @@ const Home = () => {
                                     <motion.div
                                         className="skills-card"
                                         custom={index}
-                                        variants={itemVariants}
+                                        variants={cardItemVariants}
                                         whileHover={{ scale: 1.03 }}
                                         style={{
                                             cursor: 'default',

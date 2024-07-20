@@ -10,7 +10,12 @@ const TimelineInfoProfile: React.FC<TimelineInfoProps> = ({ title, icon, classNa
             style={{
                 sizeIcon: 60,
                 marginLeft: -26,
-                headHeight: "140px",
+                headHeight: {
+                    xs:"90px",
+                    sm:"110px",
+                    md:"120px",
+                    lg:"140px",
+                },
             }}
             className={className}
         >

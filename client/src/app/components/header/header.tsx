@@ -7,11 +7,9 @@ import { Squash as Hamburger } from "hamburger-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickAway } from "react-use";
 import { CustomLink } from "../widgets/Button/customLink";
-import { FaFacebook, FaInstagram, FaGithub , FaDev  } from "react-icons/fa6";
+import SocialMedia from '../widgets/Button/socileMadia';
 
 
-const pages = ['RESUME', 'PORTFOLIO', 'Stats', 'CONTACT', ];
-const socile = ['facebook', 'instagram', 'github', "dev" ];
 
 const Header: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -25,23 +23,12 @@ const Header: React.FC = () => {
                 <Toolbar disableGutters className='navBar'>
                     <CustomLink to={`/`} icon={<FaHouse className='iconHome' />} className='btnHead btnHome' />
                     <Box className='navMenu' sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
+                        {['RESUME', 'PORTFOLIO', 'Stats', 'CONTACT'].map((page) => (
                             <CustomLink key={page} to={`/${page.toLowerCase()}`} text={page} />
                         ))}
                     </Box>
                     <List className='socile-icon'>
-                        {socile.map((icon) => (
-                            <li key={icon} className='socile-item' >
-                                <a href={`https://www.${icon}.com`} target='_blank' rel="noopener noreferrer">
-                                    {
-                                        icon === 'facebook'? <FaFacebook /> :
-                                        icon === 'instagram'? <FaInstagram /> :
-                                        icon === 'github'? <FaGithub /> :
-                                        icon === 'dev'? <FaDev /> : null
-                                    }
-                                </a>
-                            </li>
-                        ))}
+                        <SocialMedia />
                     </List>
                     <MainButton text='Hire Me' className='btn-nav' icon={<FaPaperPlane />} />
                     <IconButton
@@ -67,7 +54,7 @@ const Header: React.FC = () => {
                         ref={ref}
                     >
                         <List className="menuList">
-                            {pages.map((page, idx) => (
+                            {['RESUME', 'PORTFOLIO', 'Stats', 'CONTACT'].map((page, idx) => (
                                 <motion.li
                                     initial={{ scale: 0, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}

@@ -10,7 +10,20 @@
 }
 
 .btn-container {
-    .btn-dialog-github {
-        background-color: #7b1fa2;
+    max-width: 300px !important;
+    margin: 20px auto !important;
+    .btn-dialog {
+        &-github {
+            background-color: #7b1fa2;
+            width: 100%;
+            &:hover {
+                background-color: #6a1b9a;
+            }
+        }
+        &-live {
+            background-color: #0077b5;
+            margin-left: 0;
+            width: 100%;
+        }
     }
 }

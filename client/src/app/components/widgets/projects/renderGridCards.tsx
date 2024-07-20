@@ -22,15 +22,17 @@ const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog
                     key={project._id}
                     margin={0}
                     padding={0}
+                    display="flex"
                 >
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 50 }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
+                        style={{ flex: 1, display: 'flex' }}
                     >
-                        <Card className="portfolio-card">
-                            <div className="portfolio-card-media-wrapper">
+                        <Card style={{ flex: 1, display: 'flex', flexDirection: 'column' }} className="portfolio-card">
+                            <div style={{ flex: '0 0 auto' }} className="portfolio-card-media-wrapper">
                                 <CardMedia
                                     component="img"
                                     height="140"

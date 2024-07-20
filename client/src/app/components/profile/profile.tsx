@@ -4,7 +4,7 @@ import CustomTimeline from '../widgets/Timeline/CustomTimeline';
 import './profile.scss';
 import MainButton from '../widgets/Button/MainButton';
 import { FaDownload, FaCircleUser, FaQrcode } from "react-icons/fa6";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Box } from '@mui/material';
 import { fetchProfile } from '../../service';
 import { Profile as ProfileType } from '../../types';
 import { urlFor } from '../../sanityClient';
@@ -51,12 +51,20 @@ const Profile: React.FC = () => {
             link: link
         };
     });
+    const profileInfo = profile.infos.map(info => {
+        return {
+            name: info.name.toLowerCase(),
+            info: info
+        };
+    });
 
     return (
         <div className="profile container_shadow">
             <div className="profile_name">
-                <Typography className='name'>{profile.fullName}</Typography>
-                <Typography className='job'>{profile.job}</Typography>
+                <Box>
+                    <Typography className='name'>{profile.fullName}</Typography>
+                    <Typography className='job'>{profile.job}</Typography>
+                </Box>
                 <MainButton icon={<FaQrcode />} className={'btn-qr'} handleClick={() => setOpen(true)} />
             </div>
             <figure>
@@ -72,22 +80,23 @@ const Profile: React.FC = () => {
                         }}
                         className='timeline_profile'
                     >
-                        <TimelineInfoProfile title='Email' text={profile.email} />
-                        <TimelineInfoProfile title='Phone' text={profile.phone} />
+                        {
+                            profileInfo.map(info => <TimelineInfoProfile key={info.name} title={info.name} text={info.info.value} />)
+                        }
                         {
                             profileLinks.map(link => <TimelineInfoProfile key={link.name} title={link.name} link={link.link} />)
                         }
                     </CustomTimeline>
                 </div>
                 <div className='btn_resume'>
-                    <MainButton text="Download CV" icon={<FaDownload />} />
+                    <MainButton text="Download CV" icon={<FaDownload />} link={profile.url_cv} />
                 </div>
             </div>
             <Dialog open={open} onClose={() => setOpen(false)}>
                 <DialogTitle align='center'>Share this page</DialogTitle>
                 <DialogContent>
                     <div ref={qrRef}>
-                        <QRCode value="https://example.com" />
+                        <QRCode value={profile.link_qr} />
                     </div>
                 </DialogContent>
                 <DialogActions sx={{

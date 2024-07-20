@@ -1,9 +1,9 @@
+import React, { useState } from "react";
 import {
     Box,
     Dialog,
     DialogTitle,
     DialogContent,
-    Button,
     IconButton,
     Typography,
     Stack,
@@ -12,46 +12,57 @@ import { FaLink, FaGithub, FaXmark } from "react-icons/fa6";
 import { urlFor } from "../../../sanityClient";
 import { ContentGrid } from '../Content/ContentGrid';
 import { Gallery } from 'react-grid-gallery';
+import Lightbox from "yet-another-react-lightbox";
 import { ModalDialogProps } from "../../../types";
-import "./ModalDialog.scss"
+import "./ModalDialog.scss";
 import MainButton from '../Button/MainButton';
-
+import 'yet-another-react-lightbox/styles.css';
 
 const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDialogProps) => {
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const handleImageClick = (index: number) => {
+        console.log("Image clicked:", index); // Debugging log
+        setCurrentImageIndex(index);
+        setIsLightboxOpen(true);
+    };
+
+    const images = currentProject?.photo.map(photo => urlFor(photo.asset).url()) || [];
+
     return (
         <Dialog
             open={openDialog}
             onClose={handleCloseDialog}
             fullWidth
-            maxWidth='xl'
+            maxWidth='lg'
+            className="modal-dialog"
+            classes={{ paper: "modal-paper" }}
+            disableScrollLock={true}
+            disableEscapeKeyDown={true}
         >
             {currentProject && (
                 <>
                     <DialogTitle sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
                         position: 'relative',
                         border: 'none',
                         boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+                        height: '50px',
                     }}
                     >
-                        {currentProject.title}
                         <IconButton
                             onClick={handleCloseDialog}
                             edge="end"
                             aria-label="close"
                             sx={{
                                 position: "absolute",
-                                top: 12,
+                                top: 7,
                                 right: 25,
                                 width: 35,
                                 height: 35,
                                 fontSize: 18,
                                 color: "#121212",
-                                "&:hover": {
-                                    color: "#1976d2",
-                                },
+                                border: "1px solid #ccc",
                             }}
                         >
                             <FaXmark />
@@ -63,8 +74,6 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                             padding: 0 ,
                         }}>
                         <Box sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
                             maxWidth: "800px",
                             width: "100%",
                             maxHeight: "500px",
@@ -75,11 +84,22 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                                 width: "100%",
                                 height: "auto",
                                 objectFit: "cover",
+                                cursor: 'pointer',
                             }
                         }} >
+                            <Typography
+                                variant="h4"
+                                color="initial"
+                                fontWeight={900}
+                                margin={"25px auto"}
+                                align="center"
+                                >
+                                {currentProject.title}
+                            </Typography>
                             <img
                                 src={urlFor(currentProject.photo[0].asset).url()}
                                 alt={currentProject.title}
+                                onClick={() => handleImageClick(0)}
                             />
                         </Box>
                         {
@@ -87,13 +107,18 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                                 <ContentGrid title="Gallery" classContent="gallery title_dialog">
                                     <Gallery
                                         images={
-                                            currentProject.photo.slice(1).map(photo => ({
+                                            currentProject.photo.slice(1).map((photo) => ({
                                                 src: urlFor(photo.asset).url(),
                                                 width: 800,
                                                 height: 600,
+                                                thumbnail: urlFor(photo.asset).url(),
+                                                thumbnailWidth: 800,
+                                                thumbnailHeight: 600,
                                             }))
                                         }
                                         enableImageSelection={false}
+                                        onClick={(index) => handleImageClick(index + 1)}
+
                                     />
                                 </ContentGrid>
                             )
@@ -112,7 +137,7 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                                 direction="row"
                                 spacing={1}
                                 className="btn-container"
-                                sx={{ margin: 3, justifyContent: 'center', gap: 2 , flexDirection: { xs : 'column' } }}
+                                sx={{ margin: 3, justifyContent: 'center', gap: 2 , flexDirection: { xs : 'column' , sm : 'row' } }}
                             >
                                 <MainButton
                                     icon={<FaGithub />}
@@ -129,8 +154,14 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                     </DialogContent>
                 </>
             )}
+            <Lightbox
+                open={isLightboxOpen}
+                close={() => setIsLightboxOpen(false)}
+                slides={images.map(src => ({ src }))}
+                index={currentImageIndex}
+            />
         </Dialog>
-    )
+    );
 }
 
 export default ModalDialog;
