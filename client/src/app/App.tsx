@@ -6,9 +6,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom"
 import { Portfolio, Resume, Home, Contact, Stats } from './pages';
 import Layout from './layout';
 
-
 const App = () => {
-
   return (
     <>
       <Container
