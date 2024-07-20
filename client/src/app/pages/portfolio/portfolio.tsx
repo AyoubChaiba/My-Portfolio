@@ -8,7 +8,7 @@ import {
 import { TabContext, TabPanel } from "@mui/lab";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import MainButton from "../../components/widgets/Button/MainButton";
+import { MainButton } from "../../components/widgets/Button/MainButton";
 import { Projects, Project } from "../../types";
 import { fetchProjects } from "../../service";
 import { ContentGrid } from '../../components/widgets/Content/ContentGrid';

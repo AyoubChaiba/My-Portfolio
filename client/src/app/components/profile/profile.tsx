@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import CustomTimeline from '../widgets/Timeline/CustomTimeline';
 import './profile.scss';
-import MainButton from '../widgets/Button/MainButton';
+import { MainButton } from '../widgets/Button/MainButton';
 import { FaDownload, FaCircleUser, FaQrcode } from "react-icons/fa6";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Box, Typography } from '@mui/material';
 import { fetchProfile } from '../../service';

@@ -15,7 +15,7 @@ import { Gallery } from 'react-grid-gallery';
 import Lightbox from "yet-another-react-lightbox";
 import { ModalDialogProps } from "../../../types";
 import "./ModalDialog.scss";
-import MainButton from '../Button/MainButton';
+import { MainButton } from '../Button/MainButton';
 import 'yet-another-react-lightbox/styles.css';
 
 const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDialogProps) => {

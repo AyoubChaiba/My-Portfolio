@@ -4,7 +4,7 @@ import { TextWithSpaces } from "../../components/widgets/Content/TextWithSpaces"
 import "./home.scss";
 import { Grid, Typography } from "@mui/material";
 import { motion, useInView } from "framer-motion";
-import MainButton from "../../components/widgets/Button/MainButton";
+import { MainButton } from "../../components/widgets/Button/MainButton";
 import { fetchAbout, fetchService, fetchSkills } from "../../service";
 import { About, Services, Skills } from '../../types';
 import { urlFor } from "../../sanityClient";
