@@ -10,7 +10,7 @@ const itemVariants = {
     visible: { opacity: 1, scale: 1 },
 };
 
-const SocialMedia = () => {
+export const  SocialMedia = () => {
     const [socialMediaData, setSocialMediaData] = useState<SocialProps | null>(null);
 
     useEffect(() => {
@@ -70,4 +70,3 @@ const SocialMedia = () => {
     );
 }
 
-export default SocialMedia;
