@@ -46,9 +46,16 @@
     "yet-another-react-lightbox": "^1.14.0"
   },
   "devDependencies": {
-    "@types/node": "^20.14.10",
+    "@types/axios": "^0.14.0",
+    "@types/node": "^20.14.11",
     "@types/react": "^18.3.3",
+    "@types/react-content-loader": "^4.0.0",
     "@types/react-dom": "^18.3.0",
+    "@types/react-icons": "^3.0.0",
+    "@types/react-modal": "^3.16.3",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/react-toastify": "^4.1.0",
+    "@types/styled-components": "^5.1.34",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
