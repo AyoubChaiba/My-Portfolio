@@ -4,12 +4,12 @@ import "./resume.scss";
 import { Grid, List, ListItem } from "@mui/material";
 import { useState, useEffect } from "react";
 import { fetchEducations, fetchWorking, fetchClients } from "../../service";
-import { Educations, Working, Clients } from "../../types";
+import { Educations, Working, Clients } from "../../types/apiTypes";
 import TimelineInfo from "../../components/widgets/Timeline/TimelineInfo";
 import { TimelineInfoResume } from "../../components/widgets/Timeline/TimelineInfoResume";
-import ResumeContentLoader from "../../components/widgets/ContentLoader/ResumeContentLoader";
+import ResumeContentLoader from "../../components/common/ContentLoader/ResumeContentLoader";
 import { urlFor } from "../../sanityClient";
-import ClientsContentLoader from "../../components/widgets/ContentLoader/ClientsContentLoader";
+import ClientsContentLoader from "../../components/common/ContentLoader/ClientsContentLoader";
 
 
 const Resume: React.FC = () => {
@@ -46,7 +46,7 @@ const Resume: React.FC = () => {
     return (
         <main>
             <ContentGrid
-                title={"Resume"}
+                title={"Experience"}
                 classContent={"resume"}
                 dataUpdate={working?._updatedAt?.split('T')[0] ?? " ... "}
             >

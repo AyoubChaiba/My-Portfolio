@@ -4,7 +4,7 @@ import { MainButton } from "../Button/MainButton";
 import { useRef, useEffect, useState } from "react";
 import emailjs from '@emailjs/browser';
 import { fetchContact } from "../../../service";
-import { Contact } from "../../../types";
+import { Contact } from "../../../types/apiTypes";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 

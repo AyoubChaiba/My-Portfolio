@@ -2,7 +2,7 @@ import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
 import { TextWithSpaces } from "../../components/widgets/Content/TextWithSpaces";
 import "./contact.scss";
 import { Container } from '@mui/material';
-import FormContact from "../../components/widgets/form/FormContact";
+import FormContact from "../../components/common/form/FormContact";
 
 const Contact = () => {
     return (

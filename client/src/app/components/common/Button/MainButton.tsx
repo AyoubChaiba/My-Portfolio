@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import React, { MouseEvent } from 'react';
 import { motion } from 'framer-motion';
-import { ButtonProps } from "../../../types";
+import { ButtonProps } from "../../../types/componentType";
 
 const buttonVariants = {
     hover: { scale: 1.05, rotate: 2 },

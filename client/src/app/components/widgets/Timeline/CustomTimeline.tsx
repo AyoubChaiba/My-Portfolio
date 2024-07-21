@@ -1,6 +1,6 @@
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
 import Typography from '@mui/material/Typography'
-import { CustomTimelineProps } from '../../../types';
+import { CustomTimelineProps } from '../../../types/componentType';
 import "./timeline.scss"
 
 

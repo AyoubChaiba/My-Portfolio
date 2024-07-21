@@ -1,6 +1,6 @@
 import { TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@mui/lab";
 import { Typography, IconButton } from '@mui/material';
-import { TimelineResumeProps } from "../../../types";
+import { TimelineResumeProps } from "../../../types/componentType";
 import { FaCalendarDays, FaLocationDot } from "react-icons/fa6";
 
 export const TimelineInfoResume: React.FC<TimelineResumeProps> = ({ name, subName, dates, description, location }) => {

@@ -1,15 +1,18 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
 import { TextWithSpaces } from "../../components/widgets/Content/TextWithSpaces";
 import "./home.scss";
 import { Grid, Typography } from "@mui/material";
 import { motion, useInView } from "framer-motion";
-import { MainButton } from "../../components/widgets/Button/MainButton";
+import { MainButton } from "../../components/common/Button/MainButton";
 import { fetchAbout, fetchService, fetchSkills } from "../../service";
-import { About, Services, Skills } from '../../types';
+import { About, Services, Skills } from '../../types/apiTypes';
 import { urlFor } from "../../sanityClient";
-import ContentLoader from 'react-content-loader';
-import AboutContentLoader from "../../components/widgets/ContentLoader/AboutContentLoader";
+import { useFetchData } from "../../hooks/useFetchData";
+import { useVisibility } from "../../hooks/useVisibility";
+import { formatDate } from "../../utils/DateTimeFormat";
+import { ServicesLoader, SkillsLoader, AboutContentLoader } from "../../components/common/ContentLoader/MainLoader";
+
 
 const containerVariants = {
     hidden: { opacity: 0, scale: 0.8, y: 50 },
@@ -51,7 +54,7 @@ const cardContainerVariants = {
             when: "beforeChildren",
             staggerChildren: 0.3,
             delay: 0.2,
-            duration: 0.6,
+            duration: 0.5,
             ease: "easeOut",
         },
     },
@@ -65,7 +68,7 @@ const cardItemVariants = {
         scale: 1,
         transition: {
             delay: index * 0.1,
-            duration: 0.4,
+            duration: 0.2,
             ease: "easeOut",
         },
     }),
@@ -75,60 +78,33 @@ const cardItemVariants = {
 const Home = () => {
     const ref1 = useRef(null);
     const ref2 = useRef(null);
-
     const isInView1 = useInView(ref1);
     const isInView2 = useInView(ref2);
 
-    const [visibleSkills, setVisibleSkills] = useState(8);
-    const [about, setAbout] = useState<About>();
-    const [services, setServices] = useState<Services>([]);
-    const [skills, setSkills] = useState<Skills>([]);
-    const [loading, setLoading] = useState(true);
-    const [isAnimation, setIsAnimation] = useState(false);
+    const { data: { about , _updatedAt: aboutUpdate }, loading: aboutLoading } = useFetchData(fetchAbout, 'about', {} as About);
+    const { data: services, loading: servicesLoading } = useFetchData(fetchService, 'services', [] as Services);
+    const { data: skills, loading: skillsLoading } = useFetchData(fetchSkills, 'skills', [] as Skills);
 
-    const handleLoadMore = () => {
-        setVisibleSkills(prevVisibleSkills => prevVisibleSkills + 6)
-        setIsAnimation(true)
-    };
-
-    useEffect(() => {
-        const fetchDataAsync = async () => {
-            setLoading(true);
-            try {
-                const dataAbout = await fetchAbout("about");
-                const dataServices = await fetchService("services");
-                const dataSkills = await fetchSkills("skills");
-                setAbout(dataAbout || {});
-                setServices(dataServices || []);
-                setSkills(dataSkills || []);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                setLoading(false);
-            }
-        };
-        fetchDataAsync();
-    }, []);
-
+    const { visibleItems: visibleSkills, handleLoadMore: handleLoadMoreSkills } = useVisibility(12, 5);
 
     return (
         <main>
             <ContentGrid
                 title={'About Me'}
                 classContent={'about'}
-                dataUpdate={about ? about?._updatedAt.split('T')[0] : "..."}
+                dataUpdate={aboutUpdate ?  formatDate({ date :aboutUpdate }) : " ... "}
             >
-                {loading || !about ? (
+                {aboutLoading || !about ? (
                         <AboutContentLoader />
                 ) : (
-                    <TextWithSpaces text={about?.about} />
+                    <TextWithSpaces text={about} />
                 )}
             </ContentGrid>
 
             <ContentGrid
                 title={'My Services'}
                 classContent={'services'}
-                dataUpdate={services[0]?._updatedAt ? services[0]._updatedAt.split('T')[0] : "..."}
+                dataUpdate={ services[0]?._updatedAt ?  formatDate({ date : services[0]?._updatedAt }) : " ... "}
                 >
                 <motion.div
                     ref={ref1}
@@ -142,24 +118,8 @@ const Home = () => {
                         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                         className="services-items"
                         >
-                        {loading || !services.length ? (
-                            <ContentLoader
-                                viewBox="0 0 400 150"
-                                speed={2}
-                                backgroundColor="#cccccc"
-                                foregroundColor="#ecebeb"
-                                style={{
-                                    width: "100%",
-                                    padding: "10px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                }}
-                            >
-                                    <rect x="9" y="10" rx="2" ry="2" width="116" height="116" />
-                                    <rect x="137" y="10" rx="2" ry="2" width="116" height="116" />
-                                    <rect x="266" y="10" rx="2" ry="2" width="116" height="116" />
-                                </ContentLoader>
+                        {servicesLoading || !services.length ? (
+                            <ServicesLoader />
                         ) : (
                             services.map((service, index) => (
                                 <Grid item xs={12} sm={6} md={6} lg key={index}>
@@ -185,11 +145,12 @@ const Home = () => {
             <ContentGrid
                 title={'My Top Skills'}
                 classContent={'skills'}
-                dataUpdate={skills[0]?._updatedAt ? skills[0]._updatedAt.split('T')[0] : "..."}
+                dataUpdate={ skills[0]?._updatedAt ?  formatDate({ date : skills[0]?._updatedAt }) : " ... "}
             >
                 <motion.div
                     ref={ref2}
-                    initial={isAnimation ? "visible" : "hidden"}
+                    // initial={isAnimation ? "visible" : "hidden"}
+                    initial={"hidden"}
                     animate={isInView2 ? "visible" : "hidden"}
                     variants={cardContainerVariants}
                     >
@@ -198,24 +159,8 @@ const Home = () => {
                         rowSpacing={2}
                         columnSpacing={{ xs: 1, sm: 2, md: 2, lg: 3 }}
                         className="skills-items">
-                        {loading || !skills.length ? (
-                            <ContentLoader
-                                viewBox="0 0 400 150"
-                                speed={2}
-                                backgroundColor="#cccccc"
-                                foregroundColor="#ecebeb"
-                                style={{
-                                    width: "100%",
-                                    padding: "10px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                }}
-                            >
-                                    <rect x="9" y="10" rx="2" ry="2" width="116" height="116" />
-                                    <rect x="137" y="10" rx="2" ry="2" width="116" height="116" />
-                                    <rect x="266" y="10" rx="2" ry="2" width="116" height="116" />
-                                </ContentLoader>
+                        {skillsLoading || !skills.length ? (
+                            <SkillsLoader />
                         ) : (
                             skills.slice(0, visibleSkills).map((skill, index) => (
                                 <Grid item xs={4} sm={4} lg={3} key={skill.name}>
@@ -223,7 +168,6 @@ const Home = () => {
                                         className="skills-card"
                                         custom={index}
                                         variants={cardItemVariants}
-                                        whileHover={{ scale: 1.03 }}
                                         style={{
                                             cursor: 'default',
                                             background: '#fff',
@@ -259,7 +203,7 @@ const Home = () => {
                 <MainButton
                     text={`${visibleSkills < skills.length ? `Load More  (${skills.length - visibleSkills})` : 'No More Skills' }`}
                     className="btn-load"
-                    handleClick={handleLoadMore}
+                    handleClick={handleLoadMoreSkills}
                 />
             </ContentGrid>
         </main>

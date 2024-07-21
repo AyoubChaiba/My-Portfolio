@@ -2,7 +2,7 @@ import { Grid, Card, CardMedia, Chip, IconButton, CardContent, Typography, Stack
 import { motion } from "framer-motion";
 import { FaEye } from "react-icons/fa6";
 import { urlFor } from "../../../sanityClient";
-import { RenderGridCardsProps } from "../../../types";
+import { RenderGridCardsProps } from "../../../types/componentType";
 
 
 const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog }: RenderGridCardsProps) => {

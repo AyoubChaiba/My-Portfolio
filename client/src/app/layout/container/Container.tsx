@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import { Footer, Header } from "../components"
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
 
-const Layout = () => {
+const ContainerPage = () => {
     return (
         <>
             <Header />
@@ -12,4 +13,4 @@ const Layout = () => {
 }
 
 
-export default Layout;
+export default ContainerPage;

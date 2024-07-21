@@ -1,6 +1,5 @@
 import Typography from '@mui/material/Typography';
-import "./footer.scss"
-
+import "./Footer.scss"
 
 const Footer = () => {
     return (
