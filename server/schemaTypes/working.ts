@@ -43,6 +43,14 @@ export const working = defineType({
                             title: 'Description',
                             type: 'text',
                         }),
+                        defineField({
+                            name: 'photo',
+                            title: 'Photo',
+                            type: 'image',
+                            options: {
+                                hotspot: true,
+                            },
+                        })
                     ],
                 },
             ],

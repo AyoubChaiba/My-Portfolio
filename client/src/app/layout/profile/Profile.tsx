@@ -1,118 +1,91 @@
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 import CustomTimeline from '../../components/widgets/Timeline/CustomTimeline';
 import './Profile.scss';
 import { MainButton } from '../../components/common/Button/MainButton';
 import { FaDownload, FaCircleUser, FaQrcode } from "react-icons/fa6";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Box, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { fetchProfile } from '../../service';
-import { Profile as ProfileType } from '../../types/apiTypes';
+import { Profile as TypeProfile } from '../../types/apiTypes';
 import { urlFor } from '../../sanityClient';
-import QRCode from 'react-qr-code';
-import * as htmlToImage from 'html-to-image';
 import TimelineInfoProfile from '../../components/widgets/Timeline/TimelineInfoProfile';
 import CustomProfileLoader from '../../components/common/ContentLoader/ProfileContentLoader';
+import ModalDialogQR from '../../components/widgets/profile/ModalDialogQR';
+import { useFetchData } from '../../hooks/useFetchData';
+import { motion } from 'framer-motion';
 
 const Profile: React.FC = () => {
-    const [profile, setProfile] = useState<ProfileType | null>(null);
     const [open, setOpen] = useState(false);
-    const qrRef = useRef<HTMLDivElement>(null);
+    const { data: profile, loading } = useFetchData<TypeProfile>(fetchProfile, "profile", {} as TypeProfile);
 
-    useEffect(() => {
-        const getProfile = async () => {
-            const data = await fetchProfile("profile");
-            setProfile(data);
-        };
-        getProfile();
-    }, []);
+    const profileLinks = profile?.links?.map(link => ({
+        name: link.name.toLowerCase(),
+        link: link
+    })) || [];
 
-    const handleDownloadQRCode = () => {
-        if (qrRef.current) {
-            htmlToImage.toPng(qrRef.current)
-                .then((dataUrl) => {
-                    const link = document.createElement('a');
-                    link.download = 'qr-code.png';
-                    link.href = dataUrl;
-                    link.click();
-                })
-                .catch(() => {
-                    console.error('Failed to generate QR code image');
-                });
-        }
-    };
-
-    if (!profile) {
-        return <div className="profile container_shadow"><CustomProfileLoader /></div>
-    }
-
-    const profileLinks = profile.links.map(link => {
-        return {
-            name: link.name.toLowerCase(),
-            link: link
-        };
-    });
-    const profileInfo = profile.infos.map(info => {
-        return {
-            name: info.name.toLowerCase(),
-            info: info
-        };
-    });
+    const profileInfo = profile?.infos?.map(info => ({
+        name: info.name.toLowerCase(),
+        info: info
+    })) || [];
 
     return (
         <div className="profile container_shadow">
-            <div className="profile_name">
-                <Box>
-                    <Typography className='name'>{profile.fullName}</Typography>
-                    <Typography className='job'>{profile.job}</Typography>
-                </Box>
-                <MainButton icon={<FaQrcode />} className={'btn-qr'} handleClick={() => setOpen(true)} />
-            </div>
-            <figure>
-                <img src={urlFor(profile.photo.asset).url()} alt="Avatar" />
-            </figure>
-            <div className='profile_info'>
-                <div className='timeline_info'>
-                    <CustomTimeline icon={<FaCircleUser />}
-                        style={{
-                            sizeIcon: 45,
-                            marginLeft: -19,
-                            headIconTop: "-24px",
-                        }}
-                        className='timeline_profile'
+            {loading ? (
+                <CustomProfileLoader />
+            ) : (
+                profile && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
                     >
-                        {
-                            profileInfo.map(info => <TimelineInfoProfile key={info.name} title={info.name} text={info.info.value} />)
-                        }
-                        {
-                            profileLinks.map(link => <TimelineInfoProfile key={link.name} title={link.name} link={link.link} />)
-                        }
-                    </CustomTimeline>
-                </div>
-                <div className='btn_resume'>
-                    <MainButton text="Download CV" icon={<FaDownload />} link={profile.url_cv} />
-                </div>
-            </div>
-            <Dialog open={open} onClose={() => setOpen(false)}>
-                <DialogTitle align='center'>Share this page</DialogTitle>
-                <DialogContent>
-                    <div ref={qrRef}>
-                        <QRCode value={profile.link_qr} />
-                    </div>
-                </DialogContent>
-                <DialogActions sx={{
-                    display: 'flex',
-                    justifyContent: 'space-around',
-                }}>
-                    <Button onClick={handleDownloadQRCode} color="primary">
-                        Download
-                    </Button>
-                    <Button onClick={() => setOpen(false)} color="primary">
-                        Close
-                    </Button>
-                </DialogActions>
-            </Dialog>
+                        <div className="profile_name">
+                            <Box>
+                                <Typography className='name'>{profile.fullName}</Typography>
+                                <Typography className='job'>{profile.job}</Typography>
+                            </Box>
+                            <MainButton icon={<FaQrcode />} className={'btn-qr'} handleClick={() => setOpen(true)} />
+                        </div>
+                        <figure>
+                            <motion.img
+                                src={urlFor(profile.photo.asset).url()}
+                                alt="Avatar"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+                            />
+                        </figure>
+                        <div className='profile_info'>
+                            <div className='timeline_info'>
+                                <CustomTimeline icon={<FaCircleUser />}
+                                    style={{
+                                        sizeIcon: 45,
+                                        marginLeft: -19,
+                                        headIconTop: "-24px",
+                                    }}
+                                    className='timeline_profile'
+                                >
+                                    {profileInfo.map(info => (
+                                        <TimelineInfoProfile key={info.name} title={info.name} text={info.info.value} />
+                                    ))}
+                                    {profileLinks.map(link => (
+                                        <TimelineInfoProfile key={link.name} title={link.name} link={link.link} />
+                                    ))}
+                                </CustomTimeline>
+                            </div>
+                            <div className='btn_resume'>
+                                <MainButton text="Download CV" icon={<FaDownload />} link={profile.url_cv} />
+                            </div>
+                        </div>
+                        <ModalDialogQR
+                            open={open}
+                            onClose={() => setOpen(false)}
+                            link={profile.link_qr}
+                        />
+                    </motion.div>
+                )
+            )}
         </div>
     );
 };
 
 export default Profile;
-

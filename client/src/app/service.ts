@@ -51,5 +51,10 @@ export const fetchSocial = async (type: string) => {
     return client.fetch(query);
 };
 
+export const fetchCertifications = async (type: string) => {
+    const query = `*[_type == "${type}"]`;
+    return client.fetch(query);
+};
+
 
 

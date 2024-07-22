@@ -1,21 +1,27 @@
 import { TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@mui/lab";
-import { Typography, IconButton } from '@mui/material';
+import { Typography, IconButton, Avatar } from '@mui/material';
 import { TimelineResumeProps } from "../../../types/componentType";
 import { FaCalendarDays, FaLocationDot } from "react-icons/fa6";
 
-export const TimelineInfoResume: React.FC<TimelineResumeProps> = ({ name, subName, dates, description, location }) => {
+export const TimelineInfoResume: React.FC<TimelineResumeProps> = ({ name, subName, dates, description, location, logo }) => {
     return (
         <TimelineItem className={`timeline-item timeline_info_resume`}>
             <TimelineSeparator className='timeline-separator'>
-                <TimelineDot variant="outlined" className='timeline-dot' color="primary" />
+                <TimelineDot variant="outlined" className='timeline-dot' color="primary" >
+                    <Avatar alt="Remy Sharp" src={logo}
+                        sx={{
+                            width : {xs : 20 , sm : 25 , md : 30} ,
+                            height : {xs : 20 , sm : 25 , md : 30}
+                        }}
+                        />
+                </TimelineDot>
                 <TimelineConnector className='timeline-connector' />
             </TimelineSeparator>
             <TimelineContent
                 sx={{
-                    padding: "20px 16px",
-                    textAlign: "left",
-                    marginBottom: "25px",
-                    marginTop: "-35px",
+                    padding: "18px 16px",
+                    marginBottom: "13px",
+                    marginTop: "-17px",
                 }}
             >
                 <Typography
@@ -24,7 +30,6 @@ export const TimelineInfoResume: React.FC<TimelineResumeProps> = ({ name, subNam
                     sx={{
                         fontSize: { xs: '0.7em', sm: '0.8em', md: '0.9em' },
                         fontWeight: 'bold',
-                        lineHeight: '2',
                         textTransform: 'capitalize',
                         letterSpacing: '0.030em',
                         marginTop: "-12px",

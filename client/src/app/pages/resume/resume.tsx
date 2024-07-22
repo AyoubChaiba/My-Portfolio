@@ -1,91 +1,79 @@
 import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa6";
 import "./resume.scss";
-import { Grid, List, ListItem } from "@mui/material";
-import { useState, useEffect } from "react";
-import { fetchEducations, fetchWorking, fetchClients } from "../../service";
-import { Educations, Working, Clients } from "../../types/apiTypes";
+import { Box, Grid } from "@mui/material";
+import { fetchCertifications, fetchEducations, fetchWorking } from "../../service";
+import { Certifications, Educations, Working } from "../../types/apiTypes";
 import TimelineInfo from "../../components/widgets/Timeline/TimelineInfo";
 import { TimelineInfoResume } from "../../components/widgets/Timeline/TimelineInfoResume";
-import ResumeContentLoader from "../../components/common/ContentLoader/ResumeContentLoader";
+import { useFetchData } from "../../hooks/useFetchData";
+import { formatDate } from "../../utils/DateTimeFormat";
+import CertificationCard from "../../components/widgets/CertificationCard/CertificationCard";
 import { urlFor } from "../../sanityClient";
-import ClientsContentLoader from "../../components/common/ContentLoader/ClientsContentLoader";
+import { motion } from "framer-motion";
+import { useCustomInView } from "../../hooks/useCustomInView";
+import { CertificatesContentLoader, ResumeContentLoader } from "../../components/common/ContentLoader/MainLoader";
+import { ResumeVariants } from "../../utils/animationVariants";
+
 
 
 const Resume: React.FC = () => {
-    const [working, setWorking] = useState<Working | null>(null);
-    const [educations, setEducations] = useState<Educations | null>(null);
-    const [clients, setClients] = useState<Clients | null>(null);
-    const [loading, setLoading] = useState(true);
+    const { data: { title: titleWorking, work, _updatedAt: workUpdate }, loading: workLoading } =
+        useFetchData<Working>(fetchWorking, "working", {} as Working);
 
-    useEffect(() => {
-        const fetchDataAsync = async (): Promise<void> => {
-            setLoading(true);
-            try {
-                const [dataWorking, dataEducations, dataClients] = await Promise.all([
-                    fetchWorking("working"),
-                    fetchEducations("educations"),
-                    fetchClients("clients"),
-                ]);
-                setWorking(dataWorking);
-                setEducations(dataEducations);
-                setClients(dataClients);
-            } catch (error) {
-                console.error("Error fetching data");
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDataAsync();
-    }, []);
+    const { data: { title: titleEducation, education }, loading: educationLoading } =
+        useFetchData<Educations>(fetchEducations, "educations", {} as Educations);
+
+    const { data: certifications, loading: certificationLoading } =
+        useFetchData<Certifications>(fetchCertifications, "certifications", [] as Certifications);
 
 
-    const repeatedClients = clients ? Array.from({ length: 20 }, (_, i) => clients[i % clients.length]) : [];
-
+    const { ref: certificationRef, inView: certificationInView } = useCustomInView();
 
     return (
         <main>
             <ContentGrid
                 title={"Experience"}
                 classContent={"resume"}
-                dataUpdate={working?._updatedAt?.split('T')[0] ?? " ... "}
+                dataUpdate={workUpdate ? formatDate({ date: workUpdate }) : " ... "}
             >
                 <Grid container>
                     <Grid item md={12} lg={6}>
-                        {loading ? (
+                        {workLoading ? (
                             <ResumeContentLoader />
                         ) : (
-                            working && (
-                                <TimelineInfo
-                                    title={working.title}
-                                    icon={<FaBriefcase />}
-                                    className="timeline_resume working"
-                                >
-                                    {working.work.map((item, index) => (
-                                        <TimelineInfoResume
-                                            key={index}
-                                            name={item.position}
-                                            subName={item.company}
-                                            dates={item.dates}
-                                            description={item.description}
-                                            location={item.location}
-                                        />
-                                    ))}
-                                </TimelineInfo>
+                            work && (
+                            <TimelineInfo
+                                title={titleWorking}
+                                icon={<FaBriefcase />}
+                                className="timeline_resume working"
+                            >
+                                {work.map((item, index) => (
+                                    <TimelineInfoResume
+                                        key={index}
+                                        name={item.position}
+                                        subName={item.company}
+                                        dates={item.dates}
+                                        description={item.description}
+                                        location={item.location}
+                                        logo={urlFor(item.photo.asset).url()}
+                                    />
+                                ))}
+                            </TimelineInfo>
                             )
                         )}
                     </Grid>
                     <Grid item md={12} lg={6}>
-                        {loading ? (
+                        {educationLoading ? (
                             <ResumeContentLoader />
                         ) : (
-                            educations && (
+                            education && (
                                 <TimelineInfo
-                                    title={educations.title}
+                                    title={titleEducation}
                                     icon={<FaGraduationCap />}
                                     className="timeline_resume educations"
                                 >
-                                    {educations.education.map((item, index) => (
+                                    {education.map((item, index) => (
                                         <TimelineInfoResume
                                             key={index}
                                             name={item.degree}
@@ -93,6 +81,7 @@ const Resume: React.FC = () => {
                                             dates={item.dates}
                                             description={item.description}
                                             location={item.location}
+                                            logo={urlFor(item.photo.asset).url()}
                                         />
                                     ))}
                                 </TimelineInfo>
@@ -102,25 +91,28 @@ const Resume: React.FC = () => {
                 </Grid>
             </ContentGrid>
             <ContentGrid
-                title={"Clients"}
-                classContent={"clients"}
-                dataUpdate={clients ? clients[0]?._updatedAt?.split('T')[0] : " ... "}
+                title={"Certificates"}
+                classContent={"certificates"}
             >
-                <div className="clients">
-                    <div className="scroller">
-                        {loading ? (
-                            <ClientsContentLoader />
-                        ) : (
-                            <List className="clients-items">
-                                {repeatedClients.map((client, index) => (
-                                    <ListItem key={index} className="client-card">
-                                        <img src={urlFor(client.logo.asset).url()} alt={client.name} loading="lazy" />
-                                    </ListItem>
-                                ))}
-                            </List>
-                        )}
-                    </div>
-                </div>
+                <Box sx={{ padding: 2, boxShadow: "none" }}>
+                    {certificationLoading ? (
+                        <CertificatesContentLoader  />
+                    ) : (
+                        certifications.map((certification, index) => (
+                            <motion.div
+                                ref={certificationRef}
+                                initial="hidden"
+                                animate={certificationInView ? "visible" : "hidden"}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                variants={ResumeVariants}
+                                whileHover={{ scale: 1.009 }}
+                                key={index}
+                            >
+                                <CertificationCard certification={certification} index={index} />
+                            </motion.div>
+                        ))
+                    )}
+                </Box>
             </ContentGrid>
         </main>
     );

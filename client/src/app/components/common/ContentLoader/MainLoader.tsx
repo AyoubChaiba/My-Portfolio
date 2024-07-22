@@ -19,13 +19,6 @@ export const SkillsLoader = () => (
         speed={2}
         backgroundColor="#cccccc"
         foregroundColor="#ecebeb"
-        style={{
-            width: "100%",
-            padding: "10px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-        }}
     >
         <rect x="20" y="10" rx="8" ry="8" width="110" height="40" />
         <rect x="140" y="10" rx="8" ry="8" width="110" height="40" />
@@ -40,7 +33,6 @@ export const SkillsLoader = () => (
         <rect x="260" y="110" rx="8" ry="8" width="110" height="40" />
     </ContentLoader>
 );
-
 
 export const AboutContentLoader: React.FC = () => (
     <ContentLoader
@@ -59,4 +51,41 @@ export const AboutContentLoader: React.FC = () => (
     </ContentLoader>
 );
 
+export const CertificatesContentLoader = () => (
+    <ContentLoader
+        speed={2}
+        viewBox="0 0 400 200"
+        backgroundColor="#B4B4B8"
+        foregroundColor="#ecebeb"
+    >
+        <rect x="10" y="10" rx="4" ry="4" width="380" height="50" />
+        <rect x="10" y="70" rx="4" ry="4" width="380" height="50" />
+        <rect x="10" y="130" rx="4" ry="4" width="380" height="50" />
+    </ContentLoader>
+);
+
+export const ResumeContentLoader: React.FC = () => (
+    <ContentLoader
+        speed={2}
+        width={800 / 2}
+        height={300}
+        viewBox="0 0 400 300"
+        backgroundColor="#B4B4B8"
+        foregroundColor="#ecebeb"
+    >
+        <circle cx="60" cy="40" r="20" />
+        <rect x="90" y="20" rx="5" ry="5" width="200" height="20" />
+        <rect x="90" y="50" rx="5" ry="5" width="150" height="15" />
+        <rect x="90" y="75" rx="5" ry="5" width="180" height="10" />
+        <rect x="90" y="95" rx="5" ry="5" width="160" height="10" />
+        <rect x="20" y="120" rx="5" ry="5" width="360" height="10" />
+
+        <circle cx="60" cy="180" r="20" />
+        <rect x="90" y="160" rx="5" ry="5" width="200" height="20" />
+        <rect x="90" y="190" rx="5" ry="5" width="150" height="15" />
+        <rect x="90" y="215" rx="5" ry="5" width="180" height="10" />
+        <rect x="90" y="235" rx="5" ry="5" width="160" height="10" />
+        <rect x="20" y="260" rx="5" ry="5" width="360" height="10" />
+    </ContentLoader>
+);
 

@@ -1,12 +1,11 @@
 import { useState } from "react";
 import {
-    Box,
     Dialog,
-    DialogTitle,
     DialogContent,
     IconButton,
     Typography,
     Stack,
+    DialogTitle,
 } from "@mui/material";
 import { FaLink, FaGithub, FaXmark } from "react-icons/fa6";
 import { urlFor } from "../../../sanityClient";
@@ -27,7 +26,11 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
         setIsLightboxOpen(true);
     };
 
+
+
+
     const images = currentProject?.photo.map(photo => urlFor(photo.asset).url()) || [];
+
 
     return (
         <Dialog
@@ -36,9 +39,6 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
             fullWidth
             maxWidth='lg'
             className="modal-dialog"
-            classes={{ paper: "modal-paper" }}
-            disableScrollLock={true}
-            disableEscapeKeyDown={true}
         >
             {currentProject && (
                 <>
@@ -46,17 +46,27 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                         position: 'relative',
                         border: 'none',
                         boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-                        height: '50px',
+                        height: '70px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                     }}
                     >
+                        <Typography
+                            color="initial"
+                            fontWeight={{ xs : 600 , sm : 800 , md: 900 }}
+                            fontSize={{ xs : 14 , sm : 16 , md: 22 }}
+                                >
+                                {currentProject.title}
+                        </Typography>
                         <IconButton
                             onClick={handleCloseDialog}
                             edge="end"
                             aria-label="close"
                             sx={{
                                 position: "absolute",
-                                top: 7,
-                                right: 25,
+                                top: 16,
+                                right: 30,
                                 width: 35,
                                 height: 35,
                                 fontSize: 18,
@@ -72,7 +82,7 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                             border: "none",
                             padding: 0 ,
                         }}>
-                        <Box sx={{
+                        {/* <Box sx={{
                             maxWidth: "800px",
                             width: "100%",
                             maxHeight: "500px",
@@ -89,7 +99,8 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                             <Typography
                                 variant="h4"
                                 color="initial"
-                                fontWeight={900}
+                                fontWeight={{ xs : 600 , sm : 800 , md: 900 }}
+                                fontSize={{ xs : 14 , sm : 16 , md: 22 }}
                                 margin={"25px auto"}
                                 align="center"
                                 >
@@ -100,22 +111,20 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                                 alt={currentProject.title}
                                 onClick={() => handleImageClick(0)}
                             />
-                        </Box>
+                        </Box> */}
                         {
                             currentProject.photo.length > 1 && (
                                 <ContentGrid title="Gallery" classContent="gallery title_dialog">
                                     <Gallery
                                         images={
-                                            currentProject.photo.slice(1).map((photo) => ({
+                                            currentProject.photo.map((photo) => ({
                                                 src: urlFor(photo.asset).url(),
-                                                width: 800,
-                                                height: 600,
+                                                width: photo.width || 0,
+                                                height: photo.height || 0,
                                             }))
                                         }
                                         enableImageSelection={false}
-                                        onClick={(index) => handleImageClick(index + 1)}
-                                        rowHeight={250}
-
+                                        onClick={(index) => handleImageClick(index)}
                                     />
                                 </ContentGrid>
                             )

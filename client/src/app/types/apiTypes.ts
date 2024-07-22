@@ -25,6 +25,8 @@ export interface Asset {
 export interface Image {
     _type: string;
     asset: Asset;
+    width?: number;
+    height?: number;
 }
 
 export interface Link {
@@ -83,6 +85,7 @@ export interface Work {
     dates: string;
     description: string;
     location: string;
+    photo: Image;
 }
 
 export interface Working {
@@ -98,6 +101,7 @@ export interface Education {
     dates: string;
     description: string;
     location: string;
+    photo: Image;
 }
 
 export interface Educations {
@@ -146,3 +150,16 @@ export interface SocialProps {
     dev?: string;
     twitter?: string;
 }
+
+export interface Certification {
+    _id: string;
+    title: string;
+    issuer: string;
+    dates: string;
+    photo: Image;
+    link: string;
+    _createdAt: string;
+    _updatedAt: string;
+}
+
+export type Certifications = Certification[];

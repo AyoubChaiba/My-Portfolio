@@ -12,9 +12,9 @@ const TimelineInfoProfile: React.FC<TimelineInfoProps> = ({ title, icon, classNa
                 marginLeft: -26,
                 headHeight: {
                     xs:"90px",
-                    sm:"110px",
+                    sm:"100px",
                     md:"120px",
-                    lg:"140px",
+                    lg:"120px",
                 },
             }}
             className={className}

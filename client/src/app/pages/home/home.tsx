@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
 import { TextWithSpaces } from "../../components/widgets/Content/TextWithSpaces";
 import "./home.scss";
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { motion, useInView } from "framer-motion";
 import { MainButton } from "../../components/common/Button/MainButton";
 import { fetchAbout, fetchService, fetchSkills } from "../../service";
@@ -12,78 +12,22 @@ import { useFetchData } from "../../hooks/useFetchData";
 import { useVisibility } from "../../hooks/useVisibility";
 import { formatDate } from "../../utils/DateTimeFormat";
 import { ServicesLoader, SkillsLoader, AboutContentLoader } from "../../components/common/ContentLoader/MainLoader";
+import { containerVariants, itemVariants, cardContainerVariants, cardItemVariants } from "../../utils/animationVariants";
 
 
-const containerVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: 50 },
-    visible: {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        transition: {
-            when: "beforeChildren",
-            staggerChildren: 0.3,
-            delay: 0.2,
-            duration: 0.5,
-        },
-    },
-};
+const Home : React.FC = () => {
 
-const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.8, rotate: 10 },
-    visible: (index: number) => ({
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        rotate: 0,
-        transition: {
-            delay: index * 0.1,
-            duration: 0.4,
-            type: "spring",
-            stiffness: 100,
-        },
-    }),
-};
-
-const cardContainerVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            when: "beforeChildren",
-            staggerChildren: 0.3,
-            delay: 0.2,
-            duration: 0.5,
-            ease: "easeOut",
-        },
-    },
-};
-
-const cardItemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.9 },
-    visible: (index: number) => ({
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: {
-            delay: index * 0.1,
-            duration: 0.2,
-            ease: "easeOut",
-        },
-    }),
-};
-
-
-const Home = () => {
     const ref1 = useRef(null);
     const ref2 = useRef(null);
     const isInView1 = useInView(ref1);
     const isInView2 = useInView(ref2);
 
-    const { data: { about , _updatedAt: aboutUpdate }, loading: aboutLoading } = useFetchData(fetchAbout, 'about', {} as About);
-    const { data: services, loading: servicesLoading } = useFetchData(fetchService, 'services', [] as Services);
-    const { data: skills, loading: skillsLoading } = useFetchData(fetchSkills, 'skills', [] as Skills);
+    const { data: { about , _updatedAt: aboutUpdate }, loading: aboutLoading } =
+        useFetchData<About>(fetchAbout, 'about', {} as About);
+    const { data: services, loading: servicesLoading } =
+        useFetchData<Services>(fetchService, 'services', [] as Services);
+    const { data: skills, loading: skillsLoading } =
+        useFetchData<Skills>(fetchSkills, 'skills', [] as Skills);
 
     const { visibleItems: visibleSkills, handleLoadMore: handleLoadMoreSkills } = useVisibility(12, 5);
 
@@ -163,37 +107,40 @@ const Home = () => {
                             <SkillsLoader />
                         ) : (
                             skills.slice(0, visibleSkills).map((skill, index) => (
-                                <Grid item xs={4} sm={4} lg={3} key={skill.name}>
+                                <Grid item xs={4} sm={4} lg={3} key={skill.name} >
                                     <motion.div
-                                        className="skills-card"
                                         custom={index}
                                         variants={cardItemVariants}
-                                        style={{
-                                            cursor: 'default',
-                                            background: '#fff',
-                                            padding: '15px',
-                                            minHeight: '40px',
-                                            display: 'flex',
-                                            gap: '15px',
-                                            alignItems: 'center',
-                                            textTransform: 'capitalize',
-                                            borderRadius: '7px',
-                                            width: '100%',
-                                            height: 'auto',
-                                            boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
-                                            transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-                                            border: `1px solid #${skill.color}`
-                                        }}
+                                        whileHover={{ y: -2 }}
                                     >
-                                        <img src={urlFor(skill.photo.asset).url()} alt={skill.name} />
-                                        <Typography
-                                            sx={{ display: { xs: 'none', sm: 'flex' }}}
-                                            variant="h6"
-                                            fontSize={14}
-                                            fontWeight={600}
-                                        >
-                                            {skill.name}
-                                        </Typography>
+                                        <Box
+                                            className="skills-card"
+                                            sx={{
+                                                cursor: 'default',
+                                                background: '#fff',
+                                                padding: '15px',
+                                                minHeight: '40px',
+                                                display: 'flex',
+                                                gap: '15px',
+                                                alignItems: 'center',
+                                                textTransform: 'capitalize',
+                                                borderRadius: '7px',
+                                                width: '100%',
+                                                height: 'auto',
+                                                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+                                                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                                                border: `1px solid #${skill.color}`
+                                        }}>
+                                            <img src={urlFor(skill.photo.asset).url()} alt={skill.name} />
+                                            <Typography
+                                                sx={{ display: { xs: 'none', sm: 'flex' }}}
+                                                variant="h6"
+                                                fontSize={14}
+                                                fontWeight={600}
+                                            >
+                                                {skill.name}
+                                            </Typography>
+                                        </Box>
                                     </motion.div>
                                 </Grid>
                             ))

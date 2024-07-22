@@ -8,5 +8,18 @@ import { projects } from './projects'
 import { about } from './about'
 import { contact } from './contact'
 import { socialMedia } from './socialMedia'
+import { certifications } from './certifications'
 
-export const schemaTypes = [profile, services, skills, working, educations, clients, projects, about, contact,socialMedia ]
+export const schemaTypes = [
+        profile,
+        services,
+        skills,
+        working,
+        educations,
+        clients,
+        projects,
+        about,
+        contact,
+        socialMedia,
+        certifications
+    ]

@@ -7,7 +7,8 @@ import { Squash as Hamburger } from "hamburger-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickAway } from "react-use";
 import { CustomLink } from "../../components/common/Button/CustomLink";
-import { SocialMedia } from '../../components/common/Button/SocialMedia';
+import { SocialMedia } from "../../components/common/Button/SocialMedia";
+import { routes } from "../../utils/Constants.ts";
 
 const Header: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +53,7 @@ const Header: React.FC = () => {
                         ref={ref}
                     >
                         <List className="menuList">
-                            {['RESUME', 'PORTFOLIO', 'Stats', 'CONTACT'].map((page, idx) => (
+                            {routes.map((page, idx) => (
                                 <motion.li
                                     initial={{ scale: 0, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}

@@ -16,8 +16,7 @@ import RenderGridCards from "../../components/widgets/projects/renderGridCards";
 import ModalDialog from '../../components/widgets/projects/ModalDialog';
 import ProjectContentLoader from "../../components/common/ContentLoader/ProjectContentLoader";
 
-
-const Portfolio = () => {
+const Portfolio : React.FC = () => {
     const [value, setValue] = useState("All");
     const [visibleProjects, setVisibleProjects] = useState(4);
     const [openDialog, setOpenDialog] = useState(false);

@@ -47,6 +47,16 @@
             &.timeline_info_profile {
                 min-height: 34px;
             }
+            &.timeline_info_resume {
+                &::before {
+                    padding: 6px 9px !important;
+                    @media (max-width: 768px) {
+                        & {
+                            padding: 6px 3px !important;
+                        }
+                    }
+                }
+            }
             &::before {
                 flex: 0;
                 @media (max-width: 768px) {

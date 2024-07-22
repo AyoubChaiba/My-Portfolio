@@ -16,9 +16,9 @@ export const projects = defineType({
             type: 'string',
             options: {
                 list: [
-                    { title: 'Web Dev', value: 'Web Dev' },
-                    { title: 'Web Design', value: 'Web Design' },
-                    { title: 'Mobile Dev', value: 'Mobile Dev' }
+                    { title: 'Web Dev', value: 'web-dev' },
+                    { title: 'Web Design', value: 'web-design' },
+                    { title: 'Mobile Dev', value: 'mobile-dev' }
                 ],
                 layout: 'dropdown',
             }
@@ -32,7 +32,23 @@ export const projects = defineType({
             name: 'photo',
             title: 'Photo',
             type: 'array',
-            of: [{ type: 'image' }]
+            of: [
+                {
+                    type: 'image',
+                    fields: [
+                        defineField({
+                            name: 'width',
+                            title: 'Width',
+                            type: 'number',
+                        }),
+                        defineField({
+                            name: 'height',
+                            title: 'Height',
+                            type: 'number',
+                        }),
+                    ]
+                }
+            ]
         }),
         defineField({
             name: 'description',

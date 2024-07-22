@@ -1,5 +1,5 @@
 import { ReactNode, MouseEvent } from "react";
-import { Link, Project, Projects } from "./apiTypes";
+import { Certification, Link, Project, Projects } from "./apiTypes";
 
 export interface ButtonProps {
   text?: string;
@@ -40,6 +40,7 @@ export interface TimelineResumeProps {
   dates: string;
   description: string;
   location: string;
+  logo?: string;
 }
 
 export interface TimelineInfoProps {
@@ -85,4 +86,15 @@ export interface FormatDateProps {
   date: string;
   locales?: string;
   options?: Intl.DateTimeFormatOptions;
+}
+
+export interface DialogQRProps {
+  open: boolean;
+  onClose: () => void;
+  link: string;
+}
+
+export interface CertificationProps {
+  certification: Certification;
+  index: number;
 }

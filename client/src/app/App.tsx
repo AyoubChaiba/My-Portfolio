@@ -10,9 +10,10 @@ const App = () => {
       <Container
           className='app'
           sx={{
-            marginTop: 8,
+            marginTop: 5,
             marginX: "auto",
           }}
+          maxWidth={"lg"}
         >
           <Grid container className='appGrid' columnSpacing={3} rowSpacing={3} >
             <Grid item xs={12} sm={12} md={4} lg={3} className='widgets-profile'>

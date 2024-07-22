@@ -4,7 +4,6 @@
     }
 }
 .clients {
-    background-color: #fafafa;
     .scroller {
         min-height: 200px;
         overflow: hidden;
@@ -43,5 +42,26 @@
     }
     100% {
         transform: translateX(-50%);
+    }
+}
+
+.certificates {
+    .card-certificate {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
+        .card-content {
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: #fff;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            border-radius: 15px !important;
+            figure {
+                img {
+                    width: 50px;
+                    height: auto;
+                }
+            }
+        }
     }
 }
