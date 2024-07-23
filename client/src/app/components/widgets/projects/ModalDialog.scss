@@ -1,5 +1,5 @@
 .modal-dialog{
-    .css-cyxlny-MuiPaper-root-MuiDialog-paper {
+    .css-rnmm7m-MuiPaper-root-MuiDialog-paper {
         border-radius: 15px !important;
     }
     .head-content {
@@ -16,6 +16,7 @@
     max-width: 300px !important;
     margin: 20px auto !important;
     .btn-dialog {
+        margin: 0;
         &-github {
             background-color: #7b1fa2;
             width: 100%;

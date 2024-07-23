@@ -22,21 +22,21 @@ const CertificationCard: React.FC<CertificationProps> = ({ certification, index 
             <Card sx={{ marginBottom: 2 }} className="card-certificate">
                 <CardActionArea href={certification.link} target="_blank">
                     <CardContent className="card-content">
-                        <figure>
+                        <figure >
                             <img
                                 src={urlFor(certification.photo.asset).url()}
                                 alt={certification.title}
                             />
                         </figure>
                         <div>
-                            <Typography variant="h6" fontSize={{ xs: 14, sm: 15, md: 16 }}>
+                            <Typography variant="h6" fontSize={{ xs: 12, sm: 13, md: 14, lg: 15 }}>
                                 {certification.title}
                             </Typography>
-                            <Typography color="text.secondary" fontSize={{ xs: 13, sm: 14, md: 15 }}>
-                                <Typography variant="caption" color="primary" fontWeight={900}>
+                            <Typography color="text.secondary" fontSize={{ xs: 11, sm: 12, md: 13 }}>
+                                <Typography variant="caption" color="primary" fontSize={{ xs: 11, sm: 12, md: 13 }} fontWeight={{ xs: 500, md: 900 }}>
                                     {certification.issuer}
                                 </Typography>
-                                • {certification.dates}
+                                {" • "}{certification.dates}
                             </Typography>
                         </div>
                     </CardContent>

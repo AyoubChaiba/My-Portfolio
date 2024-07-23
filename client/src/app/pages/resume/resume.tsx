@@ -1,19 +1,19 @@
 import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa6";
 import "./resume.scss";
-import { Box, Grid } from "@mui/material";
-import { fetchCertifications, fetchEducations, fetchWorking } from "../../service";
-import { Certifications, Educations, Working } from "../../types/apiTypes";
+import { Box, Grid, List, ListItem } from "@mui/material";
+import { fetchCertifications, fetchEducations, fetchWorking, fetchClients } from "../../service";
+import { Certifications, Educations, Working, Clients } from "../../types/apiTypes";
 import TimelineInfo from "../../components/widgets/Timeline/TimelineInfo";
 import { TimelineInfoResume } from "../../components/widgets/Timeline/TimelineInfoResume";
 import { useFetchData } from "../../hooks/useFetchData";
 import { formatDate } from "../../utils/DateTimeFormat";
 import CertificationCard from "../../components/widgets/CertificationCard/CertificationCard";
-import { urlFor } from "../../sanityClient";
 import { motion } from "framer-motion";
 import { useCustomInView } from "../../hooks/useCustomInView";
-import { CertificatesContentLoader, ResumeContentLoader } from "../../components/common/ContentLoader/MainLoader";
+import { CertificatesContentLoader, ClientsContentLoader, ResumeContentLoader } from "../../components/common/ContentLoader/MainLoader";
 import { ResumeVariants } from "../../utils/animationVariants";
+import { urlFor } from "../../sanityClient";
 
 
 
@@ -27,8 +27,13 @@ const Resume: React.FC = () => {
     const { data: certifications, loading: certificationLoading } =
         useFetchData<Certifications>(fetchCertifications, "certifications", [] as Certifications);
 
+    const { data: clients, loading: clientsLoading } =
+    useFetchData<Clients>(fetchClients, "clients", [] as Clients);
+
 
     const { ref: certificationRef, inView: certificationInView } = useCustomInView();
+
+    const repeatedClients = clients ? Array.from({ length: 20 }, (_, i) => clients[i % clients.length]) : [];
 
     return (
         <main>
@@ -91,10 +96,32 @@ const Resume: React.FC = () => {
                 </Grid>
             </ContentGrid>
             <ContentGrid
+                title={"Clients"}
+                classContent={"clients"}
+                dataUpdate={clients[0]?._updatedAt ? formatDate({ date : clients[0]?._updatedAt}) : " ... "}
+                >
+                    <div className="clients">
+                        <div className="scroller">
+                            {clientsLoading ? (
+                                <ClientsContentLoader />
+                            ) : (
+                                <List className="clients-items">
+                                    {repeatedClients.map((client, index) => (
+                                        <ListItem key={index} className="client-card">
+                                            <img src={urlFor(client.logo.asset).url()} alt={client.name} loading="lazy" />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            )}
+                        </div>
+                    </div>
+                </ContentGrid>
+            <ContentGrid
                 title={"Certificates"}
                 classContent={"certificates"}
+                dataUpdate={ certifications[0]?._updatedAt ? formatDate({ date : certifications[0]?._updatedAt}) : " ... "}
             >
-                <Box sx={{ padding: 2, boxShadow: "none" }}>
+                <Box sx={{ padding: { xs : 0 , md : 2}, boxShadow: "none" }}>
                     {certificationLoading ? (
                         <CertificatesContentLoader  />
                     ) : (

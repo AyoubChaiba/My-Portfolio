@@ -1,29 +1,15 @@
 import { Grid, TextField } from "@mui/material";
 import { FaPaperPlane } from "react-icons/fa6";
 import { MainButton } from "../Button/MainButton";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import emailjs from '@emailjs/browser';
-import { fetchContact } from "../../../service";
-import { Contact } from "../../../types/apiTypes";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import useContactEmail from "../../../hooks/useContactEmail";
 
 const FormContact = () => {
     const form = useRef<HTMLFormElement>(null);
-    const [contactEmail, setContactEmail] = useState<Contact | null>(null);
-
-    useEffect(() => {
-        const fetchDataAsync = async () => {
-            try {
-                const dataContact = await fetchContact("contact");
-                setContactEmail(dataContact || {});
-            } catch (error) {
-                console.error("Error fetching data");
-                toast.error("Failed to fetch contact details.");
-            }
-        };
-        fetchDataAsync();
-    }, []);
+    const contactEmail = useContactEmail();
 
     const sendEmail = (e: React.FormEvent) => {
         e.preventDefault();

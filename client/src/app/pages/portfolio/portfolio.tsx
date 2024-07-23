@@ -6,7 +6,7 @@ import {
     tabsClasses,
 } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MainButton } from "../../components/common/Button/MainButton";
 import { Projects, Project } from "../../types/apiTypes";
@@ -14,32 +14,23 @@ import { fetchProjects } from "../../service";
 import { ContentGrid } from '../../components/widgets/Content/ContentGrid';
 import RenderGridCards from "../../components/widgets/projects/renderGridCards";
 import ModalDialog from '../../components/widgets/projects/ModalDialog';
-import ProjectContentLoader from "../../components/common/ContentLoader/ProjectContentLoader";
+
+import { useFetchData } from "../../hooks/useFetchData";
+import { ProjectContentLoader } from "../../components/common/ContentLoader/MainLoader";
 
 const Portfolio : React.FC = () => {
     const [value, setValue] = useState("All");
     const [visibleProjects, setVisibleProjects] = useState(4);
     const [openDialog, setOpenDialog] = useState(false);
     const [currentProject, setCurrentProject] = useState<Project | null>(null);
-    const [projects, setProjects] = useState<Projects | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchDataAsync = async (): Promise<void> => {
-            setLoading(true);
-            try {
-                const dataProjects = await fetchProjects("projects");
-                setProjects(dataProjects);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDataAsync();
-    }, []);
 
     const handleLoadMore = () => setVisibleProjects(prev => prev + 6);
+
+
+    const { data: projects, loading: projectsLoading } =
+    useFetchData<Projects>(fetchProjects, "projects", [] as Projects);
+
+
 
     const handleOpenDialog = (project: Project) => {
         setCurrentProject(project);
@@ -51,12 +42,14 @@ const Portfolio : React.FC = () => {
         setCurrentProject(null);
     };
 
+
+
     return (
         <main className="portfolio-main">
             <ContentGrid
                 title="Portfolio"
                 classContent="portfolio"
-                dataUpdate={projects ? projects[0]._updatedAt.split('T')[0] : "..."}
+                dataUpdate={projects[0]?._updatedAt ? projects[0]._updatedAt.split('T')[0] : "..."}
                 >
                 <TabContext value={value}>
                     <Box className="portfolio-tabs-box">
@@ -73,13 +66,13 @@ const Portfolio : React.FC = () => {
                             }}
                         >
                             <Tab value="All" label="All" className="portfolio-item" />
-                            <Tab value="Web Dev" label="Web Dev" className="portfolio-item" />
-                            <Tab value="Mobile Dev" label="Mobile Dev" className="portfolio-item" />
-                            <Tab value="Web Design" label="Web Design" className="portfolio-item" />
+                            <Tab value="web-dev" label="Web Dev" className="portfolio-item" />
+                            <Tab value="mobile-dev" label="Mobile Dev" className="portfolio-item" />
+                            <Tab value="web-design" label="Web Design" className="portfolio-item" />
                         </Tabs>
                     </Box>
                     <AnimatePresence mode="wait">
-                        {["All", "Web Dev", "Mobile Dev", "Web Design"].map(tabValue =>
+                        {["All", "web-dev", "mobile-dev", "web-design"].map(tabValue =>
                             value === tabValue && (
                                 <motion.div
                                     key={tabValue}
@@ -89,7 +82,7 @@ const Portfolio : React.FC = () => {
                                     transition={{ duration: 0.3 }}
                                 >
                                     <TabPanel value={tabValue} className="portfolio-tabpanel">
-                                        {loading ? (
+                                        {projectsLoading ? (
                                             <ProjectContentLoader />
                                         ) : (
                                             <RenderGridCards
@@ -105,7 +98,7 @@ const Portfolio : React.FC = () => {
                         )}
                     </AnimatePresence>
                 </TabContext>
-                {projects && !loading && (
+                {projects && !projectsLoading && (
                     <MainButton
                         text={
                             visibleProjects < projects.length

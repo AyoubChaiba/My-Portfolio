@@ -8,10 +8,12 @@ import { fetchProfile } from '../../service';
 import { Profile as TypeProfile } from '../../types/apiTypes';
 import { urlFor } from '../../sanityClient';
 import TimelineInfoProfile from '../../components/widgets/Timeline/TimelineInfoProfile';
-import CustomProfileLoader from '../../components/common/ContentLoader/ProfileContentLoader';
 import ModalDialogQR from '../../components/widgets/profile/ModalDialogQR';
 import { useFetchData } from '../../hooks/useFetchData';
 import { motion } from 'framer-motion';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import { CustomProfileLoader } from '../../components/common/ContentLoader/MainLoader';
 
 const Profile: React.FC = () => {
     const [open, setOpen] = useState(false);
@@ -46,12 +48,13 @@ const Profile: React.FC = () => {
                             <MainButton icon={<FaQrcode />} className={'btn-qr'} handleClick={() => setOpen(true)} />
                         </div>
                         <figure>
-                            <motion.img
+                            <LazyLoadImage
                                 src={urlFor(profile.photo.asset).url()}
                                 alt="Avatar"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 0.5, delay: 0.2 }}
+                                effect="blur"
+                                width="100%"
+                                height="auto"
+                                className='image-profile'
                             />
                         </figure>
                         <div className='profile_info'>

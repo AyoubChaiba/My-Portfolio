@@ -4,7 +4,16 @@ import { ContentGridProps } from "../../../types/componentType";
 export const ContentGrid: React.FC<ContentGridProps> = ({children, title, classContent, dataUpdate }) => {
 
     return (
-        <Grid container spacing={2} className={`content ${classContent}`}>
+        <Grid
+            container
+            spacing={2}
+            className={`content ${classContent}`}
+            sx={{
+                paddingTop: 3,
+                paddingBottom: 2,
+                paddingX : { xs : "20px" , sm : "25px" , md : "30px", lg: "40px"  },
+            }}
+            >
             <Grid item className="head-content"
                 style={{
                     width: '100%',
@@ -14,8 +23,8 @@ export const ContentGrid: React.FC<ContentGridProps> = ({children, title, classC
                 }}>
                 <Typography
                     variant="h4"
-                    fontSize={{ xs : 15, sm: 18 }}
-                    fontWeight={800}
+                    fontSize={{ xs : 18, sm: 20 }}
+                    fontWeight={900}
                     className={"head-title"}
                     >
                         {title}

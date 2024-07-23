@@ -1,8 +1,9 @@
-import { Grid, Card, CardMedia, Chip, IconButton, CardContent, Typography, Stack } from "@mui/material";
+import { Grid, Card, CardMedia, Chip, CardContent, Typography, Stack } from "@mui/material";
 import { motion } from "framer-motion";
-import { FaEye } from "react-icons/fa6";
+import { FaRegWindowRestore  } from "react-icons/fa6";
 import { urlFor } from "../../../sanityClient";
 import { RenderGridCardsProps } from "../../../types/componentType";
+import { MainButton } from "../../common/Button/MainButton";
 
 
 const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog }: RenderGridCardsProps) => {
@@ -17,8 +18,8 @@ const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog
                     item
                     xs={12}
                     sm={6}
-                    md={6}
-                    lg={4}
+                    md={12}
+                    lg={6}
                     key={project._id}
                     margin={0}
                     padding={0}
@@ -50,21 +51,14 @@ const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog
                                             md: "27px",
                                         },
                                         fontSize: {
-                                            xs: "12px",
-                                            sm: "11px",
-                                            md: "11px",
+                                            xs: "11px",
+                                            sm: "12px",
+                                            md: "13px",
                                         },
                                     }}
                                 />
                                 <div className="portfolio-card-buttons">
-                                    <IconButton
-                                        aria-label="show"
-                                        className="btn-card"
-                                        sx={{ fontSize: 30 }}
-                                        onClick={() => handleOpenDialog(project)}
-                                    >
-                                        <FaEye />
-                                    </IconButton>
+                                    <MainButton icon={<FaRegWindowRestore  />} className={'btn-card'} handleClick={() => handleOpenDialog(project)} />
                                 </div>
                             </div>
                             <CardContent className="portfolio-card-content">
@@ -79,24 +73,22 @@ const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog
                                     {project.title}
                                 </Typography>
                                 <Stack direction="column" spacing={1} className="portfolio-stack">
-                                    <Typography variant="body2" color="black" className="portfolio-card-stack">
+                                    <Typography variant="body2" fontWeight={500} color="#1976d2" className="portfolio-card-stack">
                                         Stack:{" "}
                                         <Typography
                                             component="span"
                                             variant="body2"
                                             color="text.secondary"
-                                            fontWeight={500}
                                         >
                                             {project.stack}
                                         </Typography>
                                     </Typography>
-                                    <Typography variant="body2" color="black" className="portfolio-card-client">
+                                    <Typography variant="body2" fontWeight={500} color="#1976d2" className="portfolio-card-client">
                                         Client:{" "}
                                         <Typography
                                             component="span"
                                             variant="body2"
                                             color="text.secondary"
-                                            fontWeight={500}
                                         >
                                             {project.client}
                                         </Typography>

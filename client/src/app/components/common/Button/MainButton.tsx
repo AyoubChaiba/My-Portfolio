@@ -22,6 +22,7 @@ export const MainButton: React.FC<ButtonProps> = ({ text, className, icon, handl
             whileHover="hover"
             whileTap="tap"
             variants={buttonVariants}
+            style={{margin : 0}}
         >
             <Button
                 variant="contained"

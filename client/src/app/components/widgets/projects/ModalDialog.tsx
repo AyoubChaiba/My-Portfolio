@@ -26,18 +26,14 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
         setIsLightboxOpen(true);
     };
 
-
-
-
     const images = currentProject?.photo.map(photo => urlFor(photo.asset).url()) || [];
-
 
     return (
         <Dialog
             open={openDialog}
             onClose={handleCloseDialog}
             fullWidth
-            maxWidth='lg'
+            maxWidth='md'
             className="modal-dialog"
         >
             {currentProject && (
@@ -82,36 +78,6 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                             border: "none",
                             padding: 0 ,
                         }}>
-                        {/* <Box sx={{
-                            maxWidth: "800px",
-                            width: "100%",
-                            maxHeight: "500px",
-                            paddingX: "27px" ,
-                            margin: "15px auto",
-                            overflow: "hidden",
-                            "& img": {
-                                width: "100%",
-                                height: "auto",
-                                objectFit: "cover",
-                                cursor: 'pointer',
-                            }
-                        }} >
-                            <Typography
-                                variant="h4"
-                                color="initial"
-                                fontWeight={{ xs : 600 , sm : 800 , md: 900 }}
-                                fontSize={{ xs : 14 , sm : 16 , md: 22 }}
-                                margin={"25px auto"}
-                                align="center"
-                                >
-                                {currentProject.title}
-                            </Typography>
-                            <img
-                                src={urlFor(currentProject.photo[0].asset).url()}
-                                alt={currentProject.title}
-                                onClick={() => handleImageClick(0)}
-                            />
-                        </Box> */}
                         {
                             currentProject.photo.length > 1 && (
                                 <ContentGrid title="Gallery" classContent="gallery title_dialog">
@@ -148,10 +114,12 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                                 <MainButton
                                     icon={<FaGithub />}
                                     text="GitHub"
+                                    link={currentProject.github}
                                     className="btn-dialog-github"
                                 />
                                 <MainButton
                                     icon={<FaLink />}
+                                    link={currentProject.link}
                                     text="Live Site"
                                     className="btn-dialog-live"
                                 />
