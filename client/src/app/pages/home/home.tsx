@@ -36,7 +36,7 @@ const Home : React.FC = () => {
             <ContentGrid
                 title={'About Me'}
                 classContent={'about'}
-                dataUpdate={aboutUpdate &&  formatDate({ date :aboutUpdate })}
+                dataUpdate={aboutUpdate && formatDate({ date :aboutUpdate }) }
             >
                 {aboutLoading || !about ? (
                         <AboutContentLoader />
@@ -48,7 +48,7 @@ const Home : React.FC = () => {
             <ContentGrid
                 title={'My Services'}
                 classContent={'services'}
-                dataUpdate={ services[0]?._updatedAt &&  formatDate({ date : services[0]?._updatedAt })}
+                dataUpdate={ services[0]?._updatedAt && formatDate({ date : services[0]?._updatedAt }) }
                 >
                 <motion.div
                     ref={ref1}

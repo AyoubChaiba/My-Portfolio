@@ -44,7 +44,7 @@ const Stats = () => {
 
     return (
         <main>
-            <ContentGrid title={'Statistics'} classContent={'github-statistics'}>
+            <ContentGrid title={'Statistics'} classContent={'github-statistics'} uodateNull={true}>
                 {userDataLoading ? (
                     <StatisticsContentLoader />
                 ) : (
@@ -69,7 +69,7 @@ const Stats = () => {
                     </motion.div>
                 )}
             </ContentGrid>
-            <ContentGrid title={'GitHub Contribution'} classContent={'github-contribution'}>
+            <ContentGrid title={'GitHub Contribution'} classContent={'github-contribution'} uodateNull={true}>
                 {contributionsLoading ? (
                     <GitHubContributionContentLoader />
                 ) : (

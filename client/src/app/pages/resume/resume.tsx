@@ -40,7 +40,7 @@ const Resume: React.FC = () => {
             <ContentGrid
                 title={"Experience"}
                 classContent={"resume"}
-                dataUpdate={workUpdate && formatDate({ date: workUpdate })}
+                dataUpdate={workUpdate && formatDate({ date: workUpdate }) }
             >
                 <Grid container>
                     <Grid item md={12} lg={6}>
@@ -119,7 +119,7 @@ const Resume: React.FC = () => {
             <ContentGrid
                 title={"Certificates"}
                 classContent={"certificates"}
-                dataUpdate={ certifications[0]?._updatedAt && formatDate({ date : certifications[0]?._updatedAt}) }
+                dataUpdate={ certifications[0]?._updatedAt && formatDate({ date : certifications[0]?._updatedAt})}
             >
                 <Box sx={{ padding: { xs : 0 , md : 2}, boxShadow: "none" }}>
                     {certificationLoading ? (
