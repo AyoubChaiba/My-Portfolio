@@ -1,53 +1,29 @@
 import { FaFacebook, FaInstagram, FaDev, FaTwitter } from 'react-icons/fa';
 import { Link as MuiLink } from '@mui/material';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { SocialProps } from '../../../types/componentType';
+import { SocialProps } from '../../../types/apiTypes';
 import { fetchSocial } from '../../../service';
+import { useFetchData } from '../../../hooks/useFetchData';
 
 const itemVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1 },
 };
 
-export const  SocialMedia = () => {
-    const [socialMediaData, setSocialMediaData] = useState<SocialProps | null>(null);
-
-    useEffect(() => {
-        const fetchDataAsync = async () => {
-            try {
-                const dataSocial = await fetchSocial("socialMedia");
-                setSocialMediaData(dataSocial || {});
-            } catch (error) {
-                console.error("Error fetching data", error);
-            }
-        };
-        fetchDataAsync();
-    }, []);
+const SocialMedia = () => {
+    const { data: socialMediaData } = useFetchData(fetchSocial, "socialMedia", {} as SocialProps);
 
     const socialMedia: { name: 'facebook' | 'instagram' | 'dev' | 'twitter', icon: JSX.Element }[] = [
-        {
-            name: 'facebook',
-            icon: <FaFacebook />,
-        },
-        {
-            name: 'instagram',
-            icon: <FaInstagram />,
-        },
-        {
-            name: 'dev',
-            icon: <FaDev />,
-        },
-        {
-            name: 'twitter',
-            icon: <FaTwitter />,
-        }
+        { name: 'facebook', icon: <FaFacebook /> },
+        { name: 'instagram', icon: <FaInstagram /> },
+        { name: 'dev', icon: <FaDev /> },
+        { name: 'twitter', icon: <FaTwitter /> },
     ];
 
 
     return (
         <>
-            {socialMedia.filter((item) => socialMediaData && socialMediaData[item.name]).map((item, index) => (
+            {socialMediaData && socialMedia.filter((item) => socialMediaData && socialMediaData[item.name]).map((item, index) => (
                 <motion.li
                     key={item.name}
                     className='social-media-item'
@@ -68,5 +44,6 @@ export const  SocialMedia = () => {
             ))}
         </>
     );
-}
+};
 
+export default SocialMedia;

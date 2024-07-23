@@ -49,7 +49,7 @@ const Portfolio : React.FC = () => {
             <ContentGrid
                 title="Portfolio"
                 classContent="portfolio"
-                dataUpdate={projects[0]?._updatedAt ? projects[0]._updatedAt.split('T')[0] : "..."}
+                dataUpdate={projects[0]?._updatedAt && projects[0]._updatedAt.split('T')[0] }
                 >
                 <TabContext value={value}>
                     <Box className="portfolio-tabs-box">

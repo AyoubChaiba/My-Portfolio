@@ -1,8 +1,8 @@
 import { Typography, Grid } from "@mui/material";
 import { ContentGridProps } from "../../../types/componentType";
+import { UpdateContentLoader } from "../../common/ContentLoader/MainLoader";
 
-export const ContentGrid: React.FC<ContentGridProps> = ({children, title, classContent, dataUpdate }) => {
-
+export const ContentGrid: React.FC<ContentGridProps> = ({ children, title, classContent, dataUpdate }) => {
     return (
         <Grid
             container
@@ -11,9 +11,9 @@ export const ContentGrid: React.FC<ContentGridProps> = ({children, title, classC
             sx={{
                 paddingTop: 3,
                 paddingBottom: 2,
-                paddingX : { xs : "20px" , sm : "25px" , md : "30px", lg: "40px"  },
+                paddingX: { xs: "20px", sm: "25px", md: "30px", lg: "40px" },
             }}
-            >
+        >
             <Grid item className="head-content"
                 style={{
                     width: '100%',
@@ -23,23 +23,25 @@ export const ContentGrid: React.FC<ContentGridProps> = ({children, title, classC
                 }}>
                 <Typography
                     variant="h4"
-                    fontSize={{ xs : 18, sm: 20 }}
+                    fontSize={{ xs: 18, sm: 20 }}
                     fontWeight={900}
                     className={"head-title"}
-                    >
-                        {title}
+                >
+                    {title}
                 </Typography>
-                {dataUpdate && (
+                {dataUpdate ? (
                     <Typography
                         variant="caption"
-                        fontSize={{ xs : 10, sm: 12 }}
+                        fontSize={{ xs: 10, sm: 12 }}
                         color="textSecondary"
-                        >
+                    >
                         Last updated: {dataUpdate}
                     </Typography>
-                    )}
+                ) : (
+                    <UpdateContentLoader />
+                )}
             </Grid>
-            <Grid item xs={12} className="body-content" >
+            <Grid item xs={12} className="body-content">
                 {children}
             </Grid>
         </Grid>

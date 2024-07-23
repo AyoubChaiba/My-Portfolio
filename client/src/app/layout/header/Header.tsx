@@ -7,7 +7,7 @@ import { Squash as Hamburger } from "hamburger-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickAway } from "react-use";
 import { CustomLink } from "../../components/common/Button/CustomLink";
-import { SocialMedia } from "../../components/common/Button/SocialMedia";
+import SocialMedia  from "../../components/common/Button/SocialMedia";
 import { routes } from "../../utils/Constants.ts";
 
 const Header: React.FC = () => {
