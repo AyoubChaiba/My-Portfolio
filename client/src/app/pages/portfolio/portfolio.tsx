@@ -1,10 +1,5 @@
 import "./portfolio.scss";
-import {
-    Box,
-    Tabs,
-    Tab,
-    tabsClasses,
-} from "@mui/material";
+import { Box, Tabs, Tab, tabsClasses } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -14,11 +9,10 @@ import { fetchProjects } from "../../service";
 import { ContentGrid } from '../../components/widgets/Content/ContentGrid';
 import RenderGridCards from "../../components/widgets/projects/renderGridCards";
 import ModalDialog from '../../components/widgets/projects/ModalDialog';
-
 import { useFetchData } from "../../hooks/useFetchData";
-import { ProjectContentLoader } from "../../components/common/ContentLoader/MainLoader";
+import ProjectContentLoader from "../../components/widgets/projects/ProjectContentLoader";
 
-const Portfolio : React.FC = () => {
+const Portfolio: React.FC = () => {
     const [value, setValue] = useState("All");
     const [visibleProjects, setVisibleProjects] = useState(4);
     const [openDialog, setOpenDialog] = useState(false);
@@ -26,11 +20,7 @@ const Portfolio : React.FC = () => {
 
     const handleLoadMore = () => setVisibleProjects(prev => prev + 6);
 
-
-    const { data: projects, loading: projectsLoading } =
-    useFetchData<Projects>(fetchProjects, "projects", [] as Projects);
-
-
+    const { data: projects, loading: projectsLoading } = useFetchData<Projects>(fetchProjects, "projects", [] as Projects);
 
     const handleOpenDialog = (project: Project) => {
         setCurrentProject(project);
@@ -42,15 +32,13 @@ const Portfolio : React.FC = () => {
         setCurrentProject(null);
     };
 
-
-
     return (
         <main className="portfolio-main">
             <ContentGrid
                 title="Portfolio"
                 classContent="portfolio"
                 dataUpdate={projects[0]?._updatedAt && projects[0]._updatedAt.split('T')[0]}
-                >
+            >
                 <TabContext value={value}>
                     <Box className="portfolio-tabs-box">
                         <Tabs

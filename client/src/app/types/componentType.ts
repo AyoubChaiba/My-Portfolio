@@ -63,7 +63,7 @@ export interface ContentGridProps {
   classContent: string;
   children?: ReactNode;
   dataUpdate?: string;
-  uodateNull?: boolean;
+  updateNull?: boolean;
 }
 
 export interface TextWithProps {

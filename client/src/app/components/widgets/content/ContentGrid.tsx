@@ -2,7 +2,7 @@ import { Typography, Grid } from "@mui/material";
 import { ContentGridProps } from "../../../types/componentType";
 import { UpdateContentLoader } from "../../common/ContentLoader/MainLoader";
 
-export const ContentGrid: React.FC<ContentGridProps> = ({ children, title, classContent, dataUpdate, uodateNull }) => {
+export const ContentGrid: React.FC<ContentGridProps> = ({ children, title, classContent, dataUpdate, updateNull }) => {
     return (
         <Grid
             container
@@ -38,7 +38,7 @@ export const ContentGrid: React.FC<ContentGridProps> = ({ children, title, class
                         Last updated: {dataUpdate}
                     </Typography>
                 ) : (
-                    !uodateNull && <UpdateContentLoader />
+                    !updateNull && <UpdateContentLoader />
                 )}
             </Grid>
             <Grid item xs={12} className="body-content">

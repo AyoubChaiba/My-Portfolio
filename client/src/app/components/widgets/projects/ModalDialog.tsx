@@ -6,6 +6,8 @@ import {
     Typography,
     Stack,
     DialogTitle,
+    useMediaQuery,
+    useTheme,
 } from "@mui/material";
 import { FaLink, FaGithub, FaXmark } from "react-icons/fa6";
 import { urlFor } from "../../../sanityClient";
@@ -20,6 +22,8 @@ import 'yet-another-react-lightbox/styles.css';
 const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDialogProps) => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const handleImageClick = (index: number) => {
         setCurrentImageIndex(index);
@@ -34,26 +38,28 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
             onClose={handleCloseDialog}
             fullWidth
             maxWidth='md'
+            fullScreen={fullScreen}
             className="modal-dialog"
         >
             {currentProject && (
                 <>
-                    <DialogTitle sx={{
-                        position: 'relative',
-                        border: 'none',
-                        boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-                        height: '70px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
+                    <DialogTitle
+                        sx={{
+                            position: 'relative',
+                            border: 'none',
+                            boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+                            height: '70px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
                     >
                         <Typography
                             color="initial"
-                            fontWeight={{ xs : 600 , sm : 800 , md: 900 }}
-                            fontSize={{ xs : 14 , sm : 16 , md: 22 }}
-                                >
-                                {currentProject.title}
+                            fontWeight={{ xs: 600, sm: 800, md: 900 }}
+                            fontSize={{ xs: 14, sm: 16, md: 22 }}
+                        >
+                            {currentProject.title}
                         </Typography>
                         <IconButton
                             onClick={handleCloseDialog}
@@ -73,29 +79,29 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                             <FaXmark />
                         </IconButton>
                     </DialogTitle>
-                    <DialogContent dividers
+                    <DialogContent
+                        dividers
                         sx={{
                             border: "none",
-                            padding: 0 ,
-                        }}>
-                        {
-                            currentProject.photo.length > 1 && (
-                                <ContentGrid title="Gallery" classContent="gallery title_dialog">
-                                    <Gallery
-                                        images={
-                                            currentProject.photo.map((photo) => ({
-                                                src: urlFor(photo.asset).url(),
-                                                width: photo.width || 0,
-                                                height: photo.height || 0,
-                                            }))
-                                        }
-                                        enableImageSelection={false}
-                                        onClick={(index) => handleImageClick(index)}
-                                    />
-                                </ContentGrid>
-                            )
-                        }
-                        <ContentGrid title="About Project" classContent="about_project title_dialog">
+                            padding: 0,
+                        }}
+                    >
+                        {currentProject.photo.length > 1 && (
+                            <ContentGrid title="Gallery" classContent="gallery title_dialog" updateNull={true}>
+                                <Gallery
+                                    images={
+                                        currentProject.photo.map((photo) => ({
+                                            src: urlFor(photo.asset).url(),
+                                            width: photo.width || 0,
+                                            height: photo.height || 0,
+                                        }))
+                                    }
+                                    enableImageSelection={false}
+                                    onClick={(index) => handleImageClick(index)}
+                                />
+                            </ContentGrid>
+                        )}
+                        <ContentGrid title="About Project" classContent="about_project title_dialog" updateNull={true}>
                             <Typography variant="body2" gutterBottom align="center" marginBottom={4}>
                                 {currentProject.description}
                             </Typography>
@@ -109,7 +115,7 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                                 direction="row"
                                 spacing={1}
                                 className="btn-container"
-                                sx={{ margin: 3, justifyContent: 'center', gap: 2 , flexDirection: { xs : 'column' , sm : 'row' } }}
+                                sx={{ margin: 3, justifyContent: 'center', gap: 2, flexDirection: { xs: 'column', sm: 'row' } }}
                             >
                                 <MainButton
                                     icon={<FaGithub />}

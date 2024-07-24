@@ -89,50 +89,6 @@ export const ResumeContentLoader: React.FC = () => (
     </ContentLoader>
 );
 
-
-export const StatisticsContentLoader: React.FC = () => (
-<ContentLoader
-        speed={2}
-        viewBox="0 0 430 200"
-        backgroundColor="#B4B4B8"
-        foregroundColor="#ecebeb"
-    >
-        <rect x="10" y="15" rx="5" ry="5" width="200" height="50" />
-        <rect x="220" y="15" rx="5" ry="5" width="200" height="50" />
-
-        <rect x="10" y="75" rx="5" ry="5" width="200" height="50" />
-        <rect x="220" y="75" rx="5" ry="5" width="200" height="50" />
-
-    </ContentLoader>
-);
-
-
-export const GitHubContributionContentLoader: React.FC = () => (
-    <ContentLoader
-        viewBox="0 0 800 160"
-        backgroundColor="#B4B4B8"
-        foregroundColor="#ecebeb"
-        >
-        <rect x="0" y="0" rx="5" ry="5" width="800" height="140" />
-        <rect x="0" y="150" rx="5" ry="5" width="100" height="10" />
-    </ContentLoader>
-);
-
-export const ProjectContentLoader: React.FC = () => (
-    <ContentLoader
-        speed={2}
-        width="100%"
-        height={400}
-        viewBox="0 0 600 400"
-        backgroundColor="#B4B4B8"
-        foregroundColor="#ecebeb"
-    >
-        <rect x="0" y="0" rx="5" ry="5" width="100%" height="200" />
-        <rect x="0" y="220" rx="5" ry="5" width="80%" height="30" />
-        <rect x="0" y="260" rx="5" ry="5" width="60%" height="30" />
-    </ContentLoader>
-);
-
 export const CustomProfileLoader: React.FC = () => (
     <ContentLoader
         speed={2}
@@ -161,26 +117,12 @@ export const CustomProfileLoader: React.FC = () => (
 export const ClientsContentLoader: React.FC = () => {
     return (
         <ContentLoader
-            speed={2}
-            height={160}
-            viewBox="0 0 800 160"
+            height={130}
+            width={"100%"}
             backgroundColor="#B4B4B8"
             foregroundColor="#ecebeb"
-            style={{
-                width: "100%",
-            }}
         >
-            {Array.from({ length: 9 }).map((_, index) => (
-                <rect
-                    key={index}
-                    x={90 * index}
-                    y="40"
-                    rx="10"
-                    ry="10"
-                    width="80"
-                    height="80"
-                />
-            ))}
+            <rect x="0" y="10" rx="0" ry="0" width="100%" height="130" />
         </ContentLoader>
     );
 };
@@ -188,12 +130,12 @@ export const ClientsContentLoader: React.FC = () => {
 export const UpdateContentLoader: React.FC = () => {
     return (
         <ContentLoader
-        speed={2}
-        width={100}
-        height={20}
-        viewBox="0 0 100 20"
-        backgroundColor="#B4B4B8"
-        foregroundColor="#ecebeb"
+            speed={2}
+            width={100}
+            height={20}
+            viewBox="0 0 100 20"
+            backgroundColor="#B4B4B8"
+            foregroundColor="#ecebeb"
     >
         <rect x="0" y="0" rx="3" ry="3" width="100" height="20" />
     </ContentLoader>

@@ -16,7 +16,6 @@ import { ResumeVariants } from "../../utils/animationVariants";
 import { urlFor } from "../../sanityClient";
 
 
-
 const Resume: React.FC = () => {
     const { data: { title: titleWorking, work, _updatedAt: workUpdate }, loading: workLoading } =
         useFetchData<Working>(fetchWorking, "working", {} as Working);
