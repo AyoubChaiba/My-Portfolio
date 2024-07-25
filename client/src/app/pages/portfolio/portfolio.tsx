@@ -3,7 +3,7 @@ import { Box, Tabs, Tab, tabsClasses } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { MainButton } from "../../components/common/Button/MainButton";
+import MainButton from "../../components/common/Button/MainButton";
 import { Projects, Project } from "../../types/apiTypes";
 import { fetchProjects } from "../../service";
 import { ContentGrid } from '../../components/widgets/Content/ContentGrid';

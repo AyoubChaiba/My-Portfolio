@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FaRegWindowRestore  } from "react-icons/fa6";
 import { urlFor } from "../../../sanityClient";
 import { RenderGridCardsProps } from "../../../types/componentType";
-import { MainButton } from "../../common/Button/MainButton";
+import MainButton from "../../common/Button/MainButton";
 
 
 const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog }: RenderGridCardsProps) => {

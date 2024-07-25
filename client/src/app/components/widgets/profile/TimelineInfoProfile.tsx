@@ -11,7 +11,7 @@ const TimelineInfoProfile: React.FC<TimelineProfileProps> = ({ title, text, link
                 <TimelineDot variant="outlined" className='timeline-dot' color="primary" />
                 <TimelineConnector className='timeline-connector' />
             </TimelineSeparator>
-            <TimelineContent>
+            <TimelineContent className="timeline-info-content">
                 <Typography color="initial" className='timeline-text'>
                     {text ? (
                         <>{title}: <span>{text}</span></>

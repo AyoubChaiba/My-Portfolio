@@ -8,7 +8,7 @@ const buttonVariants = {
     tap: { scale: 0.95, rotate: -2 }
 };
 
-export const MainButton: React.FC<ButtonProps> = ({ text, className, icon, handleClick, link, type }) => {
+const MainButton: React.FC<ButtonProps> = ({ text, className, icon, handleClick, link, type }) => {
     const onClickHandler = (event: MouseEvent<HTMLButtonElement>) => {
         if (link) {
             window.open(link, '_blank');
@@ -56,3 +56,4 @@ export const MainButton: React.FC<ButtonProps> = ({ text, className, icon, handl
     );
 }
 
+export default MainButton;

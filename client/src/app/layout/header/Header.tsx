@@ -1,14 +1,14 @@
 import { AppBar, Box, Toolbar, IconButton, List } from '@mui/material';
 import "./Header.scss";
-import { MainButton } from '../../components/common/Button/MainButton';
+import MainButton from '../../components/common/Button/MainButton';
 import { FaPaperPlane, FaHouse } from "react-icons/fa6";
 import { useState, useRef } from "react";
 import { Squash as Hamburger } from "hamburger-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickAway } from "react-use";
-import { CustomLink } from "../../components/common/Button/CustomLink";
-import SocialMedia  from "../../components/common/Button/SocialMedia";
-import { routes } from "../../utils/Constants.ts";
+import CustomLink from "../../components/common/Button/CustomLink";
+import SocialMedia from "../../components/common/Button/SocialMedia";
+import { routes } from "../../utils/Constants";
 
 const Header: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +22,11 @@ const Header: React.FC = () => {
                 <Toolbar disableGutters className='navBar'>
                     <CustomLink to={`/`} icon={<FaHouse className='iconHome' />} className='btnHead btnHome' />
                     <Box className='navMenu' sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        {['RESUME', 'PORTFOLIO', 'Stats', 'CONTACT'].map((page) => (
+                        {routes.map((page) => (
                             <CustomLink key={page} to={`/${page.toLowerCase()}`} text={page} />
                         ))}
                     </Box>
-                    <List className='socile-icon'>
+                    <List className='social-icon'>
                         <SocialMedia />
                     </List>
                     <MainButton text='Hire Me' className='btn-nav' icon={<FaPaperPlane />} />
@@ -37,7 +37,7 @@ const Header: React.FC = () => {
                         aria-label="menu"
                         aria-expanded={isOpen}
                         onClick={() => ref.current === null && setIsOpen(!isOpen)}
-                        >
+                    >
                         <Hamburger toggled={isOpen} size={21} />
                     </IconButton>
                 </Toolbar>
@@ -66,7 +66,13 @@ const Header: React.FC = () => {
                                     key={page}
                                     className="menuItem"
                                 >
-                                    <CustomLink key={page} to={`/${page.toLowerCase()}`} text={page} handleClick={() => setIsOpen(false)} className='menuLink' />
+                                    <CustomLink
+                                        key={page}
+                                        to={`/${page.toLowerCase()}`}
+                                        text={page}
+                                        handleClick={() => setIsOpen(false)}
+                                        className='menuLink'
+                                    />
                                 </motion.li>
                             ))}
                         </List>
@@ -75,6 +81,6 @@ const Header: React.FC = () => {
             </AnimatePresence>
         </>
     );
-}
+};
 
 export default Header;

@@ -9,6 +9,7 @@
     .timeline-item-header {
             &::before {
                 flex: 0;
+                padding: 0 12px;
                 @media (max-width: 768px) {
                     &{
                         padding: 6px 8px;
@@ -59,6 +60,7 @@
             }
             &::before {
                 flex: 0;
+                padding: 0 12px;
                 @media (max-width: 768px) {
                     &{
                         padding: 6px 8px;
@@ -73,7 +75,7 @@
                 margin-top: -3px;
                 font-size: 13.5px;
                 color: #000;
-                line-height: 0px;
+                margin-top: -13px;
                 span {
                     color: #7F7F7F;
                 }
@@ -84,4 +86,8 @@
                 }
             }
         }
+}
+
+.timeline-info-content {
+    padding: 6px 2px 6px 16px !important;
 }

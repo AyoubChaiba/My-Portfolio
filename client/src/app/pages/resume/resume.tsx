@@ -15,7 +15,6 @@ import { CertificatesContentLoader, ClientsContentLoader, ResumeContentLoader } 
 import { ResumeVariants } from "../../utils/animationVariants";
 import { urlFor } from "../../sanityClient";
 
-
 const Resume: React.FC = () => {
     const { data: { title: titleWorking, work, _updatedAt: workUpdate }, loading: workLoading } =
         useFetchData<Working>(fetchWorking, "working", {} as Working);
@@ -27,8 +26,7 @@ const Resume: React.FC = () => {
         useFetchData<Certifications>(fetchCertifications, "certifications", [] as Certifications);
 
     const { data: clients, loading: clientsLoading } =
-    useFetchData<Clients>(fetchClients, "clients", [] as Clients);
-
+        useFetchData<Clients>(fetchClients, "clients", [] as Clients);
 
     const { ref: certificationRef, inView: certificationInView } = useCustomInView();
 
@@ -39,7 +37,7 @@ const Resume: React.FC = () => {
             <ContentGrid
                 title={"Experience"}
                 classContent={"resume"}
-                dataUpdate={workUpdate && formatDate({ date: workUpdate }) }
+                dataUpdate={workUpdate && formatDate({ date: workUpdate })}
             >
                 <Grid container>
                     <Grid item md={12} lg={6}>
@@ -47,23 +45,23 @@ const Resume: React.FC = () => {
                             <ResumeContentLoader />
                         ) : (
                             work && (
-                            <TimelineInfo
-                                title={titleWorking}
-                                icon={<FaBriefcase />}
-                                className="timeline_resume working"
-                            >
-                                {work.map((item, index) => (
-                                    <TimelineInfoResume
-                                        key={index}
-                                        name={item.position}
-                                        subName={item.company}
-                                        dates={item.dates}
-                                        description={item.description}
-                                        location={item.location}
-                                        logo={urlFor(item.photo.asset).url()}
-                                    />
-                                ))}
-                            </TimelineInfo>
+                                <TimelineInfo
+                                    title={titleWorking}
+                                    icon={<FaBriefcase />}
+                                    className="timeline_resume working"
+                                >
+                                    {work.map((item, index) => (
+                                        <TimelineInfoResume
+                                            key={index}
+                                            name={item.position}
+                                            subName={item.company}
+                                            dates={item.dates}
+                                            description={item.description}
+                                            location={item.location}
+                                            logo={urlFor(item.photo.asset).url()}
+                                        />
+                                    ))}
+                                </TimelineInfo>
                             )
                         )}
                     </Grid>
@@ -97,32 +95,32 @@ const Resume: React.FC = () => {
             <ContentGrid
                 title={"Clients"}
                 classContent={"clients"}
-                dataUpdate={clients[0]?._updatedAt && formatDate({ date : clients[0]?._updatedAt})}
-                >
-                    <div className="clients">
-                        <div className="scroller">
-                            {clientsLoading ? (
-                                <ClientsContentLoader />
-                            ) : (
-                                <List className="clients-items">
-                                    {repeatedClients.map((client, index) => (
-                                        <ListItem key={index} className="client-card">
-                                            <img src={urlFor(client.logo.asset).url()} alt={client.name} loading="lazy" />
-                                        </ListItem>
-                                    ))}
-                                </List>
-                            )}
-                        </div>
+                dataUpdate={clients[0]?._updatedAt && formatDate({ date: clients[0]?._updatedAt })}
+            >
+                <div className="clients">
+                    <div className="scroller">
+                        {clientsLoading ? (
+                            <ClientsContentLoader />
+                        ) : (
+                            <List className="clients-items">
+                                {repeatedClients.map((client, index) => (
+                                    <ListItem key={index} className="client-card">
+                                        <img src={urlFor(client.logo.asset).url()} alt={client.name} loading="lazy" />
+                                    </ListItem>
+                                ))}
+                            </List>
+                        )}
                     </div>
-                </ContentGrid>
+                </div>
+            </ContentGrid>
             <ContentGrid
                 title={"Certificates"}
                 classContent={"certificates"}
-                dataUpdate={ certifications[0]?._updatedAt && formatDate({ date : certifications[0]?._updatedAt})}
+                dataUpdate={certifications[0]?._updatedAt && formatDate({ date: certifications[0]?._updatedAt })}
             >
-                <Box sx={{ padding: { xs : 0 , md : 2}, boxShadow: "none" }}>
+                <Box sx={{ padding: { xs: 0, md: 2 }, boxShadow: "none" }}>
                     {certificationLoading ? (
-                        <CertificatesContentLoader  />
+                        <CertificatesContentLoader />
                     ) : (
                         certifications.map((certification, index) => (
                             <motion.div

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import CustomTimeline from '../../components/widgets/Timeline/CustomTimeline';
 import './Profile.scss';
-import { MainButton } from '../../components/common/Button/MainButton';
+import MainButton  from '../../components/common/Button/MainButton';
 import { FaDownload, FaCircleUser, FaQrcode } from "react-icons/fa6";
 import { Box, Typography } from '@mui/material';
 import { fetchProfile } from '../../service';
 import { Profile as TypeProfile } from '../../types/apiTypes';
 import { urlFor } from '../../sanityClient';
-import TimelineInfoProfile from '../../components/widgets/Timeline/TimelineInfoProfile';
+import TimelineInfoProfile from '../../components/widgets/profile/TimelineInfoProfile';
 import ModalDialogQR from '../../components/widgets/profile/ModalDialogQR';
 import { useFetchData } from '../../hooks/useFetchData';
 import { motion } from 'framer-motion';

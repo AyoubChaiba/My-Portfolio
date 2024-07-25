@@ -3,7 +3,7 @@ import React, { MouseEvent } from 'react';
 import { LinkProps } from "../../../types/componentType";
 import { Button } from '@mui/material';
 
-export const CustomLink: React.FC<LinkProps> = ({ to, text, handleClick, className, icon }) => {
+const CustomLink: React.FC<LinkProps> = ({ to, text, handleClick, className, icon }) => {
     const resolvedPath = useResolvedPath(to);
     const isActive = useMatch({ path: resolvedPath.pathname, end: true });
     const onClickHandler = (event: MouseEvent<HTMLAnchorElement>) => handleClick && handleClick(event);
@@ -21,3 +21,4 @@ export const CustomLink: React.FC<LinkProps> = ({ to, text, handleClick, classNa
     );
 };
 
+export default CustomLink

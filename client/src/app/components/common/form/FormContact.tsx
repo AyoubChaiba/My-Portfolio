@@ -1,6 +1,6 @@
 import { Grid, TextField } from "@mui/material";
 import { FaPaperPlane } from "react-icons/fa6";
-import { MainButton } from "../Button/MainButton";
+import MainButton  from "../Button/MainButton";
 import { useRef } from "react";
 import emailjs from '@emailjs/browser';
 import { ToastContainer, toast } from "react-toastify";
