@@ -8,7 +8,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useClickAway } from "react-use";
 import CustomLink from "../../components/common/Button/CustomLink";
 import SocialMedia from "../../components/common/Button/SocialMedia";
-import { routes } from "../../utils/Constants";
 
 const Header: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +21,7 @@ const Header: React.FC = () => {
                 <Toolbar disableGutters className='navBar'>
                     <CustomLink to={`/`} icon={<FaHouse className='iconHome' />} className='btnHead btnHome' />
                     <Box className='navMenu' sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        {routes.map((page) => (
+                        {['RESUME', 'PORTFOLIO', 'Stats', 'CONTACT'].map((page) => (
                             <CustomLink key={page} to={`/${page.toLowerCase()}`} text={page} />
                         ))}
                     </Box>
@@ -53,7 +52,7 @@ const Header: React.FC = () => {
                         ref={ref}
                     >
                         <List className="menuList">
-                            {routes.map((page, idx) => (
+                            {['RESUME', 'PORTFOLIO', 'Stats', 'CONTACT'].map((page, idx) => (
                                 <motion.li
                                     initial={{ scale: 0, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}

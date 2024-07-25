@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { FaLink, FaGithub, FaXmark } from "react-icons/fa6";
 import { urlFor } from "../../../sanityClient";
-import { ContentGrid } from '../Content/ContentGrid';
+import ContentGrid from '../Content/ContentGrid';
 import { Gallery } from 'react-grid-gallery';
 import Lightbox from "yet-another-react-lightbox";
 import { ModalDialogProps } from "../../../types/componentType";

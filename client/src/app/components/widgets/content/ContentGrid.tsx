@@ -2,7 +2,7 @@ import { Typography, Grid } from "@mui/material";
 import { ContentGridProps } from "../../../types/componentType";
 import { UpdateContentLoader } from "../../common/ContentLoader/MainLoader";
 
-export const ContentGrid: React.FC<ContentGridProps> = ({ children, title, classContent, dataUpdate, updateNull }) => {
+const ContentGrid: React.FC<ContentGridProps> = ({ children, title, classContent, dataUpdate, updateNull }) => {
     return (
         <Grid
             container
@@ -47,3 +47,5 @@ export const ContentGrid: React.FC<ContentGridProps> = ({ children, title, class
         </Grid>
     )
 }
+
+export default ContentGrid;

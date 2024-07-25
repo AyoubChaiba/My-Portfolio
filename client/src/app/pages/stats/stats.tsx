@@ -1,4 +1,4 @@
-import { ContentGrid } from "../../components/widgets/Content/ContentGrid";
+import ContentGrid from "../../components/widgets/Content/ContentGrid";
 import CalendarWrapper from "../../components/widgets/GitHubCalendar/calendarWrapper";
 import { Grid, Typography } from '@mui/material';
 import useGithubStats from "react-github-user-stats";

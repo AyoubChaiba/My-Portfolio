@@ -1,7 +1,7 @@
 import { TextWithProps } from "../../../types/componentType";
 import { Typography } from "@mui/material";
 
-export const TextWithSpaces: React.FC<TextWithProps>  = ({text}) => {
+const TextWithSpaces: React.FC<TextWithProps>  = ({text}) => {
     const formattedText = text.split('. ').join('.<span></span> ');
     return (
         <Typography
@@ -12,3 +12,5 @@ export const TextWithSpaces: React.FC<TextWithProps>  = ({text}) => {
         />
     )
 }
+
+export default TextWithSpaces;
