@@ -39,7 +39,7 @@ const Resume: React.FC = () => {
                 classContent={"resume"}
                 dataUpdate={workUpdate && formatDate({ date: workUpdate })}
             >
-                <Grid container>
+                <Grid container paddingX={{ xs : 0 , sm : 1 }}>
                     <Grid item md={12} lg={6}>
                         {workLoading ? (
                             <ResumeContentLoader />

@@ -50,7 +50,7 @@
             }
             &.timeline_info_resume {
                 &::before {
-                    padding: 6px 9px !important;
+                    padding: 6px 5px !important;
                     @media (max-width: 768px) {
                         & {
                             padding: 6px 3px !important;
@@ -76,8 +76,21 @@
                 font-size: 13.5px;
                 color: #000;
                 margin-top: -13px;
+                text-transform: capitalize;
+                font-weight: 400;
                 span {
+                    margin-left: 2px;
                     color: #7F7F7F;
+                    font-weight: normal;
+                    text-transform: none !important;
+                }
+                a {
+                    margin-left: 2px;
+                    font-weight: 500;
+                    text-transform: none !important;
+                    &:hover {
+                        color: #0c51a0;
+                    }
                 }
             }
             &:nth-last-child(1) {
@@ -89,5 +102,5 @@
 }
 
 .timeline-info-content {
-    padding: 6px 2px 6px 16px !important;
+    padding: 6px 2px 6px 12px !important;
 }

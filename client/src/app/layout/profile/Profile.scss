@@ -24,6 +24,9 @@
         .job {
             font-size: 14px;
             font-weight: normal;
+            text-transform: capitalize;
+            font-weight: 400;
+            color: #535353;
         }
         .btn-qr {
             // position: absolute;
@@ -60,7 +63,7 @@
         height: 300px;
         overflow: hidden;
         >span {
-            display: inline !important; 
+            display: inline !important;
         }
         .image-profile {
             width: 100% !important;
