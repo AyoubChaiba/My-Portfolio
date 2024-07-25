@@ -1,5 +1,5 @@
-import ContentGrid from "../../components/widgets/Content/ContentGrid";
-import TextWithSpaces from "../../components/widgets/Content/TextWithSpaces";
+import ContentGrid from "../../components/widgets/GridContent/ContentGrid";
+import TextWithSpaces from "../../components/common/text/TextWithSpaces";
 import "./contact.scss";
 import { Container } from '@mui/material';
 import FormContact from "../../components/common/form/FormContact";

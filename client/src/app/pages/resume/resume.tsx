@@ -1,4 +1,4 @@
-import ContentGrid from "../../components/widgets/Content/ContentGrid";
+import ContentGrid from "../../components/widgets/GridContent/ContentGrid";
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa6";
 import "./resume.scss";
 import { Box, Grid, List, ListItem } from "@mui/material";

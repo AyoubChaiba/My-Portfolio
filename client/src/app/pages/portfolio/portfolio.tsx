@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import MainButton from "../../components/common/Button/MainButton";
 import { Projects, Project } from "../../types/apiTypes";
 import { fetchProjects } from "../../service";
-import ContentGrid from '../../components/widgets/Content/ContentGrid';
+import ContentGrid from '../../components/widgets/GridContent/ContentGrid';
 import RenderGridCards from "../../components/widgets/projects/renderGridCards";
 import ModalDialog from '../../components/widgets/projects/ModalDialog';
 import { useFetchData } from "../../hooks/useFetchData";
