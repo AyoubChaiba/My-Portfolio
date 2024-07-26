@@ -1,9 +1,20 @@
+import React, { useState } from "react";
 import ContentGrid from "../../components/widgets/GridContent/ContentGrid";
 import { FaBriefcase, FaGraduationCap } from "react-icons/fa6";
 import "./resume.scss";
 import { Box, Grid, List, ListItem } from "@mui/material";
-import { fetchCertifications, fetchEducations, fetchWorking, fetchClients } from "../../service";
-import { Certifications, Educations, Working, Clients } from "../../types/apiTypes";
+import {
+    fetchCertifications,
+    fetchEducations,
+    fetchWorking,
+    fetchClients,
+} from "../../services/service";
+import {
+    Certifications,
+    Educations,
+    Working,
+    Clients,
+} from "../../types/apiTypes";
 import TimelineInfo from "../../components/widgets/Timeline/TimelineInfo";
 import { TimelineInfoResume } from "../../components/widgets/Timeline/TimelineInfoResume";
 import { useFetchData } from "../../hooks/useFetchData";
@@ -11,9 +22,16 @@ import { formatDate } from "../../utils/DateTimeFormat";
 import CertificationCard from "../../components/widgets/CertificationCard/CertificationCard";
 import { motion } from "framer-motion";
 import { useCustomInView } from "../../hooks/useCustomInView";
-import { CertificatesContentLoader, ClientsContentLoader, ResumeContentLoader } from "../../components/common/ContentLoader/MainLoader";
+import {
+    CertificatesContentLoader,
+    ClientsContentLoader,
+    ResumeContentLoader,
+} from "../../components/common/ContentLoader/MainLoader";
 import { ResumeVariants } from "../../utils/animationVariants";
-import { urlFor } from "../../sanityClient";
+import { urlFor } from "../../services/sanityClient";
+import MainButton from "../../components/common/Button/MainButton";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Resume: React.FC = () => {
     const { data: { title: titleWorking, work, _updatedAt: workUpdate }, loading: workLoading } =
@@ -30,7 +48,14 @@ const Resume: React.FC = () => {
 
     const { ref: certificationRef, inView: certificationInView } = useCustomInView();
 
+    const [visibleCertificates, setVisibleCertificates] = useState<number>(5);
+
+    const handleLoadMoreCertificates = () => {
+        setVisibleCertificates(prevCount => prevCount + 10);
+    };
+
     const repeatedClients = clients ? Array.from({ length: 20 }, (_, i) => clients[i % clients.length]) : [];
+
 
     return (
         <main>
@@ -93,27 +118,6 @@ const Resume: React.FC = () => {
                 </Grid>
             </ContentGrid>
             <ContentGrid
-                title={"Clients"}
-                classContent={"clients"}
-                dataUpdate={clients[0]?._updatedAt && formatDate({ date: clients[0]?._updatedAt })}
-            >
-                <div className="clients">
-                    <div className="scroller">
-                        {clientsLoading ? (
-                            <ClientsContentLoader />
-                        ) : (
-                            <List className="clients-items">
-                                {repeatedClients.map((client, index) => (
-                                    <ListItem key={index} className="client-card">
-                                        <img src={urlFor(client.logo.asset).url()} alt={client.name} loading="lazy" />
-                                    </ListItem>
-                                ))}
-                            </List>
-                        )}
-                    </div>
-                </div>
-            </ContentGrid>
-            <ContentGrid
                 title={"Certificates"}
                 classContent={"certificates"}
                 dataUpdate={certifications[0]?._updatedAt && formatDate({ date: certifications[0]?._updatedAt })}
@@ -122,7 +126,7 @@ const Resume: React.FC = () => {
                     {certificationLoading ? (
                         <CertificatesContentLoader />
                     ) : (
-                        certifications.map((certification, index) => (
+                        certifications.slice(0, visibleCertificates).map((certification, index) => (
                             <motion.div
                                 ref={certificationRef}
                                 initial="hidden"
@@ -137,7 +141,42 @@ const Resume: React.FC = () => {
                         ))
                     )}
                 </Box>
+                {certifications.length > visibleCertificates && (
+                    <MainButton
+                        text={`Load More (${certifications.length - visibleCertificates})`}
+                        className="btn-load"
+                        handleClick={handleLoadMoreCertificates}
+                    />
+                )}
             </ContentGrid>
+            {clients.length > 0 && (
+                <ContentGrid
+                    title={"Clients"}
+                    classContent={"clients"}
+                    dataUpdate={clients[0]?._updatedAt && formatDate({ date: clients[0]?._updatedAt })}
+                >
+                    <div className="clients">
+                        <div className="scroller">
+                            {clientsLoading ? (
+                                <ClientsContentLoader />
+                            ) : (
+                                <List className="clients-items">
+                                    {repeatedClients.concat(repeatedClients).map((client, index) => (
+                                        <ListItem key={index} className="client-card">
+                                            <LazyLoadImage
+                                                src={urlFor(client.logo.asset).url()}
+                                                alt={client.name}
+                                                effect="blur"
+                                                className="client-image"
+                                            />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            )}
+                        </div>
+                    </div>
+                </ContentGrid>
+            )}
         </main>
     );
 };

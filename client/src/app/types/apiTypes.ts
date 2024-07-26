@@ -125,7 +125,7 @@ export interface Project {
     _id: string;
     title: string;
     category: string;
-    type: string;
+    type?: string;
     photo: Image[];
     description: string;
     client: string;

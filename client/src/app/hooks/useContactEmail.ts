@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { fetchContact } from '../service';
+import { fetchContact } from '../services/service';
 import { Contact } from '../types/apiTypes';
 
 const useContactEmail = () => {

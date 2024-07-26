@@ -10,7 +10,7 @@ import {
     useTheme,
 } from "@mui/material";
 import { FaLink, FaGithub, FaXmark } from "react-icons/fa6";
-import { urlFor } from "../../../sanityClient";
+import { urlFor } from "../../../services/sanityClient";
 import ContentGrid from '../GridContent/ContentGrid';
 import { Gallery } from 'react-grid-gallery';
 import Lightbox from "yet-another-react-lightbox";
@@ -105,30 +105,46 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                             <Typography variant="body2" gutterBottom align="center" marginBottom={4}>
                                 {currentProject.description}
                             </Typography>
-                            <Typography variant="body2" color="#1976d2" gutterBottom align="center" fontWeight={500}>
-                                Stack: <Typography variant="caption" color="#121212" fontWeight={500}>{currentProject.stack}</Typography>
-                            </Typography>
-                            <Typography variant="body2" color="#1976d2" gutterBottom align="center" fontWeight={500}>
-                                Client: <Typography variant="caption" color="#121212" fontWeight={500}>{currentProject.client}</Typography>
-                            </Typography>
+                            {
+                                currentProject?.stack && (
+                                    <Typography variant="body2" color="#1976d2" gutterBottom align="center" fontWeight={500}>
+                                        Stack: <Typography variant="caption" color="#121212" fontWeight={500}>{currentProject.stack}</Typography>
+                                    </Typography>
+                                )
+                            }
+                            {
+                                currentProject?.client && (
+                                    <Typography variant="body2" color="#1976d2" gutterBottom align="center" fontWeight={500}>
+                                        Client: <Typography variant="caption" color="#121212" fontWeight={500}>{currentProject.client}</Typography>
+                                    </Typography>
+                                )
+                            }
                             <Stack
                                 direction="row"
                                 spacing={1}
                                 className="btn-container"
                                 sx={{ margin: 3, justifyContent: 'center', gap: 2, flexDirection: { xs: 'column', sm: 'row' } }}
                             >
-                                <MainButton
-                                    icon={<FaGithub />}
-                                    text="GitHub"
-                                    link={currentProject.github}
-                                    className="btn-dialog-github"
-                                />
-                                <MainButton
-                                    icon={<FaLink />}
-                                    link={currentProject.link}
-                                    text="Live Site"
-                                    className="btn-dialog-live"
-                                />
+                                {
+                                    currentProject?.github &&(
+                                        <MainButton
+                                            icon={<FaGithub />}
+                                            text="GitHub"
+                                            link={currentProject.github}
+                                            className="btn-dialog-github"
+                                        />
+                                    )
+                                }
+                                {
+                                    currentProject?.link && (
+                                        <MainButton
+                                            icon={<FaLink />}
+                                            link={currentProject.link}
+                                            text="Live Site"
+                                            className="btn-dialog-live"
+                                        />
+                                        )
+                                }
                             </Stack>
                         </ContentGrid>
                     </DialogContent>

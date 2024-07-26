@@ -2,7 +2,7 @@ import { FaFacebook, FaInstagram, FaDev, FaTwitter } from 'react-icons/fa';
 import { Link as MuiLink } from '@mui/material';
 import { motion } from 'framer-motion';
 import { SocialProps } from '../../../types/apiTypes';
-import { fetchSocial } from '../../../service';
+import { fetchSocial } from '../../../services/service';
 import { useFetchData } from '../../../hooks/useFetchData';
 
 const itemVariants = {

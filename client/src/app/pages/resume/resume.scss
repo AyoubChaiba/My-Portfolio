@@ -5,7 +5,7 @@
 }
 .clients {
     .scroller {
-        min-height: 200px;
+        min-height: 120px;
         @media (max-width: 500px) {
             & {
                 min-height: 160px;
@@ -15,34 +15,33 @@
         position: relative;
         -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
         mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
-
         .clients-items {
             display: flex;
-            gap: 1rem;
+            gap: 2rem;
             padding-block: 1rem;
             width: max-content;
             flex-wrap: nowrap;
-            animation: scroll 20s linear infinite;
+            animation: scroll 40s linear infinite;
             animation-play-state: running;
             position: absolute;
-
             .client-card {
                 padding: 5px;
                 border-radius: 8px;
-                width: 100%;
-                height: 100px;
                 @media (max-width: 500px) {
                     & {
                         height: auto;
                     }
                 }
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    @media (max-width: 500px) {
-                        & {
-                            width: 60%;
+                .lazy-load-image-loaded {
+                    width: fit-content;
+                    height: 50px;
+                    img {
+                        height: 100% !important;
+                        object-position: center;
+                        @media (max-width: 500px) {
+                            & {
+                                width: 60% !important;
+                            }
                         }
                     }
                 }
@@ -87,5 +86,10 @@
                 }
             }
         }
+    }
+    .btn-load {
+        display: block;
+        margin: 25px auto 15px auto;
+        padding: 9px 25px;
     }
 }

@@ -1,15 +1,17 @@
-import { Grid, Card, CardMedia, Chip, CardContent, Typography, Stack } from "@mui/material";
+import { Grid, Card, Chip, CardContent, Typography, Stack } from "@mui/material";
 import { motion } from "framer-motion";
-import { FaRegWindowRestore  } from "react-icons/fa6";
-import { urlFor } from "../../../sanityClient";
+import { FaRegWindowRestore } from "react-icons/fa6";
+import { urlFor } from "../../../services/sanityClient";
 import { RenderGridCardsProps } from "../../../types/componentType";
 import MainButton from "../../common/Button/MainButton";
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog }: RenderGridCardsProps) => {
     const filteredProjects = projects?.filter(
         project => category === "All" || project.category === category
     );
+
 
     return (
         <Grid container columnSpacing={2} rowSpacing={4}>
@@ -34,14 +36,25 @@ const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog
                     >
                         <Card style={{ flex: 1, display: 'flex', flexDirection: 'column' }} className="portfolio-card">
                             <div style={{ flex: '0 0 auto' }} className="portfolio-card-media-wrapper">
-                                <CardMedia
-                                    component="img"
-                                    height="140"
-                                    image={urlFor(project.photo[0].asset).url()}
-                                    alt={project.title}
-                                    className="portfolio-card-media"
-                                />
-                                <Chip
+                            {
+                                project?.photo[0] && (
+                                    <LazyLoadImage
+                                        src={
+                                            urlFor(project?.photo[0]?.asset)
+                                                .width(project?.photo[0]?.width || 800)
+                                                .height(project?.photo[0]?.height || 600)
+                                                .url()
+                                        }
+                                        alt={project.title}
+                                        height="100%"
+                                        width="100%"
+                                        effect="blur"
+                                        className="portfolio-card-media"
+                                    />
+                                )
+                            }
+                                { project?.type && (
+                                    <Chip
                                     label={project.type}
                                     className="portfolio-chip"
                                     sx={{
@@ -56,9 +69,10 @@ const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog
                                             md: "13px",
                                         },
                                     }}
-                                />
+                                    />)
+                                    }
                                 <div className="portfolio-card-buttons">
-                                    <MainButton icon={<FaRegWindowRestore  />} className={'btn-card'} handleClick={() => handleOpenDialog(project)} />
+                                    <MainButton icon={<FaRegWindowRestore />} className={'btn-card'} handleClick={() => handleOpenDialog(project)} />
                                 </div>
                             </div>
                             <CardContent className="portfolio-card-content">
@@ -73,26 +87,34 @@ const RenderGridCards = ({ category, projects, visibleProjects, handleOpenDialog
                                     {project.title}
                                 </Typography>
                                 <Stack direction="column" spacing={1} className="portfolio-stack">
-                                    <Typography variant="body2" fontWeight={500} color="#1976d2" className="portfolio-card-stack">
-                                        Stack:{" "}
-                                        <Typography
-                                            component="span"
-                                            variant="body2"
-                                            color="text.secondary"
-                                        >
-                                            {project.stack}
-                                        </Typography>
-                                    </Typography>
-                                    <Typography variant="body2" fontWeight={500} color="#1976d2" className="portfolio-card-client">
-                                        Client:{" "}
-                                        <Typography
-                                            component="span"
-                                            variant="body2"
-                                            color="text.secondary"
-                                        >
-                                            {project.client}
-                                        </Typography>
-                                    </Typography>
+                                    {
+                                        project?.stack && (
+                                            <Typography variant="body2" fontWeight={500} color="#1976d2" className="portfolio-card-stack">
+                                                Stack:{" "}
+                                                <Typography
+                                                    component="span"
+                                                    variant="body2"
+                                                    color="text.secondary"
+                                                >
+                                                    {project.stack}
+                                                </Typography>
+                                            </Typography>
+                                        )
+                                    }
+                                    {
+                                        project?.client && (
+                                            <Typography variant="body2" fontWeight={500} color="#1976d2" className="portfolio-card-client">
+                                                Client:{" "}
+                                                <Typography
+                                                    component="span"
+                                                    variant="body2"
+                                                    color="text.secondary"
+                                                >
+                                                    {project.client}
+                                                </Typography>
+                                            </Typography>
+                                        )
+                                    }
                                 </Stack>
                             </CardContent>
                         </Card>

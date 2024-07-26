@@ -1,6 +1,6 @@
 import sanityClient from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
-import { Asset } from './types/apiTypes';
+import { Asset } from '../types/apiTypes';
 
 export const client = sanityClient({
     projectId: 'fsmqol3o',

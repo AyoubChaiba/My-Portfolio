@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useCustomInView } from "../../../hooks/useCustomInView";
 import { Card, CardContent, CardActionArea, Typography } from "@mui/material";
-import { urlFor } from "../../../sanityClient";
+import { urlFor } from "../../../services/sanityClient";
 import { itemVariants } from "../../../utils/animationVariants";
 import { CertificationProps } from "../../../types/componentType";
 

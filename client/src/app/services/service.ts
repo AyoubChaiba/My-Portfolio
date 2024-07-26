@@ -1,5 +1,5 @@
 import { client } from './sanityClient';
-import { Profile, Services, Skills, Working, Educations, Clients, Projects } from './types/apiTypes';
+import { Profile, Services, Skills, Working, Educations, Clients, Projects } from '../types/apiTypes';
 
 export const fetchProfile = async (type: string): Promise<Profile> => {
     const query = `*[_type == "${type}"][0]`;

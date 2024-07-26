@@ -5,9 +5,9 @@ import "./home.scss";
 import { Box, Grid, Typography } from "@mui/material";
 import { motion, useInView } from "framer-motion";
 import MainButton from "../../components/common/Button/MainButton";
-import { fetchAbout, fetchService, fetchSkills } from "../../service";
+import { fetchAbout, fetchService, fetchSkills } from "../../services/service";
 import { About, Services, Skills } from '../../types/apiTypes';
-import { urlFor } from "../../sanityClient";
+import { urlFor } from "../../services/sanityClient";
 import { useFetchData } from "../../hooks/useFetchData";
 import { useVisibility } from "../../hooks/useVisibility";
 import { formatDate } from "../../utils/DateTimeFormat";
@@ -128,7 +128,7 @@ const Home : React.FC = () => {
                                                 width: '100%',
                                                 height: 'auto',
                                                 boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
-                                                transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                                                // transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
                                                 border: `1px solid #${skill.color}`
                                         }}>
                                             <img src={urlFor(skill.photo.asset).url()} alt={skill.name} />
