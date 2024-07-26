@@ -35,7 +35,7 @@ const Profile: React.FC = () => {
     const handleDownloadCV = () => {
         if (profile?.cv?.asset) {
             const cvUrl = fileUrlFor(profile.cv);
-            saveAs(cvUrl, 'cv.pdf');
+            saveAs(cvUrl, 'AyoubChaibaResume.pdf');
         }
     };
 
