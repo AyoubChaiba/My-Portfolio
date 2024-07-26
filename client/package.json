@@ -23,6 +23,7 @@
     "@sanity/client": "^6.21.0",
     "@sanity/image-url": "^1.0.2",
     "axios": "^1.7.2",
+    "file-saver": "^2.0.5",
     "framer-motion": "^11.2.12",
     "github-contributions": "^0.0.2",
     "hamburger-react": "^2.5.1",
@@ -51,6 +52,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/file-saver": "^2.0.7",
     "@types/node": "^20.14.11",
     "@types/react": "^18.3.3",
     "@types/react-content-loader": "^4.0.0",

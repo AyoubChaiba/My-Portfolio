@@ -1,12 +1,14 @@
-import { useState } from 'react';
+// src/components/Profile/Profile.tsx
+
+import React, { useState } from 'react';
 import CustomTimeline from '../../components/widgets/Timeline/CustomTimeline';
 import './Profile.scss';
-import MainButton  from '../../components/common/Button/MainButton';
+import MainButton from '../../components/common/Button/MainButton';
 import { FaDownload, FaCircleUser, FaQrcode } from "react-icons/fa6";
 import { Box, Typography } from '@mui/material';
 import { fetchProfile } from '../../services/service';
 import { Profile as TypeProfile } from '../../types/apiTypes';
-import { urlFor } from '../../services/sanityClient';
+import { fileUrlFor, urlFor } from '../../services/sanityClient';
 import TimelineInfoProfile from '../../components/widgets/profile/TimelineInfoProfile';
 import ModalDialogQR from '../../components/widgets/profile/ModalDialogQR';
 import { useFetchData } from '../../hooks/useFetchData';
@@ -14,6 +16,7 @@ import { motion } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { CustomProfileLoader } from '../../components/common/ContentLoader/MainLoader';
+import { saveAs } from 'file-saver';
 
 const Profile: React.FC = () => {
     const [open, setOpen] = useState(false);
@@ -28,6 +31,13 @@ const Profile: React.FC = () => {
         name: info.name.toLowerCase(),
         info: info
     })) || [];
+
+    const handleDownloadCV = () => {
+        if (profile?.cv?.asset) {
+            const cvUrl = fileUrlFor(profile.cv);
+            saveAs(cvUrl, 'cv.pdf');
+        }
+    };
 
     return (
         <div className="profile container_shadow">
@@ -76,7 +86,7 @@ const Profile: React.FC = () => {
                                 </CustomTimeline>
                             </div>
                             <div className='btn_resume'>
-                                <MainButton text="Download CV" icon={<FaDownload />} link={profile.url_cv} />
+                                <MainButton text="Download CV" icon={<FaDownload />} handleClick={handleDownloadCV} />
                             </div>
                         </div>
                         <ModalDialogQR

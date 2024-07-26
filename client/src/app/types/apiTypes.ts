@@ -29,6 +29,11 @@ export interface Image {
     height?: number;
 }
 
+export interface File {
+    _type: string;
+    asset: Asset;
+}
+
 export interface Link {
     name: string;
     url: string;
@@ -46,7 +51,7 @@ export interface Profile {
     photo: Image;
     links: Link[];
     infos: Info[];
-    url_cv: string;
+    cv: File;
     link_qr: string;
     _createdAt: string;
     _updatedAt: string;
