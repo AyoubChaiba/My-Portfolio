@@ -1,6 +1,11 @@
 .modal-dialog{
-    .css-rnmm7m-MuiPaper-root-MuiDialog-paper {
-        border-radius: 15px !important;
+    .MuiDialog-container {
+        >div {
+            border-radius: 15px !important;
+            @media (max-width: 599px) {
+                border-radius: 0 !important;
+            }
+        }
     }
     .head-content {
         justify-content: center !important;

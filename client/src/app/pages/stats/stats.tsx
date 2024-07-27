@@ -30,7 +30,7 @@ const Stats = () => {
                     <div>
                         <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 2, lg: 3 }} className="statistics-items">
                             {statistics.map(stat => (
-                                <Grid item xs={12} sm={6} md={6} lg={3} key={stat.title}>
+                                <Grid item xs={12} sm={6} md={6} lg={4} key={stat.title}>
                                     <div className="stats-card">
                                         <Typography variant="h5" fontWeight={600}>{stat.value ?? 'N/A'}</Typography>
                                         <Typography variant="body1">{stat.title}</Typography>

@@ -102,7 +102,7 @@ const ModalDialog = ({ openDialog, handleCloseDialog, currentProject }: ModalDia
                             </ContentGrid>
                         )}
                         <ContentGrid title="About Project" classContent="about_project title_dialog" updateNull={true}>
-                            <Typography variant="body2" gutterBottom align="center" marginBottom={4}>
+                            <Typography variant="body2" gutterBottom align="center" marginBottom={2}>
                                 {currentProject.description}
                             </Typography>
                             {
