@@ -1,5 +1,3 @@
-// src/components/Profile/Profile.tsx
-
 import React, { useState } from 'react';
 import CustomTimeline from '../../components/widgets/Timeline/CustomTimeline';
 import './Profile.scss';

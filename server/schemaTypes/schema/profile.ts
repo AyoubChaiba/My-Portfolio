@@ -68,9 +68,9 @@ export const profile = defineType({
             ],
         }),
         defineField({
-            name: 'url_cv',
-            title: 'Url Cv',
-            type: 'url',
+            name: 'cv',
+            title: 'Cv',
+            type: 'file',
         }),
         defineField({
             name: 'link_qr',

@@ -1,5 +1,5 @@
 import { client } from './sanityClient';
-import { Profile, Services, Skills, Working, Educations, Clients, Projects } from '../types/apiTypes';
+import { Profile, Services, Skills, Working, Educations, Clients, Projects, About, Certifications, SocialProps, Contact } from '../types/apiTypes';
 
 export const fetchProfile = async (type: string): Promise<Profile> => {
     const query = `*[_type == "${type}"][0]`;
@@ -36,22 +36,22 @@ export const fetchProjects = async (type: string): Promise<Projects> => {
     return client.fetch(query);
 };
 
-export const fetchAbout = async (type: string) => {
+export const fetchAbout = async (type: string): Promise<About> => {
     const query = `*[_type == "${type}"][0]`;
     return client.fetch(query);
 };
 
-export const fetchContact = async (type: string) => {
+export const fetchContact = async (type: string): Promise<Contact> => {
     const query = `*[_type == "${type}"][0]`;
     return client.fetch(query);
 };
 
-export const fetchSocial = async (type: string) => {
+export const fetchSocial = async (type: string): Promise<SocialProps> => {
     const query = `*[_type == "${type}"][0]`;
     return client.fetch(query);
 };
 
-export const fetchCertifications = async (type: string) => {
+export const fetchCertifications = async (type: string): Promise<Certifications> => {
     const query = `*[_type == "${type}"]`;
     return client.fetch(query);
 };

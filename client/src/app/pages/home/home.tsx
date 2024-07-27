@@ -129,7 +129,7 @@ const Home : React.FC = () => {
                                                 height: 'auto',
                                                 boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
                                                 // transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-                                                border: `1px solid #${skill.color}`
+                                                border: `2px solid #${skill.color}`
                                         }}>
                                             <img src={urlFor(skill.photo.asset).url()} alt={skill.name} />
                                             <Typography
