@@ -41,7 +41,7 @@ const App = () => {
             maxWidth={'lg'}
           >
             <Grid container className='appGrid' columnSpacing={3} rowSpacing={3}>
-              <Grid item xs={12} sm={12} md={4} lg={3} className='widgets-profile'>
+              <Grid item xs={12} sm={12} md={4} lg={3.2} className='widgets-profile'>
                 <Profile />
               </Grid>
               <Grid item xs className='widgets-main'>

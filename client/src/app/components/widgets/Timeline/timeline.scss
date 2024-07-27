@@ -9,7 +9,7 @@
     .timeline-item-header {
             &::before {
                 flex: 0;
-                padding: 0 12px;
+                padding: 0 12.3px;
                 @media (max-width: 768px) {
                     &{
                         padding: 6px 8px;
@@ -37,7 +37,7 @@
             }
             .timeline-connector.timeline_profile {
                 @media (max-width: 900px) {
-                    margin-left: -15px;
+                    margin-left: -18px;
                 }
             }
             .timeline-connector {
