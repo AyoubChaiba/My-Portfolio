@@ -28,11 +28,12 @@ export const TimelineInfoResume: React.FC<TimelineResumeProps> = ({ name, subNam
                     variant="h6"
                     color="initial"
                     sx={{
-                        fontSize: { xs: '0.7em', sm: '0.8em', md: '0.9em' },
+                        fontSize: { xs: '0.71em', sm: '0.81em', md: '0.91em' },
                         fontWeight: 'bold',
                         textTransform: 'capitalize',
                         letterSpacing: '0.030em',
                         marginTop: "-12px",
+                        marginBottom: "6px",
                     }}
                     className='timeline-titel'
                 >
@@ -42,7 +43,7 @@ export const TimelineInfoResume: React.FC<TimelineResumeProps> = ({ name, subNam
                     variant="h6"
                     color="initial"
                     sx={{
-                        fontSize: { xs: '0.65em', sm: '0.75em', md: '0.85em' },
+                        fontSize: { xs: '0.64em', sm: '0.72em', md: '0.74em' },
                         fontWeight: 'bold',
                         lineHeight: '1.5',
                         textTransform: 'uppercase',
