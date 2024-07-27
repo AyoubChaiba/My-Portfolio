@@ -16,9 +16,9 @@ export const certifications = defineType({
             type: 'string',
         }),
         defineField({
-            name: 'date',
+            name: 'dates',
             title: 'Date',
-            type: 'date',
+            type: 'string',
         }),
         defineField({
             name: 'link',

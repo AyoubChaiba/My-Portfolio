@@ -48,7 +48,7 @@ const Resume: React.FC = () => {
 
     const { ref: certificationRef, inView: certificationInView } = useCustomInView();
 
-    const [visibleCertificates, setVisibleCertificates] = useState<number>(5);
+    const [visibleCertificates, setVisibleCertificates] = useState<number>(3);
 
     const handleLoadMoreCertificates = () => {
         setVisibleCertificates(prevCount => prevCount + 10);
